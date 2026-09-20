@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Beats by Fineboy Producer | Original Music for Artists</title>
+<meta name="description" content="Explore original beats by Fineboy Producer and find the sound for your next record. Listen, choose your license and start creating.">
+<meta name="keywords" content="Fineboy Producer beats, beats for artists, Afrobeat instrumentals, music producer, original beats, producer beats, buy beats">
+<meta name="theme-color" content="#000000">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fineboy Producer">
+<meta property="og:title" content="Beats by Fineboy Producer | Original Music for Artists">
+<meta property="og:description" content="Explore original beats by Fineboy Producer and find the sound for your next record. Listen, choose your license and start creating.">
+<meta name="twitter:card" content="summary">
+<!-- Add og:image and a canonical <link> here using the same values as your other pages. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Newsreader:opsz,wght@6..72,300..500&display=swap">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<style>
+/* ==========================================================================
+   FINEBOY PRODUCER — BEATS
+   TOKENS: map these to the variables already used across the site
+   (colors, fonts, spacing) so this page inherits any future change.
+   ========================================================================== */
+:root{
+  --black:#000;
+  --char:#101010;
+  --char-2:#1a1a1a;
+  --paper:#f0ede6;
+  --white:#f5f3ee;
+  --gold:#b59b63;
+  --muted:#9c9a94;
+  --dim:#77756f;
+  --line:rgba(245,243,238,.16);
+  --line-strong:rgba(245,243,238,.32);
+
+  --font-display:"Archivo","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Newsreader",Georgia,"Times New Roman",serif;
+
+  --pad:clamp(1.25rem,5vw,4.5rem);
+  --max:1440px;
+  --nav-h:4.5rem;
+  --ease:cubic-bezier(.2,.7,.2,1);
+
+  /* Optional hero photograph. Uncomment and point at an existing brand image:
+     --hero-photo:url("/images/fineboy-portrait.jpg"); */
+}
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0;background:var(--black);color:var(--white);
+  font-family:var(--font-body);font-size:clamp(1.125rem,1.05rem + .3vw,1.3rem);line-height:1.6;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;overflow-x:clip;
+}
+h1,h2,p,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+img,iframe{max-width:100%}
+
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:1rem;top:-4rem;z-index:200;background:var(--white);color:#000;padding:.8rem 1.1rem;font:600 .8rem/1 var(--font-display);letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+.skip:focus{top:1rem}
+
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.on-paper :focus-visible{outline-color:#000}
+
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+
+/* ---------- type ---------- */
+.display{
+  font-family:var(--font-display);font-weight:800;font-stretch:72%;
+  text-transform:uppercase;letter-spacing:-.012em;line-height:.9;
+}
+.label{
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;
+  font-size:.78rem;line-height:1.3;letter-spacing:.16em;text-transform:uppercase;
+}
+.h2{font-size:clamp(2.6rem,7vw,6.25rem)}
+.lead{font-size:clamp(1.25rem,1.05rem + .9vw,1.75rem);line-height:1.45;max-width:32ch;text-wrap:balance}
+
+/* masked line reveal (used inside [data-reveal] containers) */
+.line{display:block;overflow:hidden;padding-block:.06em;margin-block:-.06em}
+.line>span{display:block}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.8em;
+  min-height:3.25rem;padding:.95rem 1.6rem;
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;font-size:.8rem;line-height:1;
+  letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+  border:1px solid var(--white);
+  transition:background-color .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease);
+}
+.btn__arrow{display:inline-block;transition:transform .35s var(--ease)}
+.btn:hover .btn__arrow{transform:translateX(4px)}
+.btn--down:hover .btn__arrow{transform:translateY(4px)}
+.btn--solid{background:var(--white);color:#000}
+.btn--solid:hover{background:var(--gold);border-color:var(--gold)}
+.btn--line{background:transparent;color:var(--white);border-color:var(--line-strong)}
+.btn--line:hover{border-color:var(--white)}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem}
+
+/* ---------- navigation (mirror the site's existing header) ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  border-bottom:1px solid transparent;
+  transition:background-color .4s var(--ease),border-color .4s var(--ease);
+}
+.nav.is-scrolled{background:rgba(0,0,0,.94);border-color:var(--line)}
+.nav.is-open{background:#000;border-color:var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h);gap:1.5rem}
+.nav__brand{
+  font-family:var(--font-display);font-weight:800;font-stretch:80%;font-size:1.15rem;
+  letter-spacing:.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap;
+}
+.nav__menu{display:flex;align-items:center;gap:clamp(1.25rem,3vw,3rem)}
+.nav__list{display:flex;gap:clamp(1.1rem,2.4vw,2.4rem)}
+.nav__link{
+  position:relative;display:inline-block;padding:.5rem 0;
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;font-size:.75rem;
+  letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--muted);
+  transition:color .3s var(--ease);
+}
+.nav__link::after{
+  content:"";position:absolute;left:0;right:0;bottom:.15rem;height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
+}
+.nav__link:hover{color:var(--white)}
+.nav__link:hover::after{transform:scaleX(1)}
+.nav__link[aria-current="page"]{color:var(--white)}
+.nav__link[aria-current="page"]::after{transform:scaleX(1)}
+.nav__cta{
+  display:inline-flex;align-items:center;gap:.7em;padding:.8rem 1.2rem;
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;font-size:.75rem;line-height:1;
+  letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+  border:1px solid var(--gold);color:var(--white);
+  transition:background-color .35s var(--ease),color .35s var(--ease);
+}
+.nav__cta:hover{background:var(--gold);color:#000}
+.nav__toggle{
+  display:none;align-items:center;min-height:2.75rem;padding:0 .9rem;background:transparent;color:var(--white);
+  border:1px solid var(--line-strong);cursor:pointer;
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;
+}
+
+@media (max-width:899px){
+  .nav__in{flex-wrap:wrap;height:auto;min-height:var(--nav-h);padding-block:.75rem}
+  .nav__menu{width:100%;flex-direction:column;align-items:stretch;gap:1.5rem;padding-block:1rem 1.5rem}
+  .nav__list{flex-direction:column;gap:0}
+  .nav__link{display:block;padding:1rem 0;font-size:1.05rem;border-bottom:1px solid var(--line)}
+  .nav__link::after{display:none}
+  .nav__link[aria-current="page"]{color:var(--gold)}
+  .nav__link[aria-current="page"]::before{content:"";display:inline-block;width:.6rem;height:1px;background:var(--gold);margin-right:.7rem;vertical-align:middle}
+  .nav__cta{justify-content:center;min-height:3.25rem}
+  .js .nav__toggle{display:inline-flex}
+  .js .nav__menu{display:none}
+  .js .nav__menu.is-open{display:flex;max-height:calc(100svh - var(--nav-h));overflow-y:auto}
+}
+
+/* ---------- sections ---------- */
+main{display:block}
+.section{position:relative;padding-block:clamp(5rem,12vw,10rem)}
+.player,.proof,.begin,.final{background:var(--char)}
+.section:not(.hero):not(.on-paper){border-top:1px solid var(--line)}
+section[id]{scroll-margin-top:var(--nav-h)}
+
+/* fine grain */
+.grain{isolation:isolate}
+.grain::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.on-paper.grain::before{
+  opacity:.08;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ==========================================================================
+   1 — HERO
+   ========================================================================== */
+.hero{
+  --ph:78vw;
+  --bar:clamp(88px,22vw,140px);
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:100vh;min-height:100svh;
+  display:flex;align-items:flex-end;
+  padding:calc(var(--nav-h) + 3.5rem) 0 clamp(2rem,5vw,4rem);
+}
+.hero__photo{
+  position:absolute;inset:0;z-index:-4;
+  background:var(--hero-photo,none) center/cover no-repeat;filter:grayscale(1) contrast(1.05);opacity:.4;
+}
+.hero__photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),#000 92%)}
+
+/* a bar ruler, the way a session is laid out: quiet, structural, not decorative clip-art */
+.ruler{
+  position:absolute;inset:0;z-index:-3;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(90deg,rgba(245,243,238,.11) 0 1px,transparent 1px var(--bar)),
+    repeating-linear-gradient(90deg,rgba(245,243,238,.045) 0 1px,transparent 1px calc(var(--bar) / 4));
+  -webkit-mask-image:linear-gradient(105deg,transparent 6%,#000 60%);
+  mask-image:linear-gradient(105deg,transparent 6%,#000 60%);
+}
+.ruler__nums{position:absolute;top:calc(var(--nav-h) + .9rem);left:0;right:0;display:flex}
+.ruler__nums li{
+  flex:0 0 var(--bar);padding-left:.6rem;
+  font-family:var(--font-display);font-weight:500;font-stretch:100%;font-size:.68rem;line-height:1;letter-spacing:.1em;
+  color:rgba(245,243,238,.42);
+}
+.playhead{
+  position:absolute;z-index:-2;top:calc(var(--nav-h) + 2.1rem);bottom:0;left:0;width:1px;pointer-events:none;
+  background:linear-gradient(180deg,var(--gold),rgba(181,155,99,0) 94%);
+  transform:translateX(var(--ph));
+}
+.playhead::before{
+  content:"";position:absolute;top:-9px;left:-4.5px;width:10px;height:9px;background:var(--gold);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+}
+
+.hero__in{position:relative}
+.hero__eyebrow{color:var(--muted);margin-bottom:clamp(1.25rem,3vw,2.25rem)}
+.hero__title{font-size:clamp(3.4rem,15.2vw,15.5rem);line-height:.88}
+.hero__foot{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:1.75rem 3rem;
+  margin-top:clamp(2rem,4.5vw,4rem);padding-top:1.6rem;border-top:1px solid var(--line);
+}
+.hero__lede{font-size:clamp(1.3rem,1.05rem + 1vw,1.85rem);line-height:1.4;max-width:26ch}
+.hero__credit{color:var(--muted);margin-top:1.1rem}
+
+@media (min-width:900px){
+  .hero{--ph:71vw;--bar:clamp(120px,11vw,176px)}
+}
+@media (max-width:599px){
+  .hero__title{font-size:26.5vw;line-height:.86}
+}
+@media (max-width:759px){
+  .hero__foot{grid-template-columns:1fr}
+  .hero__foot .actions .btn{flex:1 1 100%}
+}
+
+/* ==========================================================================
+   2 — PLAYER
+   ========================================================================== */
+.player__head{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:clamp(2rem,5vw,3.5rem)}
+@media (min-width:900px){
+  .player__head{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:end;gap:3rem}
+  .player__head .lead{justify-self:end}
+}
+.player__frame{
+  border:1px solid var(--line);border-top-color:var(--gold);
+  background:#0a0a0a;padding:clamp(.25rem,1.6vw,1.5rem);
+}
+.player__iframe{
+  display:block;width:100%;height:clamp(640px,88vh,860px);height:clamp(640px,88svh,860px);
+  border:0;background:transparent;
+}
+.player__note{margin-top:1.1rem;font-size:.95rem;color:var(--muted)}
+.player__note a{text-underline-offset:.2em;text-decoration-color:var(--gold)}
+.player__note a:hover{color:var(--white)}
+
+/* ==========================================================================
+   3 — THE STARTING POINT
+   ========================================================================== */
+.start__title{font-size:clamp(2.7rem,12.6vw,5.6rem)}
+.start__title .dim{color:var(--dim)}
+.start__body{margin-top:clamp(3rem,7vw,6rem);display:grid;gap:1.4rem;font-size:clamp(1.25rem,1.05rem + .9vw,1.7rem);line-height:1.5}
+.start__body p:first-child,.start__body p:last-child{color:var(--muted)}
+.start__lines{color:var(--white)}
+@media (min-width:900px){
+  .start__title{font-size:clamp(4rem,7.5vw,7rem)}
+  .start__body{margin-left:calc(50% + 1.5rem);max-width:30rem}
+}
+
+/* ==========================================================================
+   4 — PROOF
+   ========================================================================== */
+.proof__title{font-size:clamp(2.4rem,6vw,5.5rem);max-width:14ch}
+.proof__grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,3rem);margin-top:clamp(3rem,7vw,6rem)}
+.stat{border-top:1px solid var(--gold);padding-top:clamp(1.75rem,3vw,2.5rem)}
+.stat__num{font-size:clamp(5.5rem,27vw,9rem);line-height:.85;font-variant-numeric:tabular-nums}
+.stat__label{margin-top:1.5rem;color:var(--muted)}
+.proof__copy{margin-top:clamp(2.5rem,6vw,4.5rem);max-width:34ch;font-size:clamp(1.25rem,1.05rem + .9vw,1.7rem);line-height:1.5;color:var(--muted)}
+@media (min-width:760px){
+  .proof__grid{grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem)}
+  .stat__num{font-size:clamp(6rem,15vw,14rem)}
+}
+
+/* ==========================================================================
+   5 — MADE FOR RECORDS  (the one light section)
+   ========================================================================== */
+.records{background:var(--paper);color:#000}
+.records__title{font-size:clamp(1.5rem,1.1rem + 1.8vw,2.75rem);letter-spacing:-.005em}
+.records__list{margin-top:clamp(1.5rem,4vw,3rem)}
+.records__list li{line-height:.86}
+.records__list li:nth-child(1){font-size:clamp(2.4rem,12vw,5.5rem);color:rgba(0,0,0,.45)}
+.records__list li:nth-child(2){font-size:clamp(3rem,15vw,7rem);color:rgba(0,0,0,.6)}
+.records__list li:nth-child(3){font-size:clamp(3.4rem,19vw,9rem);color:rgba(0,0,0,.8)}
+.records__list li:nth-child(4){font-size:clamp(3.6rem,21vw,11rem);color:#000}
+.records__copy{margin-top:clamp(3rem,7vw,6rem);display:grid;gap:1.1rem;max-width:32rem;font-size:clamp(1.25rem,1.05rem + .9vw,1.7rem);line-height:1.5}
+.records__copy p:first-child{color:#4d4b46}
+@media (min-width:900px){
+  .records__list li:nth-child(1){font-size:clamp(3rem,9vw,8.5rem)}
+  .records__list li:nth-child(2){font-size:clamp(4rem,12.5vw,12rem)}
+  .records__list li:nth-child(3){font-size:clamp(5rem,16.5vw,16.5rem)}
+  .records__list li:nth-child(4){font-size:clamp(6rem,21vw,19.5rem)}
+  .records__copy{margin-left:auto}
+}
+
+/* ==========================================================================
+   6 — READY TO RECORD?
+   ========================================================================== */
+.ready{background:var(--black);padding-block:clamp(4rem,8vw,7rem)}
+.ready__grid{display:grid;grid-template-columns:1fr;gap:2rem;align-items:end}
+.ready__grid .lead{margin-bottom:2rem}
+@media (min-width:900px){
+  .ready__grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:4rem}
+}
+
+/* ==========================================================================
+   7 — THE BEAT IS ONLY THE BEGINNING
+   ========================================================================== */
+.begin__head{display:grid;gap:1.75rem}
+.begin__title{max-width:12ch}
+.begin__copy{display:grid;gap:1rem;max-width:30rem;font-size:clamp(1.2rem,1.05rem + .7vw,1.5rem);line-height:1.5;color:var(--muted)}
+@media (min-width:900px){
+  .begin__head{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);align-items:end;gap:3rem}
+}
+
+.chain{
+  display:flex;align-items:center;
+  margin-top:clamp(3.5rem,8vw,7rem);padding-block:clamp(2rem,4vw,3.25rem);
+  border-block:1px solid var(--line);
+  font-size:clamp(1.9rem,3.7vw,4.25rem);
+}
+.chain__item{display:flex;align-items:center;flex:1 1 auto;min-width:0}
+.chain__item:last-child{flex:0 0 auto}
+.chain__word{line-height:.9;white-space:nowrap;color:var(--white)}
+.chain__item:last-child .chain__word{color:var(--gold)}
+.chain__arrow{
+  position:relative;flex:1 1 auto;min-width:2rem;height:2px;
+  margin-inline:clamp(.6rem,1.2vw,1.25rem);background:var(--line-strong);
+}
+.chain__arrow::before{content:"";position:absolute;inset:0;background:var(--gold);transform-origin:left}
+.chain__arrow::after{
+  content:"";position:absolute;right:1px;top:-6px;width:14px;height:14px;
+  border-top:2px solid var(--gold);border-right:2px solid var(--gold);transform:rotate(45deg);
+}
+@media (max-width:859px){
+  .chain{flex-direction:column;align-items:flex-start;font-size:clamp(2.8rem,15vw,4.5rem);border-block:0;padding-block:0}
+  .chain__item{flex:0 0 auto;flex-direction:column;align-items:flex-start}
+  .chain__arrow{flex:0 0 auto;width:2px;height:clamp(2.5rem,10vw,3.5rem);min-width:0;margin:.9rem 0 .9rem .35rem}
+  .chain__arrow::before{transform-origin:top}
+  .chain__arrow::after{right:auto;left:-6px;top:auto;bottom:1px;transform:rotate(135deg)}
+}
+
+/* ==========================================================================
+   8 — NOW BUILD AROUND IT
+   ========================================================================== */
+.build{background:var(--black)}
+.build__kicker{display:block;font-size:clamp(1.4rem,1rem + 2vw,2.6rem);color:var(--muted);margin-bottom:clamp(1rem,2.5vw,2rem);line-height:1}
+.build__big{font-size:clamp(3.6rem,18vw,14rem);line-height:.88}
+@media (min-width:600px){.build__big{font-size:clamp(3.6rem,15vw,14rem)}}
+.build__foot{
+  display:grid;grid-template-columns:1fr;gap:2rem;align-items:end;
+  margin-top:clamp(2.5rem,6vw,5rem);padding-top:1.75rem;border-top:1px solid var(--line);
+}
+.build__copy{display:grid;gap:.4rem;font-size:clamp(1.25rem,1.05rem + .9vw,1.7rem);line-height:1.45;max-width:34rem}
+.build__copy p:last-child{color:var(--muted)}
+@media (min-width:900px){
+  .build__foot{grid-template-columns:minmax(0,1fr) auto;gap:3rem}
+}
+@media (max-width:759px){
+  .build__foot .actions .btn{flex:1 1 100%}
+}
+
+/* ==========================================================================
+   9 — FIND THE ONE
+   ========================================================================== */
+.final__in{text-align:center;display:flex;flex-direction:column;align-items:center}
+.final__title{font-size:clamp(4rem,17vw,16rem);line-height:.86}
+.final__in .lead{margin-top:clamp(2rem,5vw,3.5rem);margin-bottom:2rem}
+.final__sign{margin-top:clamp(3rem,7vw,5rem);color:var(--gold)}
+
+/* ==========================================================================
+   FOOTER (mirror the site's existing footer)
+   ========================================================================== */
+.footer{background:var(--black);border-top:1px solid var(--line);padding-block:clamp(3rem,7vw,5rem) 2rem}
+.footer__grid{display:grid;gap:2.5rem;grid-template-columns:1fr}
+.footer__brand{font-size:clamp(1.8rem,1.2rem + 2.4vw,3rem);line-height:.9}
+.footer__tag{margin-top:.9rem;color:var(--muted)}
+.footer__nav{display:flex;flex-wrap:wrap;gap:.25rem 2rem}
+.footer__nav a{
+  display:inline-block;padding:.6rem 0;
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;font-size:.78rem;
+  letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--muted);
+  background:linear-gradient(var(--gold),var(--gold)) left bottom .35rem/0 1px no-repeat;
+  transition:color .3s var(--ease),background-size .4s var(--ease);
+}
+.footer__nav a:hover{color:var(--white);background-size:100% 1px}
+.footer__legal{margin-top:clamp(2.5rem,6vw,4.5rem);padding-top:1.5rem;border-top:1px solid var(--line);color:var(--dim)}
+@media (min-width:900px){
+  .footer__grid{grid-template-columns:1fr auto;align-items:end}
+}
+
+/* ==========================================================================
+   MOTION — one orchestrated hero moment, then only what earns it.
+   Everything is visible without JS and under reduced-motion.
+   ========================================================================== */
+@media (prefers-reduced-motion:no-preference){
+  /* hero: playhead sweeps once, headline rises behind it */
+  .playhead{animation:sweep 3.4s var(--ease) both}
+  @keyframes sweep{
+    0%{transform:translateX(0);opacity:0}
+    10%{opacity:1}
+    100%{transform:translateX(var(--ph));opacity:1}
+  }
+
+  /* masked headline lines */
+  .js [data-reveal] .line>span{
+    transform:translateY(112%);
+    transition:transform 1.05s var(--ease);
+    transition-delay:calc(var(--d,0) * .12s);
+  }
+  .js [data-reveal].in .line>span{transform:none}
+  .js .hero [data-reveal] .line>span{transition-delay:calc(.25s + var(--d,0) * .14s)}
+
+  /* fade for supporting blocks inside a reveal */
+  .js [data-reveal] .fade{opacity:0;transition:opacity 1s var(--ease) .5s}
+  .js [data-reveal].in .fade{opacity:1}
+
+  /* chain: each step lights in order, arrows draw between */
+  .js .chain:not(.in) .chain__word{color:#5c5a55}
+  .js .chain .chain__word{transition:color .7s var(--ease) calc(var(--i) * .65s)}
+  .js .chain:not(.in) .chain__arrow::before{transform:scaleX(0)}
+  .js .chain:not(.in) .chain__arrow::after{opacity:0}
+  .js .chain .chain__arrow::before{transition:transform .8s var(--ease) calc(var(--i) * .65s + .3s)}
+  .js .chain .chain__arrow::after{transition:opacity .3s linear calc(var(--i) * .65s + 1s)}
+  @media (max-width:859px){
+    .js .chain:not(.in) .chain__arrow::before{transform:scaleY(0)}
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ======================= NAVIGATION =======================
+     Mirrors the existing site header. If your project has a shared header
+     include or component, use that instead and set BEATS as the current page.
+     LINKS TO CONFIRM: index.html, about.html, work-with-me.html, YouTube URL, beats.html -->
+<header class="nav" id="top">
+  <div class="wrap nav__in">
+    <a class="nav__brand" href="index.html" aria-label="Fineboy Producer, home">Fineboy Producer</a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu"><span class="nav__toggle-text">Menu</span></button>
+    <div class="nav__menu" id="site-menu">
+      <nav aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="about.html">About</a></li>
+          <li><a class="nav__link" href="work-with-me.html">Work With Me</a></li>
+          <li><a class="nav__link" href="https://www.youtube.com/" target="_blank" rel="noopener" data-youtube>YouTube</a></li>
+          <li><a class="nav__link" href="beats.html" aria-current="page">Beats</a></li>
+        </ul>
+      </nav>
+      <a class="nav__cta" href="work-with-me.html">Get Started <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ======================= 1 · HERO ======================= -->
+  <section class="hero grain" aria-labelledby="hero-title">
+    <div class="hero__photo" aria-hidden="true"></div>
+    <div class="ruler" aria-hidden="true"><ol class="ruler__nums" id="ruler-nums"></ol></div>
+    <div class="playhead" aria-hidden="true"></div>
+
+    <div class="wrap hero__in" data-reveal>
+      <p class="label hero__eyebrow">Fineboy Producer</p>
+      <h1 class="display hero__title" id="hero-title">
+        <span class="line" style="--d:0"><span>The music</span></span>
+        <span class="line" style="--d:1"><span>starts here.</span></span>
+      </h1>
+
+      <div class="hero__foot">
+        <div>
+          <p class="hero__lede">Original beats for artists who want to make records people remember.</p>
+          <p class="label hero__credit">Produced by Fineboy Producer</p>
+        </div>
+        <div class="actions">
+          <a class="btn btn--solid btn--down" href="#player">Browse the beats <span class="btn__arrow" aria-hidden="true">↓</span></a>
+          <a class="btn btn--line" href="work-with-me.html">Work with me <span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= 2 · FIND YOUR SOUND + BLAZE PLAYER ======================= -->
+  <section class="section player" id="player" aria-labelledby="player-title">
+    <div class="wrap">
+      <div class="player__head">
+        <h2 class="display h2" id="player-title">Find your sound.</h2>
+        <p class="lead">Listen through the catalog and find the record that makes you want to start writing.</p>
+      </div>
+
+      <div class="player__frame">
+        <iframe
+          class="player__iframe"
+          src="https://player.beatstars.com/?storeId=142245"
+          title="Fineboy Producer beat catalog. Listen to beats and buy a license on BeatStars."
+          loading="lazy"
+          allow="fullscreen; clipboard-write"
+          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <p class="player__note">Player not loading? <a href="https://player.beatstars.com/?storeId=142245" target="_blank" rel="noopener noreferrer">Open the catalog in a new tab</a>.</p>
+    </div>
+  </section>
+
+  <!-- ======================= 3 · THE STARTING POINT ======================= -->
+  <section class="section start" aria-labelledby="start-title">
+    <div class="wrap" data-reveal>
+      <h2 class="display start__title" id="start-title">
+        <span class="line dim" style="--d:0"><span>I don’t just make beats.</span></span>
+        <span class="line" style="--d:1"><span>I make the starting point.</span></span>
+      </h2>
+      <div class="start__body fade">
+        <p>Every record starts somewhere.</p>
+        <p class="start__lines">A melody.<br>A feeling.<br>A line that hasn’t been written yet.</p>
+        <p>My job is to create the sound that gives an artist somewhere to go.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= 4 · PROOF ======================= -->
+  <section class="section proof" aria-labelledby="proof-title">
+    <div class="wrap">
+      <h2 class="display proof__title" id="proof-title">Built from years of making music.</h2>
+
+      <div class="proof__grid" data-count-group>
+        <div class="stat">
+          <p class="display stat__num">
+            <span class="sr-only">1,000+</span>
+            <span aria-hidden="true" data-count-to="1000" data-suffix="+">1,000+</span>
+          </p>
+          <p class="label stat__label">Beats created</p>
+        </div>
+        <div class="stat">
+          <p class="display stat__num">
+            <span class="sr-only">237+</span>
+            <span aria-hidden="true" data-count-to="237" data-suffix="+">237+</span>
+          </p>
+          <p class="label stat__label">Artists worked with</p>
+        </div>
+      </div>
+
+      <p class="proof__copy">I’ve spent years creating music and working with artists across different sounds and creative directions.</p>
+    </div>
+  </section>
+
+  <!-- ======================= 5 · MADE FOR RECORDS ======================= -->
+  <section class="section records on-paper grain" aria-labelledby="records-title">
+    <div class="wrap" data-reveal>
+      <h2 class="display records__title" id="records-title">Made for records.</h2>
+      <ul class="display records__list" aria-label="Songs, stories, moments, careers">
+        <li class="line" style="--d:0"><span>Songs.</span></li>
+        <li class="line" style="--d:1"><span>Stories.</span></li>
+        <li class="line" style="--d:2"><span>Moments.</span></li>
+        <li class="line" style="--d:3"><span>Careers.</span></li>
+      </ul>
+      <div class="records__copy fade">
+        <p>Don’t buy a beat just because it sounds good.</p>
+        <p>Find the one that makes you hear the song before you’ve even written it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= 6 · READY TO RECORD? ======================= -->
+  <section class="section ready" aria-labelledby="ready-title">
+    <div class="wrap ready__grid">
+      <h2 class="display h2" id="ready-title">Ready to record?</h2>
+      <div>
+        <p class="lead">Choose a beat from the player, select the license that fits your record, and get to work.</p>
+        <a class="btn btn--solid btn--down" href="#player">Browse beats <span class="btn__arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= 7 · THE BEAT IS ONLY THE BEGINNING ======================= -->
+  <section class="section begin" aria-labelledby="begin-title">
+    <div class="wrap">
+      <div class="begin__head">
+        <h2 class="display h2 begin__title" id="begin-title">The beat is only the beginning.</h2>
+        <div class="begin__copy">
+          <p>A great record doesn’t end when you find the instrumental.</p>
+          <p>The sound, the artist, the positioning, the release and the strategy all have to connect.</p>
+        </div>
+      </div>
+
+      <ol class="chain display" data-reveal aria-label="Music, then positioning, then promotion, then growth">
+        <li class="chain__item" style="--i:0"><span class="chain__word">Music</span><span class="chain__arrow" aria-hidden="true"></span></li>
+        <li class="chain__item" style="--i:1"><span class="chain__word">Positioning</span><span class="chain__arrow" aria-hidden="true"></span></li>
+        <li class="chain__item" style="--i:2"><span class="chain__word">Promotion</span><span class="chain__arrow" aria-hidden="true"></span></li>
+        <li class="chain__item" style="--i:3"><span class="chain__word">Growth</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ======================= 8 · WORK WITH ME ======================= -->
+  <section class="section build" aria-labelledby="build-title">
+    <div class="wrap" data-reveal>
+      <h2 class="display" id="build-title">
+        <span class="build__kicker">Made your record?</span>
+        <span class="line build__big" style="--d:0"><span>Now build</span></span>
+        <span class="line build__big" style="--d:1"><span>around it.</span></span>
+      </h2>
+      <div class="build__foot fade">
+        <div class="build__copy">
+          <p>Making the song is step one.</p>
+          <p>What happens next matters just as much.</p>
+        </div>
+        <div class="actions">
+          <a class="btn btn--solid" href="work-with-me.html">Work with me <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--line" href="https://www.youtube.com/" target="_blank" rel="noopener" data-youtube>Watch on YouTube <span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= 9 · FIND THE ONE ======================= -->
+  <section class="section final" aria-labelledby="final-title">
+    <div class="wrap final__in" data-reveal>
+      <h2 class="display final__title" id="final-title">
+        <span class="line" style="--d:0"><span>Find the</span></span>
+        <span class="line" style="--d:1"><span>one.</span></span>
+      </h2>
+      <p class="lead fade">The beat that makes you stop scrolling and start writing.</p>
+      <a class="btn btn--solid btn--down fade" href="#player">Browse the beats <span class="btn__arrow" aria-hidden="true">→</span></a>
+      <p class="label final__sign">Strategy before streams.</p>
+    </div>
+  </section>
+</main>
+
+<!-- ======================= FOOTER =======================
+     Mirrors the existing footer. Swap for the shared footer include if the project has one. -->
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <p class="display footer__brand">Fineboy Producer</p>
+      <p class="label footer__tag">Strategy before streams.</p>
+    </div>
+    <nav class="footer__nav" aria-label="Footer">
+      <a href="about.html">About</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="index.html">Home</a>
+      <a href="https://www.youtube.com/" target="_blank" rel="noopener" data-youtube>YouTube</a>
+    </nav>
+  </div>
+  <div class="wrap footer__legal">
+    <p class="label">© 2026 Fineboy Producer. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var d = document, root = d.documentElement;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* header: solid once scrolled */
+  var nav = d.querySelector('.nav');
+  function onScroll() { nav.classList.toggle('is-scrolled', window.scrollY > 24); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* mobile menu */
+  var toggle = d.querySelector('.nav__toggle');
+  var menu = d.getElementById('site-menu');
+  var toggleText = d.querySelector('.nav__toggle-text');
+  function setMenu(open) {
+    menu.classList.toggle('is-open', open);
+    nav.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggleText.textContent = open ? 'Close' : 'Menu';
+  }
+  toggle.addEventListener('click', function () { setMenu(!menu.classList.contains('is-open')); });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  d.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menu.classList.contains('is-open')) { setMenu(false); toggle.focus(); }
+  });
+  window.matchMedia('(min-width: 900px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
+
+  /* hero ruler: decorative bar numbers */
+  var nums = d.getElementById('ruler-nums');
+  for (var i = 1; i <= 24; i++) { var li = d.createElement('li'); li.textContent = i; nums.appendChild(li); }
+
+  /* count-up for the two confirmed stats */
+  function fmt(n) { return n.toLocaleString('en-US'); }
+  var counters = [].slice.call(d.querySelectorAll('[data-count-to]'));
+  function runCount(el) {
+    var to = +el.getAttribute('data-count-to'), suffix = el.getAttribute('data-suffix') || '';
+    var t0 = null, dur = 1700;
+    function step(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(to * e)) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* reveals */
+  var targets = [].slice.call(d.querySelectorAll('[data-reveal]'));
+  var groups = [].slice.call(d.querySelectorAll('[data-count-group]'));
+  if (reduce || !('IntersectionObserver' in window)) {
+    targets.forEach(function (t) { t.classList.add('in'); });
+    return;
+  }
+  counters.forEach(function (el) { el.textContent = '0' + (el.getAttribute('data-suffix') || ''); });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var el = en.target;
+      el.classList.add('in');
+      if (el.hasAttribute('data-count-group')) {
+        [].forEach.call(el.querySelectorAll('[data-count-to]'), runCount);
+      }
+      io.unobserve(el);
+    });
+  }, { threshold: 0.3, rootMargin: '0px 0px -8% 0px' });
+
+  targets.concat(groups).forEach(function (t) { io.observe(t); });
+})();
+</script>
+</body>
+</html>
