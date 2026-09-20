@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fineboy Producer | Music Growth Strategy for Independent Artists</title>
+<meta name="description" content="Fineboy Producer helps serious independent artists grow their music through strategy, systems and practical music marketing — not guesswork.">
+<meta property="og:title" content="Fineboy Producer | Music Growth Strategy for Independent Artists">
+<meta property="og:description" content="Fineboy Producer helps serious independent artists grow their music through strategy, systems and practical music marketing — not guesswork.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fineboyproducer.com.ng">
+<link rel="canonical" href="https://fineboyproducer.com.ng">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a;
+    --near-black:#111110;
+    --offwhite:#f3f1ec;
+    --paper:#eeece5;
+    --gray:#4a4844;
+    --gray-light:#8a877f;
+    --gold:#b78a3d;
+    --gold-soft:#cba15e;
+    --line-dark: rgba(243,241,236,0.14);
+    --line-light: rgba(10,10,10,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--black);
+    color:var(--offwhite);
+    font-family:'Inter',system-ui,sans-serif;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--black);}
+  h1,h2,h3,.display{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    line-height:0.98;
+    margin:0;
+  }
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    font-weight:500;
+  }
+  .eyebrow.on-light{color:#8a5f22;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1240px;margin:0 auto;padding-left:24px;padding-right:24px;}
+  @media(min-width:768px){.wrap{padding-left:48px;padding-right:48px;}}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:16px 30px;
+    font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;
+    border:1px solid currentColor;
+    transition:background .35s ease, color .35s ease, border-color .35s ease;
+    white-space:nowrap;
+  }
+  .btn-gold{background:var(--gold);color:var(--black);border-color:var(--gold);}
+  .btn-gold:hover{background:var(--gold-soft);border-color:var(--gold-soft);}
+  .btn-outline-dark{color:var(--offwhite);border-color:rgba(243,241,236,0.4);}
+  .btn-outline-dark:hover{border-color:var(--offwhite);}
+  .btn-outline-light{color:var(--black);border-color:rgba(10,10,10,0.35);}
+  .btn-outline-light:hover{border-color:var(--black);}
+
+  /* Nav */
+  #nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:26px 0;
+    border-bottom:1px solid transparent;
+    transition:padding .4s ease, background .4s ease, border-color .4s ease;
+  }
+  #nav.scrolled{
+    padding:14px 0;
+    background:rgba(10,10,10,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom-color:var(--line-dark);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;}
+  .brand-mark{font-family:'Fraunces',serif;font-size:14px;letter-spacing:0.06em;font-weight:500;}
+  .nav-links{display:none;gap:36px;font-size:13px;letter-spacing:0.02em;color:rgba(243,241,236,0.78);}
+  .nav-links a{position:relative;padding:4px 0;}
+  .nav-links a:hover{color:var(--offwhite);}
+  @media(min-width:920px){.nav-links{display:flex;}}
+  .nav-cta{display:none;}
+  @media(min-width:920px){.nav-cta{display:inline-flex;}}
+  .hamburger{display:flex;flex-direction:column;gap:5px;width:26px;cursor:pointer;background:none;border:0;padding:8px 0;}
+  @media(min-width:920px){.hamburger{display:none;}}
+  .hamburger span{height:1px;background:var(--offwhite);width:100%;transition:transform .3s ease, opacity .3s ease;}
+  #mobile-menu{
+    position:fixed;inset:0;background:var(--black);z-index:99;
+    display:flex;flex-direction:column;justify-content:center;gap:28px;padding:24px;
+    transform:translateY(-100%);transition:transform .45s ease;
+  }
+  #mobile-menu.open{transform:translateY(0);}
+  #mobile-menu a{font-family:'Fraunces',serif;font-size:32px;}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  section{position:relative;}
+  .section-dark{background:var(--black);color:var(--offwhite);}
+  .section-light{background:var(--offwhite);color:var(--black);}
+
+  .rule{height:1px;background:var(--line-dark);width:100%;}
+  .rule.on-light{background:var(--line-light);}
+
+  /* Hero */
+  .hero{min-height:100svh;display:flex;align-items:center;padding-top:110px;padding-bottom:60px;}
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:56px;align-items:center;}
+  @media(min-width:1024px){.hero-grid{grid-template-columns:1.05fr 0.95fr;gap:40px;}}
+  .hero-headline{font-size:clamp(44px,8vw,86px);}
+  .portrait-frame{
+    position:relative;aspect-ratio:4/5;background:linear-gradient(155deg,#1c1c1a,#0a0a0a 70%);
+    border:1px solid var(--line-dark);overflow:hidden;
+  }
+  .portrait-frame .grain{position:absolute;inset:0;background:
+    radial-gradient(circle at 30% 20%, rgba(183,138,61,0.10), transparent 55%),
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 6px);}
+  .portrait-frame .label{
+    position:absolute;bottom:20px;left:20px;right:20px;
+    display:flex;justify-content:space-between;align-items:flex-end;
+    font-size:11px;letter-spacing:0.08em;color:rgba(243,241,236,0.55);text-transform:uppercase;
+  }
+  .portrait-frame .placeholder-icon{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  }
+  .portrait-frame img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;
+  }
+  .about-portrait img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 30%;
+  }
+  .portrait-frame .shade{
+    position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,10,10,0) 55%, rgba(10,10,10,0.55) 100%);
+  }
+  .parallax-el{transition:transform .1s linear;}
+
+  /* Problem blocks */
+  .problem-grid{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line-light);margin-top:56px;}
+  @media(min-width:860px){.problem-grid{grid-template-columns:repeat(3,1fr);}}
+  .problem-block{padding:40px 8px 40px 0;border-bottom:1px solid var(--line-light);}
+  @media(min-width:860px){.problem-block{border-right:1px solid var(--line-light);padding:44px 32px;}
+    .problem-block:last-child{border-right:none;}}
+  .problem-block h3{font-size:20px;margin-bottom:14px;font-weight:500;}
+  .problem-block p{color:var(--gray);font-size:15px;line-height:1.6;max-width:34ch;}
+
+  /* Pillars */
+  .pillars{display:grid;grid-template-columns:1fr;margin-top:64px;border-top:1px solid var(--line-dark);}
+  @media(min-width:860px){.pillars{grid-template-columns:repeat(4,1fr);}}
+  .pillar{padding:36px 8px;border-bottom:1px solid var(--line-dark);}
+  @media(min-width:860px){.pillar{border-right:1px solid var(--line-dark);padding:40px 26px;}
+    .pillar:last-child{border-right:none;}}
+  .pillar .num{font-family:'Fraunces',serif;font-size:15px;color:var(--gold-soft);margin-bottom:26px;display:block;}
+  .pillar h3{font-size:19px;margin-bottom:12px;font-weight:500;}
+  .pillar p{color:rgba(243,241,236,0.62);font-size:14.5px;line-height:1.6;max-width:30ch;}
+
+  /* Stats */
+  .stats{display:grid;grid-template-columns:1fr;gap:36px;margin-top:56px;}
+  @media(min-width:720px){.stats{grid-template-columns:repeat(3,1fr);gap:24px;}}
+  .stat-num{font-family:'Fraunces',serif;font-size:clamp(40px,6vw,64px);font-weight:500;color:var(--black);}
+  .stat-label{font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray);margin-top:8px;}
+
+  .case-frame{
+    margin-top:64px;border:1px solid var(--line-light);background:#e4e1d8;
+    position:relative;overflow:hidden;
+  }
+  .case-frame img{width:100%;height:auto;display:block;}
+
+  /* Product sections */
+  .feature-list{list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:1fr;gap:12px 28px;}
+  @media(min-width:640px){.feature-list{grid-template-columns:1fr 1fr;}}
+  .feature-list li{font-size:14.5px;padding-left:20px;position:relative;color:rgba(243,241,236,0.75);}
+  .feature-list li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:1px;background:var(--gold-soft);}
+
+  .process{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:40px 0;font-family:'Fraunces',serif;font-size:clamp(20px,3.4vw,30px);color:rgba(243,241,236,0.9);}
+  .process .arrow{color:var(--gold-soft);font-size:20px;}
+
+  .agi-grid{display:grid;grid-template-columns:1fr;gap:0;margin-top:8px;border-top:1px solid var(--line-dark);}
+  @media(min-width:860px){.agi-grid{grid-template-columns:repeat(3,1fr);}}
+  .agi-card{padding:32px 8px;border-bottom:1px solid var(--line-dark);}
+  @media(min-width:860px){.agi-card{border-right:1px solid var(--line-dark);padding:36px 28px;}
+    .agi-card:last-child{border-right:none;}}
+  .agi-card h3{font-size:17px;font-weight:500;margin-bottom:10px;}
+  .agi-card p{font-size:14.5px;color:rgba(243,241,236,0.62);line-height:1.6;}
+
+  /* Video cards */
+  .video-grid{display:grid;grid-template-columns:1fr;gap:28px;margin-top:48px;}
+  @media(min-width:760px){.video-grid{grid-template-columns:repeat(3,1fr);}}
+  .video-card{border:1px solid var(--line-light);}
+  .video-thumb{aspect-ratio:16/9;background:linear-gradient(160deg,#e4e1d8,#d8d5cb);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .video-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .video-thumb .play-ring{position:relative;z-index:1;background:rgba(255,255,255,0.92);}
+  .soon-badge{position:absolute;top:12px;left:12px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;background:var(--black);color:var(--offwhite);padding:5px 10px;z-index:1;}
+  .play-ring{width:52px;height:52px;border-radius:50%;border:1px solid rgba(10,10,10,0.3);display:flex;align-items:center;justify-content:center;}
+  .video-card h4{font-size:15px;font-weight:500;padding:18px 18px 20px;line-height:1.4;}
+
+  /* Who this is for */
+  .statements{display:grid;grid-template-columns:1fr;gap:0;margin-top:48px;border-top:1px solid var(--line-dark);}
+  .statement{padding:22px 0;border-bottom:1px solid var(--line-dark);font-family:'Fraunces',serif;font-size:clamp(18px,2.6vw,24px);color:rgba(243,241,236,0.9);}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr;gap:48px;}
+  @media(min-width:900px){.about-grid{grid-template-columns:0.85fr 1.15fr;gap:64px;}}
+  .about-portrait{position:relative;aspect-ratio:4/5;background:linear-gradient(160deg,#1c1c1a,#0a0a0a 70%);border:1px solid var(--line-dark);overflow:hidden;}
+
+  /* Waveform */
+  .waveform{display:flex;align-items:flex-end;gap:3px;height:34px;opacity:0.6;}
+  .waveform span{width:2px;background:var(--gold-soft);}
+
+  /* Footer */
+  footer{background:var(--black);color:rgba(243,241,236,0.65);padding:64px 0 32px;}
+  .footer-grid{display:grid;grid-template-columns:1fr;gap:40px;}
+  @media(min-width:760px){.footer-grid{grid-template-columns:1.3fr 1fr 1fr;}}
+  footer h5{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(243,241,236,0.4);margin-bottom:16px;font-weight:500;}
+  .footer-links{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:14px;}
+  .footer-links a:hover{color:var(--offwhite);}
+
+  .sticky-cta{
+    position:fixed;bottom:0;left:0;right:0;z-index:90;background:var(--gold);color:var(--black);
+    display:flex;justify-content:center;padding:14px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;
+    transform:translateY(100%);transition:transform .4s ease;
+  }
+  .sticky-cta.show{transform:translateY(0);}
+  @media(min-width:920px){.sticky-cta{display:none;}}
+
+  .counted{font-variant-numeric:tabular-nums;}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="brand-mark">FINEBOYPRODUCER.COM.NG</a>
+    <div class="nav-links">
+      <a href="#agi">Work With Me</a>
+      <a href="#blueprint">Blueprint</a>
+      <a href="#youtube">YouTube</a>
+      <a href="#about">About</a>
+    </div>
+    <a href="#blueprint" class="btn btn-outline-dark nav-cta">Get Started</a>
+    <button class="hamburger" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-menu">
+  <a href="#agi" class="mm-link">Work With Me</a>
+  <a href="#blueprint" class="mm-link">Blueprint</a>
+  <a href="#youtube" class="mm-link">YouTube</a>
+  <a href="#about" class="mm-link">About</a>
+  <a href="#blueprint" class="btn btn-gold mm-link" style="width:fit-content;margin-top:10px;">Get Started</a>
+</div>
+
+<!-- HERO -->
+<section class="section-dark hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow reveal">Fineboy Producer</p>
+      <h1 class="hero-headline reveal" style="margin-top:18px;">STRATEGY<br>BEFORE STREAMS.</h1>
+      <p class="reveal" style="margin-top:26px;font-size:17px;line-height:1.6;color:rgba(243,241,236,0.72);max-width:46ch;">
+        I help serious independent artists turn their music into real streams, real fans, and real growth — using strategy, not guesswork.
+      </p>
+      <div class="reveal" style="margin-top:34px;display:flex;flex-wrap:wrap;gap:16px;">
+        <a href="#blueprint" class="btn btn-gold">Get the 100K Streams Blueprint</a>
+        <a href="#agi" class="btn btn-outline-dark">Work With Me</a>
+      </div>
+      <p class="reveal" style="margin-top:22px;font-size:13px;color:rgba(243,241,236,0.42);">For independent artists who are ready to take their music seriously.</p>
+    </div>
+    <div class="reveal">
+      <div class="portrait-frame" id="hero-portrait">
+        <img class="parallax-el" src="assets/portrait.jpg" alt="Fineboy Producer — portrait">
+        <div class="shade"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section-light" style="padding:100px 0 110px;">
+  <div class="wrap">
+    <p class="eyebrow on-light reveal">The Real Problem</p>
+    <h2 class="reveal" style="margin-top:18px;font-size:clamp(34px,5.6vw,56px);">GOOD MUSIC<br>ISN'T ENOUGH.</h2>
+    <p class="reveal" style="margin-top:22px;font-size:16px;color:var(--gray);max-width:44ch;">You can make great music and still struggle to get heard.</p>
+
+    <div class="problem-grid">
+      <div class="problem-block reveal">
+        <h3>No Strategy</h3>
+        <p>You're releasing music without knowing what you're actually trying to achieve.</p>
+      </div>
+      <div class="problem-block reveal">
+        <h3>Wrong Promotion</h3>
+        <p>You're spending money without knowing what's actually moving your career.</p>
+      </div>
+      <div class="problem-block reveal">
+        <h3>No System</h3>
+        <p>Every release starts from zero instead of building on what worked before.</p>
+      </div>
+    </div>
+
+    <p class="reveal" style="margin-top:64px;font-family:'Fraunces',serif;font-size:clamp(22px,3.4vw,32px);max-width:22ch;line-height:1.25;">
+      The problem isn't always the music. Sometimes, it's what happens after you make it.
+    </p>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="section-dark" style="padding:100px 0 90px;">
+  <div class="wrap">
+    <p class="eyebrow reveal">The Fineboy Approach</p>
+    <h2 class="reveal" style="margin-top:18px;font-size:clamp(34px,5.6vw,56px);">BUILD THE ARTIST.<br>NOT JUST THE RELEASE.</h2>
+    <p class="reveal" style="margin-top:22px;font-size:16px;color:rgba(243,241,236,0.62);max-width:48ch;">Music growth isn't just about getting one song heard. It's about building the artist behind the song.</p>
+
+    <div class="pillars">
+      <div class="pillar reveal"><span class="num">01</span><h3>Position</h3><p>Define who you are and why people should care.</p></div>
+      <div class="pillar reveal"><span class="num">02</span><h3>Content</h3><p>Create content that gives people a reason to discover you.</p></div>
+      <div class="pillar reveal"><span class="num">03</span><h3>Promotion</h3><p>Put your attention, money and resources where they can actually matter.</p></div>
+      <div class="pillar reveal"><span class="num">04</span><h3>Growth</h3><p>Turn listeners into fans and build a repeatable system around your music.</p></div>
+    </div>
+
+    <p class="reveal" style="margin-top:56px;font-size:13px;letter-spacing:0.1em;color:var(--gold-soft);text-transform:uppercase;">Strategy before streams. Every time.</p>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="section-light" style="padding:100px 0 110px;">
+  <div class="wrap">
+    <p class="eyebrow on-light reveal">This Isn't Theory.</p>
+    <h2 class="reveal" style="margin-top:18px;font-size:clamp(34px,5.6vw,54px);">YEARS OF MAKING,<br>TESTING &amp; LEARNING.</h2>
+    <p class="reveal" style="margin-top:22px;font-size:16px;color:var(--gray);max-width:52ch;">I've spent years making music, working with artists and studying what actually creates attention, streams and growth.</p>
+
+    <div class="stats">
+      <div class="reveal"><div class="stat-num"><span class="counted" data-count="1000">0</span>+</div><div class="stat-label">Beats Created</div></div>
+      <div class="reveal"><div class="stat-num"><span class="counted" data-count="237">0</span>+</div><div class="stat-label">Artists Worked With</div></div>
+      <div class="reveal"><div class="stat-num"><span class="counted" data-count="100">0</span>K+</div><div class="stat-label">Streams In A Documented Campaign</div></div>
+    </div>
+
+    <div class="case-frame reveal">
+      <img src="assets/case-study.jpg" alt="Fineboy Producer campaign case study — Artist Growth Performance, 100K+ Audiomack plays over a ~90 day campaign">
+    </div>
+    <div class="reveal" style="margin-top:40px;">
+      <h3 style="font-size:clamp(24px,4vw,36px);">FROM UNKNOWN<br>TO CLOSE TO 100K PLAYS.</h3>
+      <p style="margin-top:14px;max-width:50ch;color:var(--gray);font-size:15px;line-height:1.6;">One artist campaign generated close to 100,000 Audiomack plays in under three months — using a deliberate growth strategy rather than simply hoping the song would catch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BLUEPRINT -->
+<section id="blueprint" class="section-dark" style="padding:100px 0;">
+  <div class="wrap">
+    <p class="eyebrow reveal">Do It Yourself</p>
+    <h2 class="reveal" style="margin-top:18px;font-size:clamp(34px,5.6vw,54px);">YOUR MUSIC<br>DESERVES A STRATEGY.</h2>
+
+    <div class="rule reveal" style="margin:44px 0;"></div>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:40px;" class="blueprint-cols">
+      <div class="reveal">
+        <p style="font-family:'Fraunces',serif;font-size:clamp(24px,3.6vw,34px);">100K Streams<br>Artist Blueprint</p>
+        <p style="margin-top:18px;font-size:15px;line-height:1.65;color:rgba(243,241,236,0.65);max-width:50ch;">A practical system for independent artists who want to understand how to promote their music, get discovered and work toward 100K+ streams without relying on guesswork.</p>
+        <ul class="feature-list">
+          <li>Release strategy</li>
+          <li>Music promotion</li>
+          <li>Content strategy</li>
+          <li>Audience growth</li>
+          <li>Streaming strategy</li>
+          <li>What to stop wasting money on</li>
+        </ul>
+        <a href="https://100k-streams.carrd.co/" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:34px;">Get The Blueprint →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGI -->
+<section id="agi" class="section-dark" style="padding:20px 0 100px;">
+  <div class="wrap">
+    <div class="rule reveal" style="margin-bottom:70px;"></div>
+    <p class="eyebrow reveal">For Artists Ready To Go Deeper</p>
+    <h2 class="reveal" style="margin-top:18px;font-size:clamp(30px,5vw,50px);">YOUR CAREER ISN'T GENERIC.<br>YOUR STRATEGY SHOULDN'T BE.</h2>
+    <p class="reveal" style="margin-top:22px;font-size:16px;color:rgba(243,241,236,0.62);max-width:54ch;">The Artist Growth Intensive is a personalized strategy experience for artists who want to understand exactly what's working, what's holding them back and what they should do next.</p>
+
+    <div class="process reveal">
+      <span>Audit</span><span class="arrow">→</span><span>Strategy</span><span class="arrow">→</span><span>Implementation</span>
+    </div>
+
+    <div class="agi-grid">
+      <div class="agi-card reveal"><h3>Deep Dive</h3><p>Your music, artist identity, social media and DSP presence.</p></div>
+      <div class="agi-card reveal"><h3>Personalized Strategy</h3><p>A clear plan built around your actual situation.</p></div>
+      <div class="agi-card reveal"><h3>Implementation Guidance</h3><p>Know what to do, where to spend and how to move forward.</p></div>
+    </div>
+
+    <div class="reveal" style="margin-top:44px;display:flex;flex-wrap:wrap;align-items:center;gap:20px;">
+      <a href="https://fineboyproducer.com.ng/work-with-me" class="btn btn-gold">Work With Me →</a>
+      <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-soft);">Limited Availability</span>
+    </div>
+  </div>
+</section>
+
+<!-- YOUTUBE -->
+<section id="youtube" class="section-light" style="padding:100px 0 110px;">
+  <div class="wrap">
+    <p class="eyebrow on-light reveal">Free Education</p>
+    <h2 class="reveal" style="margin-top:18px;font-size:clamp(32px,5.4vw,52px);">LEARN HOW TO<br>GROW YOUR MUSIC.</h2>
+    <p class="reveal" style="margin-top:20px;font-size:16px;color:var(--gray);max-width:46ch;">Practical strategies for independent artists who want more than random advice.</p>
+
+    <div class="video-grid">
+      <a href="http://www.youtube.com/@ArtistGrowthIntensive" target="_blank" rel="noopener" class="video-card reveal">
+        <div class="video-thumb"><span class="soon-badge">Coming Soon</span><div class="play-ring"><svg width="16" height="16" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <h4>How To Grow Your Music Without Paying For Promotion</h4>
+      </a>
+      <a href="https://youtu.be/QNTX5yqF7k8?si=lmOnZIfeZZyHv5j8" target="_blank" rel="noopener" class="video-card reveal">
+        <div class="video-thumb"><img src="assets/thumb-no-ads.jpg" alt="How To Get More Streams Without Running Ads — thumbnail"><div class="play-ring"><svg width="16" height="16" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <h4>How To Get More Streams Without Running Ads</h4>
+      </a>
+      <a href="https://youtu.be/CT44GSayVR0?si=wjG6jSInAouBOO09" target="_blank" rel="noopener" class="video-card reveal">
+        <div class="video-thumb"><img src="assets/thumb-nobody-knows.jpg" alt="How To Promote A Song When Nobody Knows You — thumbnail"><div class="play-ring"><svg width="16" height="16" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <h4>How To Promote A Song When Nobody Knows You</h4>
+      </a>
+    </div>
+
+    <a href="http://www.youtube.com/@ArtistGrowthIntensive" target="_blank" rel="noopener" class="btn btn-outline-light reveal" style="margin-top:44px;">Watch On YouTube →</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section-dark" style="padding:100px 0;">
+  <div class="wrap about-grid">
+    <div class="about-portrait reveal">
+      <img src="assets/portrait-about.jpg" alt="Fineboy Producer — about portrait">
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">About</p>
+      <h2 style="margin-top:18px;font-size:clamp(32px,5.4vw,52px);">I'M FINEBOY<br>PRODUCER.</h2>
+      <p style="margin-top:24px;font-size:16px;line-height:1.7;color:rgba(243,241,236,0.68);max-width:50ch;">I believe artists shouldn't have to guess their way through the music industry.</p>
+      <p style="margin-top:16px;font-size:16px;line-height:1.7;color:rgba(243,241,236,0.68);max-width:50ch;">I've spent years making music, working with artists and studying what actually creates attention, streams and growth.</p>
+      <p style="margin-top:16px;font-size:16px;line-height:1.7;color:rgba(243,241,236,0.68);max-width:50ch;">Now I turn those lessons into blueprints, strategies and systems that help artists move with intention.</p>
+      <p style="margin-top:32px;font-family:'Fraunces',serif;font-size:24px;color:var(--gold-soft);">Strategy before streams.</p>
+      <a href="https://fineboyproducer.com.ng/about" class="btn btn-outline-dark" style="margin-top:30px;">My Story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHO THIS IS FOR -->
+<section class="section-dark" style="padding:20px 0 100px;">
+  <div class="wrap">
+    <p class="eyebrow reveal">Who This Is For</p>
+    <h2 class="reveal" style="margin-top:18px;font-size:clamp(32px,5.4vw,52px);">SERIOUS ABOUT<br>YOUR MUSIC?</h2>
+
+    <div class="statements">
+      <div class="statement reveal">You're already making serious music.</div>
+      <div class="statement reveal">You have the resources to invest in your career.</div>
+      <div class="statement reveal">You're tired of random promotion.</div>
+      <div class="statement reveal">You want to understand what's actually working.</div>
+      <div class="statement reveal">You want to build something bigger than one song.</div>
+    </div>
+
+    <p class="reveal" style="margin-top:44px;font-size:16px;line-height:1.7;color:rgba(243,241,236,0.62);max-width:50ch;">
+      If you're looking for shortcuts, this probably isn't it.<br>If you're looking for a strategy, you're in the right place.
+    </p>
+  </div>
+</section>
+
+<!-- PRODUCTION -->
+<section class="section-light" style="padding:80px 0;">
+  <div class="wrap" style="display:grid;grid-template-columns:1fr;gap:24px;align-items:end;">
+    <div class="reveal">
+      <p class="eyebrow on-light">The Music</p>
+      <h2 style="margin-top:16px;font-size:clamp(26px,4.2vw,40px);">PRODUCTION IS<br>WHERE IT STARTED.</h2>
+      <p style="margin-top:18px;font-size:15px;color:var(--gray);max-width:44ch;">Before strategy, systems and artist growth, there was music.</p>
+      <a href="https://fineboyproducer.com.ng/beats" class="btn btn-outline-light" style="margin-top:26px;">Explore My Production →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section-dark" style="padding:120px 0;text-align:center;">
+  <div class="wrap" style="display:flex;flex-direction:column;align-items:center;">
+    <div class="waveform reveal" id="waveform"></div>
+    <h2 class="reveal" style="margin-top:30px;font-size:clamp(40px,8vw,88px);">STOP GUESSING.<br>START GROWING.</h2>
+    <p class="reveal" style="margin-top:22px;font-size:16px;color:rgba(243,241,236,0.6);">Your next move should have a strategy behind it.</p>
+    <div class="reveal" style="margin-top:38px;display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+      <a href="#blueprint" class="btn btn-gold">Get The Blueprint</a>
+      <a href="#agi" class="btn btn-outline-dark">Work With Me</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p style="font-family:'Fraunces',serif;font-size:16px;color:var(--offwhite);">FINEBOYPRODUCER.COM.NG</p>
+        <p style="margin-top:10px;font-size:14px;color:var(--gold-soft);">Strategy Before Streams.</p>
+      </div>
+      <div>
+        <h5>Navigate</h5>
+        <ul class="footer-links">
+          <li><a href="#blueprint">Blueprint</a></li>
+          <li><a href="#agi">Work With Me</a></li>
+          <li><a href="#youtube">YouTube</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="https://fineboyproducer.com.ng/beats">Production</a></li>
+          <li><a href="https://fineboyproducer.com.ng/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul class="footer-links">
+          <li><a href="https://www.instagram.com/fineboyproducer_" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="http://www.youtube.com/@ArtistGrowthIntensive" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="#">TikTok</a></li>
+        </ul>
+        <h5 style="margin-top:26px;">Legal</h5>
+        <ul class="footer-links">
+          <li><a href="https://fineboyproducer.com.ng/privacy">Privacy</a></li>
+          <li><a href="https://fineboyproducer.com.ng/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rule" style="margin:48px 0 24px;"></div>
+    <p style="font-size:12px;color:rgba(243,241,236,0.35);">© 2026 Fineboy Producer. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="sticky-cta"><a href="#blueprint" style="color:inherit;">Get Started</a></div>
+
+<script>
+(function(){
+  // Nav scroll state
+  var nav = document.getElementById('nav');
+  var sticky = document.getElementById('sticky-cta');
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY;
+    if(y > 40){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+    if(y > 700){ sticky.classList.add('show'); } else { sticky.classList.remove('show'); }
+  }, {passive:true});
+
+  // Mobile menu
+  var hb = document.getElementById('hamburger-btn');
+  var mm = document.getElementById('mobile-menu');
+  hb.addEventListener('click', function(){
+    var open = mm.classList.toggle('open');
+    hb.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  document.querySelectorAll('.mm-link').forEach(function(l){
+    l.addEventListener('click', function(){ mm.classList.remove('open'); hb.setAttribute('aria-expanded','false'); });
+  });
+
+  // Reveal on scroll
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  }
+
+  // Counting stats
+  var counters = document.querySelectorAll('.counted');
+  var counted = false;
+  function runCount(){
+    if(counted) return; counted = true;
+    counters.forEach(function(el){
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      var start = 0; var dur = 1400; var startTime = null;
+      function step(ts){
+        if(!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / dur, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(eased * target).toLocaleString();
+        if(progress < 1) requestAnimationFrame(step);
+        else el.textContent = target.toLocaleString();
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  var statSection = document.querySelector('.stat-num');
+  if(statSection && 'IntersectionObserver' in window){
+    var statIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ runCount(); statIo.disconnect(); } });
+    }, {threshold:0.4});
+    statIo.observe(statSection.closest('.stats'));
+  } else { runCount(); }
+
+  // Subtle hero parallax
+  var portrait = document.querySelector('.parallax-el');
+  window.addEventListener('mousemove', function(e){
+    if(!portrait || window.innerWidth < 1024) return;
+    var x = (e.clientX / window.innerWidth - 0.5) * 10;
+    var y = (e.clientY / window.innerHeight - 0.5) * 10;
+    portrait.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+  }, {passive:true});
+
+  // Waveform bars
+  var wf = document.getElementById('waveform');
+  if(wf){
+    var heights = [10,18,26,14,30,20,34,16,24,12,28,18,10,22,16];
+    heights.forEach(function(h){
+      var bar = document.createElement('span');
+      bar.style.height = h + 'px';
+      wf.appendChild(bar);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
