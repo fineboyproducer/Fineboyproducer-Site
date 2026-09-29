@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unsubscribe | Fineboy Producer</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#050505">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23050505'/%3E%3Ctext x='32' y='42' font-family='Impact,Arial Narrow,sans-serif' font-size='32' text-anchor='middle' fill='%23E6B64B'%3EFP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+:root{--gold:#e6b64b;--gold-hi:#f3ca62;--paper:#f3f1ec;--mute:#9b978e}
+body{min-height:100svh;display:grid;place-items:center;padding:32px 24px;background:radial-gradient(70% 55% at 80% 10%,rgba(230,182,75,.10),transparent 62%),#050505;color:var(--paper);font:400 1.0625rem/1.6 'Instrument Sans',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+main{width:min(520px,100%)}
+.brand{font-size:.75rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+h1{margin:1.25rem 0 0;font:400 clamp(2.6rem,10vw,3.75rem)/.98 'Anton','Oswald','Arial Narrow',Impact,sans-serif;text-transform:uppercase;letter-spacing:.01em}
+.rule{width:100px;height:1px;background:var(--gold);margin:1.5rem 0}
+p{color:var(--mute);max-width:44ch}
+.btn{margin-top:1.75rem;display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 2rem;background:var(--gold);color:#0a0a0a;border:1px solid var(--gold);border-radius:4px;font:700 .92rem/1 'Instrument Sans',sans-serif;letter-spacing:.11em;text-transform:uppercase;cursor:pointer}
+.btn:hover{background:var(--gold-hi);border-color:var(--gold-hi)}
+.btn[disabled]{opacity:.7;cursor:progress}
+.back{display:inline-block;margin-top:1.75rem;color:var(--gold);text-underline-offset:.3em}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+  <p class="brand">Fineboy Producer</p>
+  <h1 id="title" tabindex="-1">Live reminders</h1>
+  <div class="rule" aria-hidden="true"></div>
+  <p id="msg" role="status" aria-live="polite">Checking your link&hellip;</p>
+  <button type="button" class="btn" id="btn" hidden>Unsubscribe</button>
+  <a class="back" href="./">Back to the live page</a>
+</main>
+
+<script>
+(() => {
+  // The unsubscribe function you deployed on Supabase.
+  const API = 'https://nynedxlhwephelzckjoe.supabase.co/functions/v1/unsubscribe';
+
+  const token = new URLSearchParams(location.search).get('t') || '';
+  const $ = id => document.getElementById(id);
+  const title = $('title'), msg = $('msg'), btn = $('btn');
+
+  function show(heading, text, showButton) {
+    title.textContent = heading;
+    msg.textContent = text;
+    btn.hidden = !showButton;
+  }
+  const INVALID = ["This link isn't valid.", "Open the unsubscribe link in your email again. If it still doesn't work, message @fineboyproducer_ on Instagram and we'll remove you."];
+
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(token)) {
+    show(INVALID[0], INVALID[1], false);
+    return;
+  }
+
+  // A plain visit only checks the link. Nothing changes until the button is pressed
+  // (email security scanners open links automatically, so a visit must never unsubscribe anyone).
+  fetch(API + '?t=' + encodeURIComponent(token))
+    .then(r => r.json())
+    .then(d => d.ok
+      ? show('Stop the reminders?', "You'll stop getting email and WhatsApp reminders for this live.", true)
+      : show(INVALID[0], INVALID[1], false))
+    .catch(() => show('Something went wrong.', 'Please check your connection and reload this page.', false));
+
+  btn.addEventListener('click', () => {
+    btn.disabled = true;
+    fetch(API + '?t=' + encodeURIComponent(token), { method: 'POST' })
+      .then(r => r.json())
+      .then(d => {
+        btn.disabled = false;
+        if (d.ok) { show("You're unsubscribed.", "You won't get any more reminders for this live.", false); title.focus(); }
+        else show(INVALID[0], INVALID[1], false);
+      })
+      .catch(() => { btn.disabled = false; show('Something went wrong.', 'Please try again in a moment.', true); });
+  });
+})();
+</script>
+</body>
+</html>
