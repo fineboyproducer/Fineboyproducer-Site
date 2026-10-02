@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Contact Fineboy Producer | Strategy Before Streams</title>
+<meta name="description" content="Get in touch with Fineboy Producer — artist growth, music industry partnerships, production, brand collaborations, speaking and workshops.">
+<meta name="theme-color" content="#000000">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fineboy Producer">
+<meta property="og:title" content="Contact Fineboy Producer | Strategy Before Streams">
+<meta property="og:description" content="Let's talk about what you're building — for artists and for music businesses.">
+<meta name="twitter:card" content="summary">
+<!-- Add og:image and a canonical <link> here using the same values as your other pages. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Newsreader:opsz,wght@6..72,300..500&display=swap">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<style>
+/* ==========================================================================
+   FINEBOY PRODUCER — CONTACT
+   Tokens copied from the live BEATS page so this page inherits the same
+   palette, type and spacing. If those variables live in a shared
+   stylesheet on the real site, drop this block and link that instead.
+   ========================================================================== */
+:root{
+  --black:#000;
+  --char:#101010;
+  --char-2:#1a1a1a;
+  --paper:#f0ede6;
+  --white:#f5f3ee;
+  --gold:#b59b63;
+  --muted:#9c9a94;
+  --dim:#77756f;
+  --line:rgba(245,243,238,.16);
+  --line-strong:rgba(245,243,238,.32);
+  --error:#c97a6d;
+
+  --font-display:"Archivo","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Newsreader",Georgia,"Times New Roman",serif;
+
+  --pad:clamp(1.25rem,5vw,4.5rem);
+  --max:1440px;
+  --nav-h:4.5rem;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0;background:var(--black);color:var(--white);
+  font-family:var(--font-body);font-size:clamp(1.125rem,1.05rem + .3vw,1.3rem);line-height:1.6;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;overflow-x:clip;
+}
+h1,h2,h3,p,ul,dl,dd,dt{margin:0}
+ul{padding:0;list-style:none}
+a{color:inherit}
+img,iframe{max-width:100%}
+
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:1rem;top:-4rem;z-index:200;background:var(--white);color:#000;padding:.8rem 1.1rem;font:600 .8rem/1 var(--font-display);letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+.skip:focus{top:1rem}
+
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.on-paper :focus-visible{outline-color:#000}
+
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+
+/* ---------- type ---------- */
+.display{
+  font-family:var(--font-display);font-weight:800;font-stretch:72%;
+  text-transform:uppercase;letter-spacing:-.012em;line-height:.9;
+}
+.label{
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;
+  font-size:.78rem;line-height:1.3;letter-spacing:.16em;text-transform:uppercase;
+}
+.h2{font-size:clamp(2.6rem,7vw,6.25rem)}
+.lead{font-size:clamp(1.25rem,1.05rem + .9vw,1.75rem);line-height:1.45;max-width:32ch;text-wrap:balance}
+
+.line{display:block;overflow:hidden;padding-block:.06em;margin-block:-.06em}
+.line>span{display:block}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.8em;
+  min-height:3.25rem;padding:.95rem 1.6rem;
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;font-size:.8rem;line-height:1;
+  letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+  border:1px solid var(--white);background:transparent;color:var(--white);cursor:pointer;
+  transition:background-color .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease);
+}
+.btn__arrow{display:inline-block;transition:transform .35s var(--ease)}
+.btn:hover .btn__arrow{transform:translateX(4px)}
+.btn--solid{background:var(--white);color:#000}
+.btn--solid:hover{background:var(--gold);border-color:var(--gold)}
+.btn--line{background:transparent;color:var(--white);border-color:var(--line-strong)}
+.btn--line:hover{border-color:var(--white)}
+.btn[disabled]{opacity:.55;cursor:progress}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem}
+
+.ulink{
+  position:relative;display:inline-block;text-decoration:none;
+  background:linear-gradient(var(--gold),var(--gold)) left bottom .1em/0 1px no-repeat;
+  transition:color .3s var(--ease),background-size .4s var(--ease);
+}
+.ulink:hover{color:var(--white);background-size:100% 1px}
+
+/* ---------- navigation (mirrors the existing site header) ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  border-bottom:1px solid transparent;
+  transition:background-color .4s var(--ease),border-color .4s var(--ease);
+}
+.nav.is-scrolled{background:rgba(0,0,0,.94);border-color:var(--line)}
+.nav.is-open{background:#000;border-color:var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h);gap:1.5rem}
+.nav__brand{
+  font-family:var(--font-display);font-weight:800;font-stretch:80%;font-size:1.15rem;
+  letter-spacing:.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap;
+}
+.nav__menu{display:flex;align-items:center;gap:clamp(1.25rem,3vw,3rem)}
+.nav__list{display:flex;gap:clamp(1.1rem,2.4vw,2.4rem)}
+.nav__link{
+  position:relative;display:inline-block;padding:.5rem 0;
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;font-size:.75rem;
+  letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--muted);
+  transition:color .3s var(--ease);
+}
+.nav__link::after{
+  content:"";position:absolute;left:0;right:0;bottom:.15rem;height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
+}
+.nav__link:hover{color:var(--white)}
+.nav__link:hover::after{transform:scaleX(1)}
+.nav__link[aria-current="page"]{color:var(--white)}
+.nav__link[aria-current="page"]::after{transform:scaleX(1)}
+.nav__cta{
+  display:inline-flex;align-items:center;gap:.7em;padding:.8rem 1.2rem;
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;font-size:.75rem;line-height:1;
+  letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+  border:1px solid var(--gold);color:var(--white);
+  transition:background-color .35s var(--ease),color .35s var(--ease);
+}
+.nav__cta:hover{background:var(--gold);color:#000}
+.nav__toggle{
+  display:none;align-items:center;min-height:2.75rem;padding:0 .9rem;background:transparent;color:var(--white);
+  border:1px solid var(--line-strong);cursor:pointer;
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;
+}
+
+@media (max-width:899px){
+  .nav__in{flex-wrap:wrap;height:auto;min-height:var(--nav-h);padding-block:.75rem}
+  .nav__menu{width:100%;flex-direction:column;align-items:stretch;gap:1.5rem;padding-block:1rem 1.5rem}
+  .nav__list{flex-direction:column;gap:0}
+  .nav__link{display:block;padding:1rem 0;font-size:1.05rem;border-bottom:1px solid var(--line)}
+  .nav__link::after{display:none}
+  .nav__link[aria-current="page"]{color:var(--gold)}
+  .nav__link[aria-current="page"]::before{content:"";display:inline-block;width:.6rem;height:1px;background:var(--gold);margin-right:.7rem;vertical-align:middle}
+  .nav__cta{justify-content:center;min-height:3.25rem}
+  .js .nav__toggle{display:inline-flex}
+  .js .nav__menu{display:none}
+  .js .nav__menu.is-open{display:flex;max-height:calc(100svh - var(--nav-h));overflow-y:auto}
+}
+
+/* ---------- sections ---------- */
+main{display:block}
+.section{position:relative;padding-block:clamp(5rem,12vw,10rem)}
+.section:not(.on-paper){border-top:1px solid var(--line)}
+section[id]{scroll-margin-top:var(--nav-h)}
+
+.grain{isolation:isolate}
+.grain::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.on-paper.grain::before{
+  opacity:.08;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ==========================================================================
+   1 — HERO  (quieter than Beats/About: no photo, no ruler — a calm opening)
+   ========================================================================== */
+.hero{background:var(--black);padding:calc(var(--nav-h) + clamp(3.5rem,9vw,7rem)) 0 clamp(4rem,9vw,7rem)}
+.hero__eyebrow{color:var(--muted);margin-bottom:clamp(1.25rem,3vw,2.25rem)}
+.hero__title{font-size:clamp(3rem,10.5vw,8.75rem);max-width:9.5em}
+.hero__lede{margin-top:clamp(1.75rem,3.5vw,2.75rem)}
+
+/* ==========================================================================
+   2 — TWO PATHS
+   ========================================================================== */
+.paths{background:var(--char)}
+.paths__grid{display:grid;grid-template-columns:1fr;gap:0}
+.path{padding-block:clamp(2.5rem,5vw,3.5rem)}
+.path + .path{border-top:1px solid var(--line)}
+.path__label{color:var(--gold)}
+.path__title{font-size:clamp(2.2rem,6vw,3.75rem);margin-top:1rem;max-width:11ch}
+.path__copy{margin-top:1.4rem;color:var(--muted);max-width:30rem;font-size:clamp(1.1rem,1rem + .5vw,1.4rem);line-height:1.5}
+.path__audience{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-top:1.5rem;color:var(--dim)}
+.path .btn{margin-top:2rem}
+@media (min-width:860px){
+  .paths__grid{grid-template-columns:1fr 1fr;gap:clamp(2.5rem,5vw,5rem)}
+  .path{padding-block:clamp(3.5rem,6vw,5.5rem)}
+  .path + .path{border-top:0;border-left:1px solid var(--line);padding-left:clamp(2.5rem,5vw,5rem)}
+}
+
+/* ==========================================================================
+   3 — START A CONVERSATION (form)
+   ========================================================================== */
+.form-section{scroll-margin-top:var(--nav-h)}
+.form-grid{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,6vw,4rem)}
+.form-intro__title{font-size:clamp(2.4rem,6vw,4.25rem)}
+.form-intro p{margin-top:1.4rem;color:var(--muted);max-width:26rem}
+.form-intro .label{margin-top:1.1rem;color:var(--dim);display:block}
+@media (min-width:900px){
+  .form-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(3rem,7vw,6rem)}
+  .form-intro{position:sticky;top:calc(var(--nav-h) + 3rem)}
+}
+
+.field{margin-bottom:2.25rem}
+.field label{display:block;margin-bottom:.6rem;color:var(--muted);transition:color .2s var(--ease)}
+.field:focus-within label{color:var(--gold)}
+.control{
+  width:100%;background:transparent;color:var(--white);border:0;border-bottom:1px solid var(--line-strong);border-radius:0;
+  padding:.8rem 0;font-family:var(--font-body);font-size:max(1.15rem,16px);line-height:1.4;
+  transition:border-color .3s var(--ease);appearance:none;-webkit-appearance:none
+}
+.control::placeholder{color:var(--dim)}
+.control:hover{border-bottom-color:var(--muted)}
+.control:focus{outline:none;border-bottom-color:var(--gold)}
+textarea.control{min-height:10rem;resize:vertical;border:1px solid var(--line-strong);padding:1rem 1.1rem}
+textarea.control:focus{border-color:var(--gold)}
+select.control{
+  cursor:pointer;padding-right:2rem;
+  background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+  background-position:calc(100% - 9px) 55%,calc(100% - 3px) 55%;background-size:6px 6px,6px 6px;background-repeat:no-repeat
+}
+select.control:invalid{color:var(--dim)}
+select.control option{color:#111;background:#fff;font-family:var(--font-body)}
+.field[data-invalid="true"] .control{border-bottom-color:var(--error)}
+.field[data-invalid="true"] textarea.control{border-color:var(--error)}
+.field-err{display:none;margin-top:.55rem;font-size:.9rem;color:var(--error)}
+.field[data-invalid="true"] .field-err{display:block}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+.form-actions{display:flex;flex-direction:column;align-items:flex-start;gap:1.25rem;margin-top:.5rem}
+.form-alert{display:none;border-left:2px solid var(--error);padding:.3rem 0 .3rem 1rem;font-size:.95rem;max-width:30rem}
+.form-alert.show{display:block}
+.form-alert a{text-underline-offset:.2em;text-decoration-color:var(--gold)}
+.form-alert a:hover{color:var(--white)}
+
+.done{display:none;border-top:1px solid var(--gold);padding-top:2.25rem;margin-top:.5rem}
+.done.show{display:block}
+.done__title{font-size:clamp(2rem,4.5vw,3.25rem);margin-bottom:1rem}
+.done p{color:var(--muted);max-width:28rem}
+.done .ulink{margin-top:1.75rem;display:inline-block;background:none;border:0;color:var(--white);font:600 .78rem/1 var(--font-display);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:0}
+
+/* ==========================================================================
+   4 — DIRECT CONTACT
+   ========================================================================== */
+.direct{padding-block:clamp(3rem,6vw,4.5rem)}
+.direct__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:2rem 3rem}
+.direct dt{color:var(--dim);margin-bottom:.4rem}
+.direct dd{font-size:clamp(1.1rem,1rem + .4vw,1.3rem)}
+
+/* ==========================================================================
+   5 — GOOD THINGS START WITH A CONVERSATION  (the one light section)
+   ========================================================================== */
+.moment{background:var(--paper);color:#000}
+.moment__title{
+  font-family:var(--font-body);font-weight:400;font-style:italic;
+  font-size:clamp(2.1rem,5.5vw,4.5rem);line-height:1.2;max-width:14ch;letter-spacing:-.005em;
+}
+.moment p{margin-top:clamp(2rem,4vw,3rem);font-size:clamp(1.15rem,1rem + .5vw,1.45rem);line-height:1.5;color:#4d4b46;max-width:26rem}
+
+/* ==========================================================================
+   6 — WHAT ARE YOU BUILDING? (final)
+   ========================================================================== */
+.final{background:var(--black);text-align:center;display:flex;flex-direction:column;align-items:center}
+.final__title{font-size:clamp(3.2rem,11vw,9rem);line-height:.9;max-width:10ch}
+.final .lead{margin-top:clamp(1.5rem,3vw,2.25rem);margin-bottom:clamp(2rem,4vw,3rem)}
+
+/* ==========================================================================
+   FOOTER (mirrors the existing footer)
+   ========================================================================== */
+.footer{background:var(--black);border-top:1px solid var(--line);padding-block:clamp(3rem,7vw,5rem) 2rem}
+.footer__grid{display:grid;gap:2.5rem;grid-template-columns:1fr}
+.footer__brand{font-size:clamp(1.8rem,1.2rem + 2.4vw,3rem);line-height:.9}
+.footer__tag{margin-top:.9rem;color:var(--muted)}
+.footer__nav{display:flex;flex-wrap:wrap;gap:.25rem 2rem}
+.footer__nav a{
+  display:inline-block;padding:.6rem 0;
+  font-family:var(--font-display);font-weight:600;font-stretch:100%;font-size:.78rem;
+  letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--muted);
+  background:linear-gradient(var(--gold),var(--gold)) left bottom .35rem/0 1px no-repeat;
+  transition:color .3s var(--ease),background-size .4s var(--ease);
+}
+.footer__nav a:hover{color:var(--white);background-size:100% 1px}
+.footer__nav a[aria-current="page"]{color:var(--gold)}
+.footer__legal{margin-top:clamp(2.5rem,6vw,4.5rem);padding-top:1.5rem;border-top:1px solid var(--line);color:var(--dim)}
+@media (min-width:900px){
+  .footer__grid{grid-template-columns:1fr auto;align-items:end}
+}
+
+/* ==========================================================================
+   MOTION — same convention as the rest of the site: masked line reveal on
+   headlines, a fade for supporting copy, nothing else. All visible with no
+   JS and under reduced motion.
+   ========================================================================== */
+@media (prefers-reduced-motion:no-preference){
+  .js [data-reveal] .line>span{
+    transform:translateY(112%);
+    transition:transform 1.05s var(--ease);
+    transition-delay:calc(var(--d,0) * .12s);
+  }
+  .js [data-reveal].in .line>span{transform:none}
+  .js [data-reveal] .fade{opacity:0;transition:opacity 1s var(--ease) .45s}
+  .js [data-reveal].in .fade{opacity:1}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ======================= NAVIGATION =======================
+     Mirrors the existing site header exactly, with a Contact link added
+     and marked current. If the project has a shared header include or
+     component, use that instead. -->
+<header class="nav" id="top">
+  <div class="wrap nav__in">
+    <a class="nav__brand" href="/" aria-label="Fineboy Producer, home">Fineboy Producer</a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu"><span class="nav__toggle-text">Menu</span></button>
+    <div class="nav__menu" id="site-menu">
+      <nav aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="/">Home</a></li>
+          <li><a class="nav__link" href="/about">About</a></li>
+          <li><a class="nav__link" href="/work%20with%20me">Work With Me</a></li>
+          <li><a class="nav__link" href="https://youtube.com/@artistgrowthintensive" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a class="nav__link" href="/beats/">Beats</a></li>
+          <li><a class="nav__link" href="/contact" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="nav__cta" href="/work%20with%20me">Get Started <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ======================= 1 · HERO ======================= -->
+  <section class="hero grain" aria-labelledby="hero-title">
+    <div class="wrap" data-reveal>
+      <p class="label hero__eyebrow fade">Contact</p>
+      <h1 class="display hero__title fade" id="hero-title">Let’s talk about what you’re building.</h1>
+      <p class="lead hero__lede fade">Whether you're an artist trying to figure out your next move, or a company building something in music, tell me what you're working on.</p>
+    </div>
+  </section>
+
+  <!-- ======================= 2 · TWO PATHS ======================= -->
+  <section class="section paths" aria-label="Choose how to get in touch">
+    <div class="wrap paths__grid">
+
+      <article class="path">
+        <p class="label path__label">01 / Artists</p>
+        <h2 class="display path__title">You’re an artist?</h2>
+        <p class="path__copy">Tell me where you are, what you’re working on, and where you’re trying to go.</p>
+        <a class="btn btn--line" href="/work%20with%20me">Work with me <span class="btn__arrow" aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="path">
+        <p class="label path__label">02 / Music Businesses</p>
+        <h2 class="display path__title">Building something in music?</h2>
+        <p class="path__copy">If you’re looking for strategic thinking around artist growth, music marketing, education, or creative partnerships, let’s start a conversation.</p>
+        <p class="label path__audience">
+          <span>Labels</span><span>Music Brands</span><span>Startups</span><span>Platforms</span><span>Creative Companies</span>
+        </p>
+        <a class="btn btn--solid" href="#form" id="toForm">Start a conversation <span class="btn__arrow" aria-hidden="true">→</span></a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ======================= 3 · FORM ======================= -->
+  <section class="section form-section" id="form" aria-labelledby="form-title">
+    <div class="wrap form-grid">
+
+      <div class="form-intro">
+        <h2 class="display form-intro__title" id="form-title">Start a conversation.</h2>
+        <p>Have something specific in mind? Tell me about it.</p>
+        <span class="label">All fields are required</span>
+      </div>
+
+      <div>
+        <form id="contactForm" novalidate>
+          <div class="hp" aria-hidden="true">
+            <label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <div class="field" data-field="name">
+            <label for="f-name">Name</label>
+            <input class="control" id="f-name" name="name" type="text" placeholder="Your name" autocomplete="name" required aria-describedby="e-name">
+            <p class="field-err" id="e-name" role="alert"></p>
+          </div>
+
+          <div class="field" data-field="email">
+            <label for="f-email">Email</label>
+            <input class="control" id="f-email" name="email" type="email" inputmode="email" placeholder="you@example.com" autocomplete="email" required aria-describedby="e-email">
+            <p class="field-err" id="e-email" role="alert"></p>
+          </div>
+
+          <div class="field" data-field="topic">
+            <label for="f-topic">What are you reaching out about?</label>
+            <select class="control" id="f-topic" name="topic" required aria-describedby="e-topic">
+              <option value="" selected disabled>Select a topic</option>
+              <option>Artist Growth</option>
+              <option>Music Industry Partnership</option>
+              <option>Music / Production</option>
+              <option>Brand Collaboration</option>
+              <option>Speaking / Workshop</option>
+              <option>Other</option>
+            </select>
+            <p class="field-err" id="e-topic" role="alert"></p>
+          </div>
+
+          <div class="field" data-field="message">
+            <label for="f-message">Tell me a little about it.</label>
+            <textarea class="control" id="f-message" name="message" rows="6" placeholder="Tell me what you're working on, what you need, or what you'd like to explore." required aria-describedby="e-message"></textarea>
+            <p class="field-err" id="e-message" role="alert"></p>
+          </div>
+
+          <div class="form-actions">
+            <p class="form-alert" id="formAlert" role="alert"></p>
+            <button class="btn btn--solid" type="submit" id="submitBtn"><span id="submitText">Send message</span> <span class="btn__arrow" aria-hidden="true">→</span></button>
+          </div>
+        </form>
+
+        <div class="done" id="done" tabindex="-1" role="status" aria-live="polite">
+          <h3 class="display done__title" id="doneTitle">Message sent.</h3>
+          <p id="doneText"></p>
+          <button type="button" class="ulink" id="again">Send another message</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================= 4 · DIRECT CONTACT ======================= -->
+  <section class="section direct" aria-label="Direct contact">
+    <div class="wrap direct__grid">
+      <dl>
+        <dt class="label">Instagram</dt>
+        <dd><a class="ulink" href="https://www.instagram.com/fineboyproducer_/" target="_blank" rel="noopener">@fineboyproducer_</a></dd>
+      </dl>
+      <dl>
+        <dt class="label">YouTube</dt>
+        <dd><a class="ulink" href="https://youtube.com/@artistgrowthintensive" target="_blank" rel="noopener">Fineboy Producer</a></dd>
+      </dl>
+      <!-- Hidden until a verified value is set in CONFIG below — nothing invented. -->
+      <dl id="emailRow" hidden>
+        <dt class="label">Email</dt>
+        <dd><a class="ulink" id="emailLink" href="#"></a></dd>
+      </dl>
+      <dl id="waRow" hidden>
+        <dt class="label">WhatsApp</dt>
+        <dd><a class="ulink" id="waLink" href="#" target="_blank" rel="noopener">Message on WhatsApp</a></dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ======================= 5 · BRAND MOMENT ======================= -->
+  <section class="section moment on-paper grain" aria-labelledby="moment-title">
+    <div class="wrap" data-reveal>
+      <h2 class="moment__title fade" id="moment-title">Good things start with a conversation.</h2>
+      <p class="fade">You don’t need to have everything figured out before you reach out.</p>
+    </div>
+  </section>
+
+  <!-- ======================= 6 · FINAL CTA ======================= -->
+  <section class="section final" aria-labelledby="final-title">
+    <div class="wrap" data-reveal style="display:flex;flex-direction:column;align-items:center">
+      <h2 class="display final__title fade" id="final-title">What are you building?</h2>
+      <p class="lead fade">Start with a conversation.</p>
+      <div class="actions fade">
+        <a class="btn btn--solid" href="/work%20with%20me">Work with me <span class="btn__arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--line" href="https://youtube.com/@artistgrowthintensive" target="_blank" rel="noopener">Watch on YouTube <span class="btn__arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ======================= FOOTER =======================
+     Mirrors the existing footer exactly, with Contact added to the nav. -->
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <p class="display footer__brand">Fineboy Producer</p>
+      <p class="label footer__tag">Strategy before streams.</p>
+    </div>
+    <nav class="footer__nav" aria-label="Footer">
+      <a href="/about">About</a>
+      <a href="/work%20with%20me">Work With Me</a>
+      <a href="/">Home</a>
+      <a href="https://youtube.com/@artistgrowthintensive" target="_blank" rel="noopener">YouTube</a>
+      <a href="/contact" aria-current="page">Contact</a>
+    </nav>
+  </div>
+  <div class="wrap footer__legal">
+    <p class="label">© 2026 Fineboy Producer. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================================
+   CONFIG — the only place you need to touch to go live.
+   Nothing here is invented: leave a value empty and that feature stays off.
+   ========================================================================== */
+const CONFIG = {
+  // A form endpoint that accepts a JSON POST (Formspree, a serverless function, etc.).
+  // Never put an API key or secret here; use the endpoint URL your provider gives you.
+  FORM_ENDPOINT: "",
+  // Verified business email — shows in the direct-contact row and enables a
+  // mailto fallback if no FORM_ENDPOINT is set.
+  CONTACT_EMAIL: "fineboyproducer@gmail.com",
+  // Full WhatsApp link (e.g. a wa.me link) if you already use one on the site.
+  WHATSAPP_URL: ""
+};
+
+(function () {
+  var d = document, root = d.documentElement;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* header: solid once scrolled */
+  var nav = d.querySelector('.nav');
+  function onScroll() { nav.classList.toggle('is-scrolled', window.scrollY > 24); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* mobile menu */
+  var toggle = d.querySelector('.nav__toggle');
+  var menu = d.getElementById('site-menu');
+  var toggleText = d.querySelector('.nav__toggle-text');
+  function setMenu(open) {
+    menu.classList.toggle('is-open', open);
+    nav.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggleText.textContent = open ? 'Close' : 'Menu';
+  }
+  toggle.addEventListener('click', function () { setMenu(!menu.classList.contains('is-open')); });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  d.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menu.classList.contains('is-open')) { setMenu(false); toggle.focus(); }
+  });
+  window.matchMedia('(min-width: 900px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
+
+  /* "Start a conversation" jump: move focus into the form once it's in view */
+  var toFormLink = d.getElementById('toForm');
+  if (toFormLink) {
+    toFormLink.addEventListener('click', function () {
+      setTimeout(function () { d.getElementById('f-name').focus({ preventScroll: true }); }, 450);
+    });
+  }
+
+  /* reveals — same convention as the rest of the site */
+  var targets = [].slice.call(d.querySelectorAll('[data-reveal]'));
+  if (reduce || !('IntersectionObserver' in window)) {
+    targets.forEach(function (t) { t.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.3, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(function (t) { io.observe(t); });
+  }
+
+  /* optional direct-contact rows */
+  if (CONFIG.CONTACT_EMAIL) {
+    var eRow = d.getElementById('emailRow'), eLink = d.getElementById('emailLink');
+    eLink.href = 'mailto:' + CONFIG.CONTACT_EMAIL; eLink.textContent = CONFIG.CONTACT_EMAIL; eRow.hidden = false;
+  }
+  if (CONFIG.WHATSAPP_URL) {
+    var wRow = d.getElementById('waRow');
+    d.getElementById('waLink').href = CONFIG.WHATSAPP_URL; wRow.hidden = false;
+  }
+
+  /* ---------- form ---------- */
+  var form = d.getElementById('contactForm');
+  var done = d.getElementById('done');
+  var alertBox = d.getElementById('formAlert');
+  var btn = d.getElementById('submitBtn');
+  var btnText = d.getElementById('submitText');
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  var rules = {
+    name: function (v) { return v.trim().length < 2 ? 'Enter your name.' : ''; },
+    email: function (v) { return !emailRe.test(v.trim()) ? 'Enter a valid email address, like you@example.com.' : ''; },
+    topic: function (v) { return !v ? 'Choose what you\u2019re reaching out about.' : ''; },
+    message: function (v) { return v.trim().length < 10 ? 'Tell me a little more (at least 10 characters).' : ''; }
+  };
+
+  function setError(name, msg) {
+    var field = form.querySelector('[data-field="' + name + '"]');
+    var control = field.querySelector('.control');
+    var err = field.querySelector('.field-err');
+    err.textContent = msg;
+    field.dataset.invalid = msg ? 'true' : 'false';
+    control.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  }
+  function validate(name) {
+    var v = form.elements[name].value;
+    var msg = rules[name](v);
+    setError(name, msg);
+    return !msg;
+  }
+
+  Object.keys(rules).forEach(function (name) {
+    var el = form.elements[name];
+    el.addEventListener('blur', function () { el.dataset.touched = '1'; validate(name); });
+    el.addEventListener('input', function () { if (el.dataset.touched) validate(name); });
+    el.addEventListener('change', function () { el.dataset.touched = '1'; validate(name); });
+  });
+
+  function showAlert(html) { alertBox.innerHTML = html; alertBox.classList.add('show'); }
+  function clearAlert() { alertBox.classList.remove('show'); alertBox.innerHTML = ''; }
+  function setBusy(busy) {
+    btn.disabled = busy; btn.setAttribute('aria-busy', String(busy));
+    btnText.textContent = busy ? 'Sending\u2026' : 'Send message';
+  }
+  function showDone(title, text) {
+    d.getElementById('doneTitle').textContent = title;
+    d.getElementById('doneText').textContent = text;
+    form.hidden = true; done.classList.add('show'); done.focus();
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearAlert();
+
+    var allValid = Object.keys(rules).map(validate).every(Boolean);
+    if (!allValid) {
+      var first = Object.keys(rules).find(function (n) {
+        return form.querySelector('[data-field="' + n + '"]').dataset.invalid === 'true';
+      });
+      form.elements[first].focus();
+      return;
+    }
+    if (form.elements['_gotcha'].value) return; // honeypot: bot traffic, do nothing
+
+    var data = {
+      name: form.elements.name.value.trim(),
+      email: form.elements.email.value.trim(),
+      topic: form.elements.topic.value,
+      message: form.elements.message.value.trim()
+    };
+
+    if (CONFIG.FORM_ENDPOINT) {
+      setBusy(true);
+      fetch(CONFIG.FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        showDone('Message sent.', 'Thanks, ' + data.name.split(' ')[0] + '. I\u2019ll reply to ' + data.email + '.');
+        form.reset();
+        Object.keys(rules).forEach(function (n) { delete form.elements[n].dataset.touched; setError(n, ''); });
+      }).catch(function (err) {
+        console.error('Contact form failed:', err);
+        showAlert('Your message didn\u2019t send. Check your connection and try again' +
+          (CONFIG.CONTACT_EMAIL ? ', or email <a class="ulink" href="mailto:' + CONFIG.CONTACT_EMAIL + '">' + CONFIG.CONTACT_EMAIL + '</a>.' : ', or message me on <a class="ulink" href="https://www.instagram.com/fineboyproducer_/" target="_blank" rel="noopener">Instagram</a>.'));
+      }).finally(function () { setBusy(false); });
+      return;
+    }
+
+    if (CONFIG.CONTACT_EMAIL) {
+      var subject = encodeURIComponent('Contact: ' + data.topic);
+      var body = encodeURIComponent(data.message + '\n\n' + data.name + '\n' + data.email);
+      window.location.href = 'mailto:' + CONFIG.CONTACT_EMAIL + '?subject=' + subject + '&body=' + body;
+      showAlert('Your email app should open with this message ready to send. If it doesn\u2019t, email <a class="ulink" href="mailto:' + CONFIG.CONTACT_EMAIL + '">' + CONFIG.CONTACT_EMAIL + '</a> directly.');
+      return;
+    }
+
+    console.warn('Contact form: set CONFIG.FORM_ENDPOINT (or CONFIG.CONTACT_EMAIL) to enable sending.');
+    showAlert('This form isn\u2019t connected to an inbox yet, so nothing was sent. Message me on <a class="ulink" href="https://www.instagram.com/fineboyproducer_/" target="_blank" rel="noopener">Instagram</a> instead.');
+  });
+
+  d.getElementById('again').addEventListener('click', function () {
+    done.classList.remove('show'); form.hidden = false; clearAlert();
+    form.elements.name.focus();
+  });
+})();
+</script>
+</body>
+</html>
