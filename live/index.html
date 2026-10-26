@@ -784,6 +784,11 @@ const CONFIG = {
   SUPABASE_ANON_KEY: 'sb_publishable_nvbgjEhrZjS7wg_YAre5qw_JdwTL6A_',
   SUPABASE_TABLE: 'event_registrations',
 
+  // Emailer: sends the confirmation email and the reminders before the live. Paste its address
+  // here, e.g. 'https://your-emailer.onrender.com' (https, no trailing slash). Leave '' to switch
+  // this off: registration still works and is still saved to Supabase exactly as before.
+  EMAILER_URL: '',
+
   PAGE_LOADED_MIN_MS: 2000,      // spam: reject submissions faster than this after page load
   SUBMIT_COOLDOWN_MS: 20000      // spam: minimum gap between submissions from one browser
 };
@@ -1108,6 +1113,44 @@ async function saveRegistration(payload){
   }
 }
 
+/* Hand-off to the Emailer, which sends the confirmation and the reminders before the live.
+   Supabase (above) stays the record of who registered. This goes on top of it, in the
+   background, and can never delay or break the sign-up. */
+const emailerBase = () => {
+  const u = String(CONFIG.EMAILER_URL || '').trim().replace(/\/$/, '');
+  return /^https:\/\/[^\s/]+$/i.test(u) ? u : '';
+};
+
+// The Emailer runs on hosting that sleeps when idle and takes up to a minute to wake. Ping it
+// the first time the visitor touches the form so it is awake by the time they press the button.
+let emailerWarm = false;
+function warmEmailer(){
+  const base = emailerBase();
+  if (!base || emailerWarm || isPreviewHost()) return;
+  emailerWarm = true;
+  fetch(base + '/api/public/live/health', { mode: 'no-cors', cache: 'no-store' }).catch(() => {});
+}
+form.addEventListener('focusin', warmEmailer, { once: true });
+
+async function sendToEmailer(payload){
+  const base = emailerBase();
+  if (!base || isPreviewHost()) return;
+  for (const wait of [0, 4000, 15000, 45000]) {          // keep trying while a sleeping host wakes up
+    if (wait) await new Promise(r => setTimeout(r, wait));
+    try {
+      const res = await fetch(base + '/api/public/live/register', {
+        method: 'POST',
+        keepalive: true,                                  // lets it finish even if the visitor closes the tab
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },   // a "simple" request: no extra CORS round trip
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) return;
+      if (res.status >= 400 && res.status < 500 && res.status !== 429) return;   // retrying cannot fix this
+    } catch (err) { /* offline, or the host is still waking: try again */ }
+  }
+  console.warn('[registration] could not reach the Emailer; the reminder emails may not be scheduled for this person.');
+}
+
 function showSuccess(){
   form.hidden = true;
   successBox.hidden = false;
@@ -1144,7 +1187,7 @@ form.addEventListener('submit', async e => {
   const result = await saveRegistration(payload);
   setLoading(false);
 
-  if (result.ok) { showSuccess(); return; }
+  if (result.ok) { sendToEmailer(payload); showSuccess(); return; }   // not awaited: the Emailer never holds up the confirmation
 
   store.set('fp_live_last_submit', '0');
   if (result.reason === 'network') showFormError("We couldn't save your spot. Check your connection and try again.");
