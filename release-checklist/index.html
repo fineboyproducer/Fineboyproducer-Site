@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>document.documentElement.classList.add('js');</script>
+<meta name="robots" content="noindex">
+<title>No Gimmicks Release Today Checklist | Fineboy Producer — Strategy Before Streams</title>
+<meta name="description" content="The No Gimmicks Release Today Checklist: a checklist for after your music drops, with two bonuses: a content guide for effective promotion and how to promote your music with zero budget.">
+<meta name="theme-color" content="#050505">
+<meta name="color-scheme" content="dark">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23050505'/%3E%3Ctext x='32' y='42' font-family='Impact,Arial Narrow,sans-serif' font-size='32' text-anchor='middle' fill='%23E6B64B'%3EFP%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/fp-theme.css">
+
+<style>
+/* ---------- /release-checklist specifics (downsell after /blueprint) ---------- */
+.confirm{background:var(--ink-2);border-bottom:1px solid var(--gold-line)}
+.confirm .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 2rem;padding-block:1.1rem}
+.confirm-kicker{font-size:.7rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.confirm-when{margin-top:.25rem;font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;font-size:clamp(1.3rem,3.6vw,1.8rem);line-height:1.1}
+.confirm-when span + span{margin-left:.9rem;padding-left:.9rem;border-left:1px solid var(--gold-line);color:var(--gold)}
+.confirm-sub{margin-top:.2rem;font-size:.92rem;color:var(--mute)}
+.confirm-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.25rem}
+@media(max-width:520px){.confirm-actions .btn{width:100%}}
+
+.hero-copy{max-width:60rem}
+.hero-copy .label{margin-top:1.15rem}
+.lead{max-width:36ch}
+.lead span:first-child{color:var(--paper)}
+.deal{margin-top:1.75rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem 1.1rem;font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;line-height:1}
+.deal .now{font-size:clamp(2.6rem,7vw,3.6rem);color:var(--gold)}
+.deal .per{font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.2em;line-height:1.5;color:var(--mute)}
+
+.offer-panel{max-width:820px;margin-inline:auto}
+.offer-title{margin-top:1.25rem;font-size:clamp(2.4rem,7vw,4.6rem);line-height:.92}
+.offer-grid{margin-top:2rem;display:grid;gap:2rem;align-items:start}
+@media(min-width:760px){.offer-grid{grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px)}}
+.offer-now{font-family:var(--display);font-size:clamp(4rem,10vw,6.5rem);line-height:.9;color:var(--paper)}
+.offer-per{margin-top:.5rem;font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.offer-panel .btn{margin-top:2rem}
+.micro{margin-top:1rem;font-size:.95rem;color:var(--mute)}
+@media(max-width:520px){.offer-panel .btn{width:100%}}
+
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s var(--ease)}
+.js .reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
+
+.dock-inner{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.dock-price{font-family:var(--display);font-size:1.5rem;line-height:1;color:var(--paper)}
+.dock-price small{display:block;margin-top:.3rem;font-family:var(--sans);font-size:.68rem;font-weight:500;letter-spacing:.06em;color:var(--mute)}
+.dock .btn{width:auto;flex:none;min-height:50px;padding:0 1.3rem;font-size:.8rem}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#offer">Skip to the offer</a>
+
+<!-- Registration confirmation: shown if the visitor just registered for the live (carried over from /live) -->
+<aside class="confirm" id="confirm" aria-label="Your live masterclass registration" hidden>
+  <div class="wrap">
+    <div>
+      <p class="confirm-kicker" id="confirm-kicker">You're registered for the live masterclass</p>
+      <p class="confirm-when"><span id="confirm-date">This Friday</span><span>8:00 PM WAT</span></p>
+      <p class="confirm-sub">We'll remind you before we go live.</p>
+    </div>
+    <div class="confirm-actions">
+      <button type="button" class="btn btn--ghost btn--sm" id="confirm-ics">Add to calendar</button>
+      <a class="btn btn--ghost btn--sm" id="confirm-meet" href="#" target="_blank" rel="noopener noreferrer" hidden>Join on Google Meet</a>
+      <a class="textlink" href="/live/">Back to the live page</a>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Fineboy Producer home">
+      <svg viewBox="0 0 34 30" aria-hidden="true"><rect x="1" y="10" width="3.2" height="10" rx="1.6"/><rect x="8" y="4" width="3.2" height="22" rx="1.6"/><rect x="15.4" y="0" width="3.2" height="30" rx="1.6"/><rect x="22.8" y="6" width="3.2" height="18" rx="1.6"/><rect x="29.8" y="11" width="3.2" height="8" rx="1.6"/></svg>
+      <span>fineboyproducer.com.ng</span>
+    </a>
+
+    <div class="hero-copy">
+      <p class="label">Start smaller</p>
+      <h1 class="display hero-title">
+        <span class="gold">Not ready for</span>
+        <span>the Blueprint?</span>
+      </h1>
+      <div class="rule" aria-hidden="true"></div>
+      <p class="lead">
+        <span>Start with the No Gimmicks Release Today Checklist.</span>
+        <span>A checklist for after your music drops, plus two bonuses to help you promote it.</span>
+      </p>
+
+      <p class="deal"><span class="now" data-price><span class="sr-only">Price </span>₦5,500</span><span class="per">One-time · No Gimmicks Release Today Checklist</span></p>
+
+      <div class="cta-row">
+        <a class="btn btn--stack" id="hero-cta" data-pay href="#">Get the Checklist &rarr;</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- WHAT'S INSIDE -->
+<section class="section" id="inside" aria-labelledby="inside-h">
+  <div class="wrap">
+    <h2 class="display h2" id="inside-h" style="max-width:14ch">What you <span class="gold">get.</span></h2>
+    <ol class="topics" style="margin-top:clamp(40px,6vw,72px)">
+      <li class="reveal"><span class="n" aria-hidden="true">01</span><div><h3>No Gimmicks Release Today Checklist</h3><p>A checklist for after your music drops.</p></div></li>
+      <li class="reveal"><span class="n" aria-hidden="true">+</span><div><h3>Bonus: Content guide for effective promotion</h3><p>A guide to the content that makes your promotion work.</p></div></li>
+      <li class="reveal"><span class="n" aria-hidden="true">+</span><div><h3>Bonus: How to promote your music with zero budget</h3><p>A PDF on promoting your music when you have no budget to spend.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="section band" id="offer" aria-labelledby="offer-h">
+  <div class="wrap">
+    <div class="panel panel--top offer-panel reveal">
+      <p class="label">The Checklist</p>
+      <h2 class="display offer-title" id="offer-h"><span class="gold">No Gimmicks</span> Release Today Checklist</h2>
+      <div class="rule" aria-hidden="true" style="margin-top:1.75rem"></div>
+
+      <div class="offer-grid">
+        <div>
+          <p class="offer-now" data-price><span class="sr-only">Price </span>₦5,500</p>
+          <p class="offer-per">One-time</p>
+        </div>
+        <ul class="points">
+          <li>No Gimmicks Release Today Checklist</li>
+          <li>Bonus: Content guide for effective promotion</li>
+          <li>Bonus: How to promote your music with zero budget (PDF)</li>
+        </ul>
+      </div>
+
+      <a class="btn btn--stack" data-pay href="#">Get the Checklist &rarr;</a>
+      <p class="micro">Secure payment with Paystack.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOFT CLOSE -->
+<section class="final" id="final" aria-labelledby="final-h">
+  <div class="wrap">
+    <div class="rule" aria-hidden="true"></div>
+    <h2 class="display" id="final-h">
+      <span>No gimmicks.</span>
+      <span class="gold">Just a checklist.</span>
+    </h2>
+    <p class="copy">Not right now? That's fine.</p>
+    <a class="btn btn--stack" data-pay href="#">Get the Checklist &rarr;</a>
+    <p class="fine"><a class="textlink" href="/live/">Back to the live page</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot foot--dock">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-brand">Fineboy Producer</p>
+        <p class="foot-tag">Strategy before streams.</p>
+      </div>
+      <div class="foot-links">
+        <a href="https://instagram.com/fineboyproducer_" target="_blank" rel="noopener noreferrer">Instagram: @fineboyproducer_</a>
+        <a href="/">fineboyproducer.com.ng</a>
+      </div>
+    </div>
+    <small>&copy; 2026 Fineboy Producer</small>
+  </div>
+</footer>
+
+<div class="dock" data-dock>
+  <div class="dock-inner">
+    <div class="dock-price"><span data-price>₦5,500</span> <small>One-time · Checklist</small></div>
+    <a class="btn" data-pay href="#">Get the Checklist</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  /* ==========================================================
+     CONFIG — fill these two in, nothing else needs to change.
+     ========================================================== */
+  var PRICE_LABEL  = '';   // leave empty to keep the default shown in the page (₦5,500)
+  var PAYSTACK_LINK = 'https://paystack.shop/pay/daem655948';  // e.g. 'https://paystack.shop/pay/xxxxxxxx'
+
+  if (PRICE_LABEL) {
+    $$('[data-price]').forEach(function (el) {
+      var sr = el.querySelector('.sr-only');
+      el.textContent = '';
+      if (sr) el.appendChild(sr);
+      el.appendChild(document.createTextNode(PRICE_LABEL));
+    });
+  }
+  $$('[data-pay]').forEach(function (el) {
+    if (/^https:\/\/paystack\.shop\/pay\/[A-Za-z0-9_-]+$/.test(PAYSTACK_LINK)) {
+      el.setAttribute('href', PAYSTACK_LINK); el.setAttribute('rel', 'noopener');
+    } else {
+      el.addEventListener('click', function (e) { e.preventDefault(); });   // not set up yet: never send anyone to a dead link
+      el.setAttribute('aria-disabled', 'true');
+    }
+  });
+
+  /* ---------- registration confirmation (carried over from /live) ---------- */
+  var reg = null;
+  try { reg = JSON.parse(sessionStorage.getItem('fp_live_reg') || 'null'); } catch (e) { reg = null; }
+  if (reg && typeof reg.startMs === 'number' && typeof reg.endMs === 'number' && Date.now() < reg.endMs) {
+    $('#confirm').hidden = false;
+    if (reg.firstName) $('#confirm-kicker').textContent = "You're registered, " + String(reg.firstName).slice(0, 40) + ". See you at the live masterclass";
+    if (reg.label) $('#confirm-date').textContent = String(reg.label);
+
+    var fmtUTC = function (ms) { return new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); };
+    var icsEsc = function (s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n'); };
+    var fold = function (line) { var out = []; while (line.length > 74) { out.push(line.slice(0, 74)); line = ' ' + line.slice(74); } out.push(line); return out.join('\r\n'); };
+    var meet = /^https:\/\/meet\.google\.com\/[a-z0-9-]+(\?.*)?$/i.test(reg.meetUrl || '') ? reg.meetUrl : null;
+    var NAME = 'How To Stop Wasting Money Promoting Your Songs';
+    var key = String(reg.dateKey || '').replace(/[^0-9-]/g, '');
+    if (meet) { var a = $('#confirm-meet'); a.href = meet; a.hidden = false; }
+
+    $('#confirm-ics').addEventListener('click', function () {
+      var lines = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Fineboy Producer//Live Masterclass//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        'UID:fp-live-' + key.replace(/-/g, '') + '@fineboyproducer.com.ng',
+        'DTSTAMP:' + fmtUTC(Date.now()),
+        'DTSTART:' + fmtUTC(reg.startMs),
+        'DTEND:' + fmtUTC(reg.endMs),
+        'SUMMARY:' + icsEsc(NAME + ' (Live Masterclass)'),
+        'DESCRIPTION:' + icsEsc('A free live masterclass with Fineboy Producer. Strategy before streams.' + (meet ? '\n\nJoin: ' + meet : '')),
+        'LOCATION:' + icsEsc(meet || 'Google Meet (link posted closer to the date)'),
+        'BEGIN:VALARM', 'TRIGGER:-PT30M', 'ACTION:DISPLAY', 'DESCRIPTION:Starting in 30 minutes', 'END:VALARM',
+        'END:VEVENT', 'END:VCALENDAR'
+      ].map(fold).join('\r\n');
+      var blob = new Blob([lines], { type: 'text/calendar;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href = url; link.download = 'stop-wasting-money-promoting-your-songs-' + key + '.ics';
+      document.body.appendChild(link); link.click(); link.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+    });
+  }
+
+  /* ---------- hairlines, reveals, sticky mobile bar ---------- */
+  if (!('IntersectionObserver' in window)) {
+    $$('.reveal').forEach(function (t) { t.classList.add('is-in'); });
+    $$('.rule').forEach(function (r) { r.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in', 'in'); io.unobserve(en.target); } });
+  }, { threshold: .3, rootMargin: '0px 0px -6% 0px' });
+  $$('.reveal, .rule').forEach(function (t) { io.observe(t); });
+
+  var dock = $('[data-dock]');
+  var watch = [$('#hero-cta'), $('#offer'), $('#final')];
+  var visible = [];
+  function update() { dock.classList.toggle('show', window.scrollY > 300 && visible.length === 0); }
+  var dockIO = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = visible.indexOf(en.target);
+      if (en.isIntersecting && i < 0) visible.push(en.target);
+      if (!en.isIntersecting && i > -1) visible.splice(i, 1);
+    });
+    update();
+  }, { threshold: .15 });
+  watch.forEach(function (el) { if (el) dockIO.observe(el); });
+  window.addEventListener('scroll', update, { passive: true });
+})();
+</script>
+</body>
+</html>
