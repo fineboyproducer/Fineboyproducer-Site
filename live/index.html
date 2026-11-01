@@ -1144,7 +1144,23 @@ form.addEventListener('submit', async e => {
   const result = await saveRegistration(payload);
   setLoading(false);
 
-  if (result.ok) { showSuccess(); return; }
+  if (result.ok) {
+    showSuccess();   // stays as the fallback if the redirect below is blocked or the visitor comes back
+    // Upsell: send the new registrant straight to the Blueprint page. Their confirmation
+    // (which Friday, add-to-calendar, Meet link if any) travels with them in sessionStorage.
+    try {
+      sessionStorage.setItem('fp_live_reg', JSON.stringify({
+        firstName: payload.first_name,
+        startMs: session.startMs,
+        endMs: session.endMs,
+        dateKey: session.dateKey,
+        label: dateLabel(session.startMs),
+        meetUrl: watchUrlForSession() || ''
+      }));
+    } catch {}
+    window.location.assign('/blueprint/');
+    return;
+  }
 
   store.set('fp_live_last_submit', '0');
   if (result.reason === 'network') showFormError("We couldn't save your spot. Check your connection and try again.");
