@@ -6,29 +6,29 @@
 <script>document.documentElement.classList.add('js');</script>
 <title>100K Streams Artist Blueprint | Fineboy Producer — Strategy Before Streams</title>
 <meta name="description" content="The 100K Streams Artist Blueprint: a structure for serious independent artists to build clarity, identity and momentum. One-time ₦35K, instant digital access.">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="dark">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23050505'/%3E%3Ctext x='32' y='42' font-family='Impact,Arial Narrow,sans-serif' font-size='32' text-anchor='middle' fill='%23E6B64B'%3EFP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='32' y='42' font-family='Impact,Arial Narrow,sans-serif' font-size='32' text-anchor='middle' fill='%23b39a5c'%3EFP%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/fp-theme.css">
 
 <style>
 /* ---------- /blueprint specifics ---------- */
 
-/* registration confirmation band (only shown for people arriving from /live) */
+/* slim registration notice (only for people arriving from /live); one line, dismissible */
 .confirm{background:var(--ink-2);border-bottom:1px solid var(--gold-line)}
-.confirm .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 2rem;padding-block:1.1rem}
-.confirm-main{min-width:0}
-.confirm-kicker{font-size:.7rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
-.confirm-when{margin-top:.25rem;font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;font-size:clamp(1.3rem,3.6vw,1.8rem);line-height:1.1}
-.confirm-when span + span{margin-left:.9rem;padding-left:.9rem;border-left:1px solid var(--gold-line);color:var(--gold)}
-.confirm-sub{margin-top:.2rem;font-size:.92rem;color:var(--mute)}
-.confirm-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.25rem}
-@media(max-width:520px){.confirm-actions .btn{width:100%}}
+.confirm .wrap{display:flex;align-items:center;gap:.5rem 1.25rem;padding-block:.6rem}
+.confirm-text{flex:1;min-width:0;font-size:.92rem;line-height:1.35;color:var(--paper)}
+.confirm-text b{font-weight:600;color:var(--gold)}
+.confirm-actions{display:flex;align-items:center;gap:.4rem 1rem;flex:none}
+.confirm-actions .textlink{background:none;border:0;padding:0;font:inherit;font-size:.88rem;cursor:pointer}
+.confirm-x{width:32px;height:32px;display:grid;place-items:center;background:none;border:0;color:var(--mute);font-size:1.4rem;line-height:1;cursor:pointer}
+.confirm-x:hover{color:var(--paper)}
+@media(max-width:640px){.confirm .wrap{flex-wrap:wrap}.confirm-text{flex-basis:calc(100% - 44px)}}
 
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:clamp(8px,2vw,24px)}
 @media(max-width:640px){.topbar .btn{display:none}}
@@ -38,7 +38,7 @@
 .lead{max-width:34ch}
 .lead span:first-child{color:var(--paper)}
 .lead span + span{margin-top:.5rem;color:var(--mute)}
-.deal{margin-top:1.75rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem 1.1rem;font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;line-height:1}
+.deal{margin-top:1.75rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem 1.1rem;font-family:var(--display);font-weight:800;font-stretch:66%;text-transform:uppercase;letter-spacing:.03em;line-height:1}
 .deal .now{font-size:clamp(2.6rem,7vw,3.6rem);color:var(--gold)}
 .deal .per{font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.2em;line-height:1.5;color:var(--mute)}
 .cta-row .btn--ghost{min-height:58px}
@@ -75,7 +75,7 @@
 /* four statements (Reality / Transformation) */
 .quad{margin-top:clamp(40px,6vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));border-top:1px solid var(--gold-line)}
 .quad li{padding:1.75rem 1.5rem 0 0}
-.quad strong{display:block;font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(1.7rem,3vw,2.2rem);line-height:1;letter-spacing:.01em;color:var(--gold);margin-bottom:.6rem}
+.quad strong{display:block;font-family:var(--display);font-weight:800;font-stretch:66%;text-transform:uppercase;font-size:clamp(1.7rem,3vw,2.2rem);line-height:1;letter-spacing:.01em;color:var(--gold);margin-bottom:.6rem}
 .quad span{color:var(--paper);opacity:.85}
 
 /* offer */
@@ -83,7 +83,7 @@
 .offer-title{margin-top:1.25rem;font-size:clamp(2.4rem,7vw,4.6rem);line-height:.92}
 .offer-grid{margin-top:2rem;display:grid;gap:2rem;align-items:start}
 @media(min-width:760px){.offer-grid{grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px)}}
-.offer-now{font-family:var(--display);font-size:clamp(4rem,10vw,6.5rem);line-height:.9;color:var(--paper)}
+.offer-now{font-family:var(--display);font-weight:800;font-stretch:66%;font-size:clamp(4rem,10vw,6.5rem);line-height:.9;color:var(--paper)}
 .offer-per{margin-top:.5rem;font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 .offer-note{margin-top:1rem;color:var(--mute)}
 .offer-panel .btn{margin-top:2rem}
@@ -96,7 +96,7 @@
 .faq{margin-top:clamp(36px,5vw,64px);max-width:48rem}
 .faq details{border-top:1px solid var(--line)}
 .faq details:last-child{border-bottom:1px solid var(--line)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.3rem 0;font-family:var(--display);text-transform:uppercase;font-size:clamp(1.3rem,2.6vw,1.7rem);letter-spacing:.01em;line-height:1.1}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.3rem 0;font-family:var(--display);font-weight:800;font-stretch:66%;text-transform:uppercase;font-size:clamp(1.3rem,2.6vw,1.7rem);letter-spacing:.01em;line-height:1.1}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{content:"+";flex:none;font-family:var(--sans);font-size:1.6rem;line-height:1;color:var(--gold);transition:transform .25s}
 .faq details[open] summary::after{transform:rotate(45deg)}
@@ -105,7 +105,7 @@
 
 .movement{text-align:center}
 .movement p{margin:1.5rem auto 0;max-width:36ch;font-size:clamp(1.2rem,2.8vw,1.7rem);line-height:1.35}
-.movement .big{font-family:var(--display);text-transform:uppercase;font-size:clamp(3.4rem,11vw,7rem);line-height:.9;color:var(--gold);margin-top:1rem}
+.movement .big{font-family:var(--display);font-weight:800;font-stretch:66%;text-transform:uppercase;font-size:clamp(3.4rem,11vw,7rem);line-height:.9;color:var(--gold);margin-top:1rem}
 
 .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s var(--ease)}
 .js .reveal.is-in{opacity:1;transform:none}
@@ -113,7 +113,7 @@
 
 /* sticky mobile bar */
 .dock-inner{display:flex;align-items:center;justify-content:space-between;gap:14px}
-.dock-price{font-family:var(--display);font-size:1.5rem;line-height:1;color:var(--paper)}
+.dock-price{font-family:var(--display);font-weight:800;font-stretch:66%;font-size:1.5rem;line-height:1;color:var(--paper)}
 .dock-price small{display:block;margin-top:.3rem;font-family:var(--sans);font-size:.68rem;font-weight:500;letter-spacing:.06em;color:var(--mute)}
 .dock .btn{width:auto;flex:none;min-height:50px;padding:0 1.3rem;font-size:.8rem}
 </style>
@@ -122,34 +122,30 @@
 <body>
 <a class="skip" href="#offer">Skip to the offer</a>
 
-<!-- Registration confirmation: only shown when the visitor has just registered for the live -->
-<aside class="confirm" id="confirm" aria-label="Your live masterclass registration" hidden>
-  <div class="wrap">
-    <div class="confirm-main">
-      <p class="confirm-kicker" id="confirm-kicker">You're registered for the live masterclass</p>
-      <p class="confirm-when"><span id="confirm-date">This Friday</span><span>8:00 PM WAT</span></p>
-      <p class="confirm-sub">We'll remind you before we go live.</p>
-    </div>
-    <div class="confirm-actions">
-      <button type="button" class="btn btn--ghost btn--sm" id="confirm-ics">Add to calendar</button>
-      <a class="btn btn--ghost btn--sm" id="confirm-meet" href="#" target="_blank" rel="noopener noreferrer" hidden>Join on Google Meet</a>
-      <a class="textlink" href="/live/">Back to the live page</a>
-    </div>
-  </div>
-</aside>
 
 <main id="main">
 
-<!-- HERO -->
-<header class="hero" id="top">
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/">Fineboy Producer</a>
+    <a class="btn btn--sm" href="#offer">Get the Blueprint</a>
+  </div>
+</header>
+
+<aside class="confirm" id="confirm" aria-label="Your live masterclass registration" hidden>
   <div class="wrap">
-    <div class="topbar">
-      <a class="brand" href="/" aria-label="Fineboy Producer home">
-        <svg viewBox="0 0 34 30" aria-hidden="true"><rect x="1" y="10" width="3.2" height="10" rx="1.6"/><rect x="8" y="4" width="3.2" height="22" rx="1.6"/><rect x="15.4" y="0" width="3.2" height="30" rx="1.6"/><rect x="22.8" y="6" width="3.2" height="18" rx="1.6"/><rect x="29.8" y="11" width="3.2" height="8" rx="1.6"/></svg>
-        <span>fineboyproducer.com.ng</span>
-      </a>
-      <a class="btn btn--sm" data-pay href="https://paystack.shop/pay/atjxnn7u1m">Get the Blueprint &rarr;</a>
+    <p class="confirm-text" id="confirm-text"><b>You're registered</b> for the live masterclass &middot; <span id="confirm-date">this Friday</span>, 8:00 PM WAT</p>
+    <div class="confirm-actions">
+      <button type="button" class="textlink" id="confirm-ics">Add to calendar</button>
+      <a class="textlink" id="confirm-meet" href="#" target="_blank" rel="noopener noreferrer" hidden>Join on Google Meet</a>
     </div>
+    <button type="button" class="confirm-x" id="confirm-x" aria-label="Dismiss">&times;</button>
+  </div>
+</aside>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
 
     <div class="hero-grid">
       <div class="hero-copy">
@@ -171,7 +167,7 @@
         <p class="deal"><span class="now"><span class="sr-only">Price </span>₦35K</span><span class="per">One-time · 100K Streams Artist Blueprint</span></p>
 
         <div class="cta-row">
-          <a class="btn btn--stack" id="hero-cta" data-pay href="https://paystack.shop/pay/atjxnn7u1m">Get The Blueprint &rarr;</a>
+          <a class="btn btn--stack" id="hero-cta" href="#offer">Get The Blueprint &rarr;</a>
           <a class="btn btn--ghost btn--stack" href="#blueprint">Show me the Blueprint</a>
         </div>
       </div>
@@ -181,7 +177,7 @@
       </figure>
     </div>
   </div>
-</header>
+</section>
 
 <!-- NOT FOR EVERYONE -->
 <section class="section" id="for" aria-labelledby="for-h">
@@ -336,19 +332,11 @@
 
 </main>
 
-<footer class="foot foot--dock">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <p class="foot-brand">Fineboy Producer</p>
-        <p class="foot-tag">Strategy before streams.</p>
-      </div>
-      <div class="foot-links">
-        <a href="https://instagram.com/fineboyproducer_" target="_blank" rel="noopener noreferrer">Instagram: @fineboyproducer_</a>
-        <a href="/">fineboyproducer.com.ng</a>
-      </div>
-    </div>
-    <small>&copy; 2026 Fineboy Producer</small>
+<footer class="site-footer site-footer--dock">
+  <div class="wrap footer__grid">
+    <div><a class="brand" href="/">Fineboy Producer</a><p class="footer__tag">Strategy before streams.</p></div>
+    <nav class="footer__nav" aria-label="Footer"><a href="/">Home</a><a href="/about/">About</a><a href="/work%20with%20me/">Work with me</a><a href="/beats/">Beats</a><a href="https://instagram.com/fineboyproducer_" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
+    <p class="footer__legal">&copy; 2026 Fineboy Producer. All rights reserved.</p>
   </div>
 </footer>
 
@@ -356,7 +344,7 @@
 <div class="dock" data-dock>
   <div class="dock-inner">
     <div class="dock-price">₦35K <small>One-time · Instant access</small></div>
-    <a class="btn" data-pay href="https://paystack.shop/pay/atjxnn7u1m">Get the Blueprint</a>
+    <a class="btn" href="#offer">Get the Blueprint</a>
   </div>
 </div>
 
@@ -375,7 +363,8 @@
   try { reg = JSON.parse(sessionStorage.getItem('fp_live_reg') || 'null'); } catch (e) { reg = null; }
   if (reg && typeof reg.startMs === 'number' && typeof reg.endMs === 'number' && Date.now() < reg.endMs) {
     $('#confirm').hidden = false;
-    if (reg.firstName) $('#confirm-kicker').textContent = "You're registered, " + String(reg.firstName).slice(0, 40) + ". See you at the live masterclass";
+    if (reg.firstName) $('#confirm-text').firstElementChild.textContent = "You're registered, " + String(reg.firstName).slice(0, 40);
+    $('#confirm-x').addEventListener('click', function () { $('#confirm').hidden = true; });
     if (reg.label) $('#confirm-date').textContent = String(reg.label);
 
     var fmtUTC = function (ms) { return new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); };
