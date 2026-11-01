@@ -7,32 +7,24 @@
 <meta name="robots" content="noindex">
 <title>No Gimmicks Release Today Checklist | Fineboy Producer — Strategy Before Streams</title>
 <meta name="description" content="The No Gimmicks Release Today Checklist: a checklist for after your music drops, with two bonuses: a content guide for effective promotion and how to promote your music with zero budget.">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="dark">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23050505'/%3E%3Ctext x='32' y='42' font-family='Impact,Arial Narrow,sans-serif' font-size='32' text-anchor='middle' fill='%23E6B64B'%3EFP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='32' y='42' font-family='Impact,Arial Narrow,sans-serif' font-size='32' text-anchor='middle' fill='%23b39a5c'%3EFP%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/fp-theme.css">
 
 <style>
 /* ---------- /release-checklist specifics (downsell after /blueprint) ---------- */
-.confirm{background:var(--ink-2);border-bottom:1px solid var(--gold-line)}
-.confirm .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 2rem;padding-block:1.1rem}
-.confirm-kicker{font-size:.7rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
-.confirm-when{margin-top:.25rem;font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;font-size:clamp(1.3rem,3.6vw,1.8rem);line-height:1.1}
-.confirm-when span + span{margin-left:.9rem;padding-left:.9rem;border-left:1px solid var(--gold-line);color:var(--gold)}
-.confirm-sub{margin-top:.2rem;font-size:.92rem;color:var(--mute)}
-.confirm-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.25rem}
-@media(max-width:520px){.confirm-actions .btn{width:100%}}
 
 .hero-copy{max-width:60rem}
 .hero-copy .label{margin-top:1.15rem}
 .lead{max-width:36ch}
 .lead span:first-child{color:var(--paper)}
-.deal{margin-top:1.75rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem 1.1rem;font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;line-height:1}
+.deal{margin-top:1.75rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem 1.1rem;font-family:var(--display);font-weight:800;font-stretch:66%;text-transform:uppercase;letter-spacing:.03em;line-height:1}
 .deal .now{font-size:clamp(2.6rem,7vw,3.6rem);color:var(--gold)}
 .deal .per{font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.2em;line-height:1.5;color:var(--mute)}
 
@@ -40,8 +32,11 @@
 .offer-title{margin-top:1.25rem;font-size:clamp(2.4rem,7vw,4.6rem);line-height:.92}
 .offer-grid{margin-top:2rem;display:grid;gap:2rem;align-items:start}
 @media(min-width:760px){.offer-grid{grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px)}}
-.offer-now{font-family:var(--display);font-size:clamp(4rem,10vw,6.5rem);line-height:.9;color:var(--paper)}
+.offer-now{font-family:var(--display);font-weight:800;font-stretch:66%;font-size:clamp(4rem,10vw,6.5rem);line-height:.9;color:var(--paper)}
 .offer-per{margin-top:.5rem;font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.offer-anchor{margin-top:1rem;font-size:.95rem;color:var(--mute);max-width:26ch}
+.offer-count{margin-top:.75rem;font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.offer-count b{font-variant-numeric:tabular-nums}
 .offer-panel .btn{margin-top:2rem}
 .micro{margin-top:1rem;font-size:.95rem;color:var(--mute)}
 @media(max-width:520px){.offer-panel .btn{width:100%}}
@@ -51,7 +46,7 @@
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
 
 .dock-inner{display:flex;align-items:center;justify-content:space-between;gap:14px}
-.dock-price{font-family:var(--display);font-size:1.5rem;line-height:1;color:var(--paper)}
+.dock-price{font-family:var(--display);font-weight:800;font-stretch:66%;font-size:1.5rem;line-height:1;color:var(--paper)}
 .dock-price small{display:block;margin-top:.3rem;font-family:var(--sans);font-size:.68rem;font-weight:500;letter-spacing:.06em;color:var(--mute)}
 .dock .btn{width:auto;flex:none;min-height:50px;padding:0 1.3rem;font-size:.8rem}
 </style>
@@ -60,31 +55,18 @@
 <body>
 <a class="skip" href="#offer">Skip to the offer</a>
 
-<!-- Registration confirmation: shown if the visitor just registered for the live (carried over from /live) -->
-<aside class="confirm" id="confirm" aria-label="Your live masterclass registration" hidden>
-  <div class="wrap">
-    <div>
-      <p class="confirm-kicker" id="confirm-kicker">You're registered for the live masterclass</p>
-      <p class="confirm-when"><span id="confirm-date">This Friday</span><span>8:00 PM WAT</span></p>
-      <p class="confirm-sub">We'll remind you before we go live.</p>
-    </div>
-    <div class="confirm-actions">
-      <button type="button" class="btn btn--ghost btn--sm" id="confirm-ics">Add to calendar</button>
-      <a class="btn btn--ghost btn--sm" id="confirm-meet" href="#" target="_blank" rel="noopener noreferrer" hidden>Join on Google Meet</a>
-      <a class="textlink" href="/live/">Back to the live page</a>
-    </div>
-  </div>
-</aside>
-
 <main id="main">
 
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/">Fineboy Producer</a>
+    <a class="btn btn--sm" data-pay href="#">Get the Checklist</a>
+  </div>
+</header>
+
 <!-- HERO -->
-<header class="hero" id="top">
+<section class="hero" id="top">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="Fineboy Producer home">
-      <svg viewBox="0 0 34 30" aria-hidden="true"><rect x="1" y="10" width="3.2" height="10" rx="1.6"/><rect x="8" y="4" width="3.2" height="22" rx="1.6"/><rect x="15.4" y="0" width="3.2" height="30" rx="1.6"/><rect x="22.8" y="6" width="3.2" height="18" rx="1.6"/><rect x="29.8" y="11" width="3.2" height="8" rx="1.6"/></svg>
-      <span>fineboyproducer.com.ng</span>
-    </a>
 
     <div class="hero-copy">
       <p class="label">Start smaller</p>
@@ -105,7 +87,7 @@
       </div>
     </div>
   </div>
-</header>
+</section>
 
 <!-- WHAT'S INSIDE -->
 <section class="section" id="inside" aria-labelledby="inside-h">
@@ -131,6 +113,8 @@
         <div>
           <p class="offer-now" data-price><span class="sr-only">Price </span>₦5,500</p>
           <p class="offer-per">One-time</p>
+          <p class="offer-anchor">The full Blueprint is <del>₦35,000</del>. This is the lighter place to start.</p>
+          <p class="offer-count" id="count" hidden>Offer ends in <b id="count-t"></b></p>
         </div>
         <ul class="points">
           <li>No Gimmicks Release Today Checklist</li>
@@ -161,19 +145,11 @@
 
 </main>
 
-<footer class="foot foot--dock">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <p class="foot-brand">Fineboy Producer</p>
-        <p class="foot-tag">Strategy before streams.</p>
-      </div>
-      <div class="foot-links">
-        <a href="https://instagram.com/fineboyproducer_" target="_blank" rel="noopener noreferrer">Instagram: @fineboyproducer_</a>
-        <a href="/">fineboyproducer.com.ng</a>
-      </div>
-    </div>
-    <small>&copy; 2026 Fineboy Producer</small>
+<footer class="site-footer site-footer--dock">
+  <div class="wrap footer__grid">
+    <div><a class="brand" href="/">Fineboy Producer</a><p class="footer__tag">Strategy before streams.</p></div>
+    <nav class="footer__nav" aria-label="Footer"><a href="/">Home</a><a href="/about/">About</a><a href="/work%20with%20me/">Work with me</a><a href="/beats/">Beats</a><a href="https://instagram.com/fineboyproducer_" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
+    <p class="footer__legal">&copy; 2026 Fineboy Producer. All rights reserved.</p>
   </div>
 </footer>
 
@@ -193,6 +169,20 @@
   /* ==========================================================
      CONFIG — fill these two in, nothing else needs to change.
      ========================================================== */
+  /* Optional real deadline, e.g. '2026-11-14T23:59:00+01:00'. Leave empty to show no countdown.
+     Only set this if the offer genuinely ends then. */
+  var OFFER_ENDS = '';
+  if (OFFER_ENDS) {
+    var endMs = Date.parse(OFFER_ENDS), cEl = $('#count'), cT = $('#count-t');
+    var tick = function () {
+      var d = endMs - Date.now();
+      if (!(d > 0)) { cEl.hidden = true; return; }
+      var h = Math.floor(d / 36e5), m = Math.floor(d % 36e5 / 6e4), sec = Math.floor(d % 6e4 / 1e3);
+      cT.textContent = (h >= 24 ? Math.floor(h / 24) + 'd ' : '') + (h % 24) + 'h ' + m + 'm ' + sec + 's';
+      cEl.hidden = false; setTimeout(tick, 1000);
+    };
+    if (!isNaN(endMs)) tick();
+  }
   var PRICE_LABEL  = '';   // leave empty to keep the default shown in the page (₦5,500)
   var PAYSTACK_LINK = 'https://paystack.shop/pay/daem655948';  // e.g. 'https://paystack.shop/pay/xxxxxxxx'
 
@@ -212,45 +202,6 @@
       el.setAttribute('aria-disabled', 'true');
     }
   });
-
-  /* ---------- registration confirmation (carried over from /live) ---------- */
-  var reg = null;
-  try { reg = JSON.parse(sessionStorage.getItem('fp_live_reg') || 'null'); } catch (e) { reg = null; }
-  if (reg && typeof reg.startMs === 'number' && typeof reg.endMs === 'number' && Date.now() < reg.endMs) {
-    $('#confirm').hidden = false;
-    if (reg.firstName) $('#confirm-kicker').textContent = "You're registered, " + String(reg.firstName).slice(0, 40) + ". See you at the live masterclass";
-    if (reg.label) $('#confirm-date').textContent = String(reg.label);
-
-    var fmtUTC = function (ms) { return new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); };
-    var icsEsc = function (s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n'); };
-    var fold = function (line) { var out = []; while (line.length > 74) { out.push(line.slice(0, 74)); line = ' ' + line.slice(74); } out.push(line); return out.join('\r\n'); };
-    var meet = /^https:\/\/meet\.google\.com\/[a-z0-9-]+(\?.*)?$/i.test(reg.meetUrl || '') ? reg.meetUrl : null;
-    var NAME = 'How To Stop Wasting Money Promoting Your Songs';
-    var key = String(reg.dateKey || '').replace(/[^0-9-]/g, '');
-    if (meet) { var a = $('#confirm-meet'); a.href = meet; a.hidden = false; }
-
-    $('#confirm-ics').addEventListener('click', function () {
-      var lines = [
-        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Fineboy Producer//Live Masterclass//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
-        'BEGIN:VEVENT',
-        'UID:fp-live-' + key.replace(/-/g, '') + '@fineboyproducer.com.ng',
-        'DTSTAMP:' + fmtUTC(Date.now()),
-        'DTSTART:' + fmtUTC(reg.startMs),
-        'DTEND:' + fmtUTC(reg.endMs),
-        'SUMMARY:' + icsEsc(NAME + ' (Live Masterclass)'),
-        'DESCRIPTION:' + icsEsc('A free live masterclass with Fineboy Producer. Strategy before streams.' + (meet ? '\n\nJoin: ' + meet : '')),
-        'LOCATION:' + icsEsc(meet || 'Google Meet (link posted closer to the date)'),
-        'BEGIN:VALARM', 'TRIGGER:-PT30M', 'ACTION:DISPLAY', 'DESCRIPTION:Starting in 30 minutes', 'END:VALARM',
-        'END:VEVENT', 'END:VCALENDAR'
-      ].map(fold).join('\r\n');
-      var blob = new Blob([lines], { type: 'text/calendar;charset=utf-8' });
-      var url = URL.createObjectURL(blob);
-      var link = document.createElement('a');
-      link.href = url; link.download = 'stop-wasting-money-promoting-your-songs-' + key + '.ics';
-      document.body.appendChild(link); link.click(); link.remove();
-      setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
-    });
-  }
 
   /* ---------- hairlines, reveals, sticky mobile bar ---------- */
   if (!('IntersectionObserver' in window)) {

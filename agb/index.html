@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>document.documentElement.classList.add('js');</script>
 <title>Congratulations — Your Artist Growth Bundle</title>
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="dark">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23050505'/%3E%3Ctext x='32' y='42' font-family='Impact,Arial Narrow,sans-serif' font-size='32' text-anchor='middle' fill='%23E6B64B'%3EFP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='32' y='42' font-family='Impact,Arial Narrow,sans-serif' font-size='32' text-anchor='middle' fill='%23b39a5c'%3EFP%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/fp-theme.css">
 
 <style>
@@ -26,7 +26,7 @@
 .stack{position:relative;height:360px;width:100%;max-width:420px}
 .cov{position:absolute;width:196px;height:268px;padding:20px 18px;background:linear-gradient(160deg,#171613,#0a0a09);border:1px solid var(--gold-line);box-shadow:0 30px 60px -20px rgba(0,0,0,.8);display:flex;flex-direction:column;justify-content:space-between;opacity:0;animation:cover-rise .9s var(--ease) forwards}
 .cov small{font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600}
-.cov b{font-family:var(--display);font-weight:400;font-size:2.2rem;line-height:.95;text-transform:uppercase;letter-spacing:.01em}
+.cov b{font-family:var(--display);font-weight:800;font-stretch:66%;font-size:2.2rem;line-height:.95;text-transform:uppercase;letter-spacing:.01em}
 .cov i{display:block;height:1px;background:var(--line);margin-top:8px}
 .cov.a{left:0;top:40px;--r:-7deg;animation-delay:.1s}
 .cov.b{left:88px;top:0;--r:2deg;animation-delay:.3s;background:var(--gold);color:#0a0a0a;border-color:transparent}
@@ -40,7 +40,7 @@
 /* index strip */
 .strip{border-bottom:1px solid var(--line);background:var(--ink-2)}
 .strip .wrap{display:flex;overflow-x:auto;scrollbar-width:none}
-.strip a{flex:1 0 auto;text-decoration:none;font-family:var(--display);text-transform:uppercase;font-size:clamp(1.15rem,2.2vw,1.5rem);letter-spacing:.05em;padding:1.35rem 1.75rem 1.15rem;border-left:1px solid var(--line);color:var(--mute);white-space:nowrap;transition:color .2s}
+.strip a{flex:1 0 auto;text-decoration:none;font-family:var(--display);font-weight:800;font-stretch:66%;text-transform:uppercase;font-size:clamp(1.15rem,2.2vw,1.5rem);letter-spacing:.05em;padding:1.35rem 1.75rem 1.15rem;border-left:1px solid var(--line);color:var(--mute);white-space:nowrap;transition:color .2s}
 .strip a:last-child{border-right:1px solid var(--line)}
 .strip a:hover{color:var(--gold-hi)}
 
@@ -57,15 +57,15 @@
 .pv>div{transition:transform .7s var(--ease)}
 .card:hover .pv>div{transform:scale(1.07) rotate(-1.5deg)}
 .body{padding:28px 28px 30px;display:flex;flex-direction:column;flex:1}
-.num{font-family:var(--display);font-size:1.6rem;color:var(--gold);line-height:1;font-variant-numeric:tabular-nums}
-.card h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(1.9rem,3.6vw,2.6rem);line-height:1;letter-spacing:.01em;margin:.7rem 0 .9rem}
+.num{font-family:var(--display);font-weight:800;font-stretch:66%;font-size:1.6rem;color:var(--gold);line-height:1;font-variant-numeric:tabular-nums}
+.card h3{font-family:var(--display);font-weight:800;font-stretch:66%;text-transform:uppercase;font-size:clamp(1.9rem,3.6vw,2.6rem);line-height:1;letter-spacing:.01em;margin:.7rem 0 .9rem}
 .card p{margin:0 0 1.75rem;color:var(--mute);flex:1;max-width:46ch}
 .card .btn{align-self:flex-start;min-height:50px;padding:0 1.6rem;font-size:.82rem}
 .card .btn.opened::after{content:" \2713"}
-.d1{width:170px;height:200px;margin-top:60px;background:linear-gradient(160deg,#171613,#0a0a09);border:1px solid var(--gold-line);padding:16px;font-family:var(--display);font-size:2rem;line-height:.95;text-transform:uppercase;color:var(--paper);box-shadow:0 20px 40px -12px rgba(0,0,0,.8)}
+.d1{width:170px;height:200px;margin-top:60px;background:linear-gradient(160deg,#171613,#0a0a09);border:1px solid var(--gold-line);padding:16px;font-family:var(--display);font-weight:800;font-stretch:66%;font-size:2rem;line-height:.95;text-transform:uppercase;color:var(--paper);box-shadow:0 20px 40px -12px rgba(0,0,0,.8)}
 .d1 span{display:block;margin-top:12px;height:1px;background:var(--gold)}
 .d2{width:160px;height:190px;margin-top:50px;background:var(--paper);color:#0a0a0a;padding:16px;box-shadow:0 20px 40px -12px rgba(0,0,0,.8)}
-.d2 b{font-family:var(--display);font-weight:400;font-size:4rem;line-height:.85;display:block;color:#9a7416}
+.d2 b{font-family:var(--display);font-weight:800;font-stretch:66%;font-size:4rem;line-height:.85;display:block;color:#9a7416}
 .d2 span{display:block;height:2px;background:rgba(10,10,10,.22);margin-top:9px}
 .d2 span:nth-child(3){width:70%}.d2 span:nth-child(5){width:45%}
 .d3{width:250px;height:110px;background-image:linear-gradient(90deg,var(--ink-2) 3px,transparent 3px),linear-gradient(var(--ink-2) 3px,transparent 3px);background-size:10% 33.34%;background-color:var(--gold);opacity:.9}
@@ -98,12 +98,15 @@
 <body>
 <a class="skip" href="#bundle">Skip to your bundle</a>
 
-<header class="hero">
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/">Fineboy Producer</a>
+    <a class="btn btn--sm" href="#bundle">Your bundle</a>
+  </div>
+</header>
+
+<section class="hero">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="Fineboy Producer home">
-      <svg viewBox="0 0 34 30" aria-hidden="true"><rect x="1" y="10" width="3.2" height="10" rx="1.6"/><rect x="8" y="4" width="3.2" height="22" rx="1.6"/><rect x="15.4" y="0" width="3.2" height="30" rx="1.6"/><rect x="22.8" y="6" width="3.2" height="18" rx="1.6"/><rect x="29.8" y="11" width="3.2" height="8" rx="1.6"/></svg>
-      <span>fineboyproducer.com.ng</span>
-    </a>
 
     <div class="hero-grid">
       <div class="hero-copy">
@@ -125,7 +128,7 @@
       </div>
     </div>
   </div>
-</header>
+</section>
 
 <nav class="strip" aria-label="In your bundle">
   <div class="wrap">
@@ -215,19 +218,11 @@
 </section>
 </main>
 
-<footer class="foot">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <p class="foot-brand">Fineboy Producer</p>
-        <p class="foot-tag">Strategy before streams.</p>
-      </div>
-      <div class="foot-links">
-        <a href="https://instagram.com/fineboyproducer_" target="_blank" rel="noopener noreferrer">Instagram: @fineboyproducer_</a>
-        <a href="/">fineboyproducer.com.ng</a>
-      </div>
-    </div>
-    <small>&copy; 2026 Fineboy Producer</small>
+<footer class="site-footer">
+  <div class="wrap footer__grid">
+    <div><a class="brand" href="/">Fineboy Producer</a><p class="footer__tag">Strategy before streams.</p></div>
+    <nav class="footer__nav" aria-label="Footer"><a href="/">Home</a><a href="/about/">About</a><a href="/work%20with%20me/">Work with me</a><a href="/beats/">Beats</a><a href="https://instagram.com/fineboyproducer_" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
+    <p class="footer__legal">&copy; 2026 Fineboy Producer. All rights reserved.</p>
   </div>
 </footer>
 
