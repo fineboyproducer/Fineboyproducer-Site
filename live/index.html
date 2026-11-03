@@ -822,6 +822,13 @@ const CONFIG = {
   SUPABASE_ANON_KEY: 'sb_publishable_nvbgjEhrZjS7wg_YAre5qw_JdwTL6A_',
   SUPABASE_TABLE: 'event_registrations',
 
+  // Emailer: sends the confirmation email and the reminders before the live. Public address only,
+  // no secret. Leave '' to switch the hand-off off: registration still saves to Supabase exactly
+  // as before. The Emailer ALSO pulls every registration from Supabase on its own schedule, so a
+  // failed hand-off from this page only delays the confirmation, it never loses the registration.
+  EMAILER_URL: 'https://emailer-0w2b.onrender.com',
+  EMAILER_WAIT_MS: 2500,         // how long to wait for the Emailer to confirm receipt before moving on to /blueprint
+
   PAGE_LOADED_MIN_MS: 2000,      // spam: reject submissions faster than this after page load
   SUBMIT_COOLDOWN_MS: 20000      // spam: minimum gap between submissions from one browser
 };
@@ -1146,6 +1153,47 @@ async function saveRegistration(payload){
   }
 }
 
+/* Hand-off to the Emailer (fast path). Supabase above remains the record of who registered; the
+   Emailer reconciles against it every few minutes, so this only makes the confirmation arrive in
+   seconds. It can never break the sign-up, and delays the redirect by at most EMAILER_WAIT_MS. */
+const emailerBase = () => {
+  const u = String(CONFIG.EMAILER_URL || '').trim().replace(/\/$/, '');
+  return /^https:\/\/[^\s/]+$/i.test(u) ? u : '';
+};
+
+// The Emailer runs on hosting that sleeps when idle and takes up to a minute to wake. Ping it
+// the first time the visitor touches the form so it is awake by the time they press the button.
+let emailerWarm = false;
+function warmEmailer(){
+  const base = emailerBase();
+  if (!base || emailerWarm || isPreviewHost()) return;
+  emailerWarm = true;
+  fetch(base + '/api/public/live/health', { mode: 'no-cors', cache: 'no-store' }).catch(() => {});
+}
+form.addEventListener('focusin', warmEmailer, { once: true });
+
+// Resolves true once the Emailer has recorded the registration, false if it could not be reached
+// or refused it. Retries only continue while this page is open; after that the Emailer's own
+// reconciliation with Supabase is what guarantees the registration is picked up.
+async function sendToEmailer(payload){
+  const base = emailerBase();
+  if (!base || isPreviewHost()) return false;
+  for (const wait of [0, 4000, 15000, 45000]) {
+    if (wait) await new Promise(r => setTimeout(r, wait));
+    try {
+      const res = await fetch(base + '/api/public/live/register', {
+        method: 'POST',
+        keepalive: true,                                  // lets the first request finish even after the page navigates away
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },   // a "simple" request: no extra CORS round trip
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) return true;
+      if (res.status >= 400 && res.status < 500 && res.status !== 429) return false;   // retrying cannot fix this
+    } catch (err) { /* offline, or the host is still waking: try again */ }
+  }
+  return false;
+}
+
 function showSuccess(){
   form.hidden = true;
   successBox.hidden = false;
@@ -1183,6 +1231,7 @@ form.addEventListener('submit', async e => {
   setLoading(false);
 
   if (result.ok) {
+    const handoff = sendToEmailer(payload);   // started first so it is already on the wire; never awaited for longer than EMAILER_WAIT_MS
     showSuccess();   // stays as the fallback if the redirect below is blocked or the visitor comes back
     // Upsell: send the new registrant straight to the Blueprint page. Their confirmation
     // (which Friday, add-to-calendar, Meet link if any) travels with them in sessionStorage.
@@ -1196,6 +1245,10 @@ form.addEventListener('submit', async e => {
         meetUrl: watchUrlForSession() || ''
       }));
     } catch {}
+    // Leaving the page cancels any retries still waiting on a timer, so give the Emailer a moment to
+    // confirm it has the registration. If it is slow (waking up), move on anyway: the request already
+    // sent keeps going, and the Emailer picks the registration up from Supabase within minutes.
+    await Promise.race([handoff, new Promise(r => setTimeout(r, CONFIG.EMAILER_WAIT_MS))]);
     window.location.assign('/blueprint/');
     return;
   }
