@@ -134,7 +134,7 @@
 
 <aside class="confirm" id="confirm" aria-label="Your live masterclass registration" hidden>
   <div class="wrap">
-    <p class="confirm-text" id="confirm-text"><b>You're registered</b> for the live masterclass &middot; <span id="confirm-date">this Friday</span>, 8:00 PM WAT</p>
+    <p class="confirm-text" id="confirm-text"><b>You're registered</b> for the live masterclass &middot; <span id="confirm-date">this Friday</span>, 8:00 PM WAT. Your Google Meet link will be emailed to you.</p>
     <div class="confirm-actions">
       <button type="button" class="textlink" id="confirm-ics">Add to calendar</button>
       <a class="textlink" id="confirm-meet" href="#" target="_blank" rel="noopener noreferrer" hidden>Join on Google Meet</a>
@@ -386,7 +386,7 @@
         'DTEND:' + fmtUTC(reg.endMs),
         'SUMMARY:' + icsEsc(NAME + ' (Live Masterclass)'),
         'DESCRIPTION:' + icsEsc('A free live masterclass with Fineboy Producer. Strategy before streams.' + (meet ? '\n\nJoin: ' + meet : '')),
-        'LOCATION:' + icsEsc(meet || 'Google Meet (link posted closer to the date)'),
+        'LOCATION:' + icsEsc(meet || 'Google Meet (link sent to your email)'),
         'BEGIN:VALARM', 'TRIGGER:-PT30M', 'ACTION:DISPLAY', 'DESCRIPTION:Starting in 30 minutes', 'END:VALARM',
         'END:VEVENT', 'END:VCALENDAR'
       ].map(fold).join('\r\n');
