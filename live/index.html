@@ -514,6 +514,21 @@ html{scroll-padding-top:84px}
   .js .rule{transform:none}
 }
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1790149552042782');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1790149552042782&ev=PageView&noscript=1" alt=""></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 
 <body>
@@ -1255,6 +1270,8 @@ form.addEventListener('submit', async e => {
 
   if (result.ok) {
     const handoff = sendToEmailer(payload);   // started first so it is already on the wire; never awaited for longer than EMAILER_WAIT_MS
+    // Meta Pixel: count the registration (name/email/phone are NOT sent to Meta). Never allowed to break the sign-up.
+    try { if (window.fbq) window.fbq('track', 'Lead', { content_name: CONFIG.EVENT_NAME }); } catch (e) {}
     showSuccess();   // stays as the fallback if the redirect below is blocked or the visitor comes back
     // Upsell: send the new registrant straight to the Blueprint page. Their confirmation
     // (which Friday, add-to-calendar, Meet link if any) travels with them in sessionStorage.
@@ -1273,6 +1290,8 @@ form.addEventListener('submit', async e => {
     // sent keeps going, and the Emailer picks the registration up from Supabase within minutes.
     try { await Promise.race([handoff, new Promise(r => setTimeout(r, CONFIG.EMAILER_WAIT_MS))]); }
     catch (err) { /* the registration is already saved; going on to /blueprint regardless */ }
+    // Give the Pixel's request a moment to leave before the page does (only when the Pixel has actually loaded).
+    if (window.fbq && typeof window.fbq.callMethod === 'function') await new Promise(r => setTimeout(r, 250));
     window.location.assign('/blueprint/');
     return;
   }
