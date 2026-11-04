@@ -754,9 +754,9 @@ html{scroll-padding-top:84px}
         </p>
         <div class="btn-row">
           <button type="button" class="btn" data-add-cal>Add to calendar</button>
-          <a class="btn btn--ghost" data-youtube href="#meet-pending">Join on Google Meet</a>
+          <a class="btn btn--ghost" data-youtube href="#meet-pending">Get my Meet link</a>
         </div>
-        <p class="yt-note" data-yt-note role="status" hidden>The Meet link will be added here closer to the date.</p>
+        <p class="yt-note" data-yt-note role="status" hidden>Registered? Your Google Meet link is emailed to you before the live, and it is saved inside the Add to calendar button in those emails. Check Spam or Promotions. Can’t find it? Message @fineboyproducer_ on Instagram.</p>
       </div>
     </div>
   </div>
@@ -813,15 +813,10 @@ const CONFIG = {
   SESSION_UTC_OFFSET_MIN: 60,  // WAT is UTC+1, no daylight saving, so this never changes
   EVENT_DURATION_MINUTES: 60,  // used for the calendar entry and the "live now" window; adjust if needed
 
-  // Add this week's Google Meet link here, keyed by the Friday's date in WAT (YYYY-MM-DD,
-  // matching the date shown on the page). You can add several weeks in advance.
-  // Until a week has a link, "Join on Google Meet" shows a short "not up yet" note instead of
-  // a broken or stale link. Create the link fresh each week (Meet, "New meeting" > "Start an
-  // instant meeting", or schedule one in Google Calendar) — reusing one old link indefinitely
-  // means anyone who ever had it can rejoin at any time, with no way to revoke just that link.
+  // The Google Meet link is deliberately NOT kept on this page: anything here is public (the page source and
+  // this repository's history). It is stored privately in the Emailer and goes only to people who registered,
+  // in their reminder emails and inside the Add to calendar button of those emails. Leave this empty.
   MEET_URLS: {
-    // '2026-10-02': 'https://meet.google.com/xxx-xxxx-xxx',
-    '2026-11-06': 'https://meet.google.com/hjf-ikbn-adm',
   },
 
   // Supabase. The publishable key is designed to be public; what keeps the table safe is the
@@ -984,7 +979,7 @@ $$('[data-youtube]').forEach(a => a.addEventListener('click', e => {
 const fmtUTC = ms => new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
 const icsEsc = s => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
 const fold = line => { const out = []; while (line.length > 74) { out.push(line.slice(0, 74)); line = ' ' + line.slice(74); } out.push(line); return out.join('\r\n'); };
-const calLocation = () => watchUrlForSession() || 'Google Meet (link posted closer to the date)';
+const calLocation = () => watchUrlForSession() || 'Google Meet (link sent to your email)';
 const calDetails  = () => 'A free live masterclass with Fineboy Producer. Strategy before streams.' + (watchUrlForSession() ? '\n\nJoin: ' + watchUrlForSession() : '');
 
 function downloadICS(){
