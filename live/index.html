@@ -514,6 +514,21 @@ html{scroll-padding-top:84px}
   .js .rule{transform:none}
 }
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1790149552042782');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1790149552042782&ev=PageView&noscript=1" alt=""></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 
 <body>
@@ -747,16 +762,14 @@ html{scroll-padding-top:84px}
         <div class="rule" aria-hidden="true"></div>
         <h3 class="display success-title" id="success-h">You're in.</h3>
         <p class="first">You're registered for the live session.</p>
-        <p>We'll remind you before we go live.</p>
+        <p>Your Google Meet link will be emailed to you on or before the day. Check Spam or Promotions if you don't see it.</p>
         <p class="when">
           <span data-session-date>This Friday</span>
           <span>8:00 PM WAT</span>
         </p>
         <div class="btn-row">
           <button type="button" class="btn" data-add-cal>Add to calendar</button>
-          <a class="btn btn--ghost" data-youtube href="#meet-pending">Join on Google Meet</a>
         </div>
-        <p class="yt-note" data-yt-note role="status" hidden>The Meet link will be added here closer to the date.</p>
       </div>
     </div>
   </div>
@@ -813,15 +826,10 @@ const CONFIG = {
   SESSION_UTC_OFFSET_MIN: 60,  // WAT is UTC+1, no daylight saving, so this never changes
   EVENT_DURATION_MINUTES: 60,  // used for the calendar entry and the "live now" window; adjust if needed
 
-  // Add this week's Google Meet link here, keyed by the Friday's date in WAT (YYYY-MM-DD,
-  // matching the date shown on the page). You can add several weeks in advance.
-  // Until a week has a link, "Join on Google Meet" shows a short "not up yet" note instead of
-  // a broken or stale link. Create the link fresh each week (Meet, "New meeting" > "Start an
-  // instant meeting", or schedule one in Google Calendar) — reusing one old link indefinitely
-  // means anyone who ever had it can rejoin at any time, with no way to revoke just that link.
+  // The Google Meet link is deliberately NOT kept on this page: anything here is public (the page source and
+  // this repository's history). It is stored privately in the Emailer and goes only to people who registered,
+  // in their reminder emails and inside the Add to calendar button of those emails. Leave this empty.
   MEET_URLS: {
-    // '2026-10-02': 'https://meet.google.com/xxx-xxxx-xxx',
-    '2026-11-06': 'https://meet.google.com/hjf-ikbn-adm',
   },
 
   // Supabase. The publishable key is designed to be public; what keeps the table safe is the
@@ -984,7 +992,7 @@ $$('[data-youtube]').forEach(a => a.addEventListener('click', e => {
 const fmtUTC = ms => new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
 const icsEsc = s => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
 const fold = line => { const out = []; while (line.length > 74) { out.push(line.slice(0, 74)); line = ' ' + line.slice(74); } out.push(line); return out.join('\r\n'); };
-const calLocation = () => watchUrlForSession() || 'Google Meet (link posted closer to the date)';
+const calLocation = () => watchUrlForSession() || 'Google Meet (link sent to your email)';
 const calDetails  = () => 'A free live masterclass with Fineboy Producer. Strategy before streams.' + (watchUrlForSession() ? '\n\nJoin: ' + watchUrlForSession() : '');
 
 function downloadICS(){
@@ -1262,6 +1270,8 @@ form.addEventListener('submit', async e => {
 
   if (result.ok) {
     const handoff = sendToEmailer(payload);   // started first so it is already on the wire; never awaited for longer than EMAILER_WAIT_MS
+    // Meta Pixel: count the registration (name/email/phone are NOT sent to Meta). Never allowed to break the sign-up.
+    try { if (window.fbq) window.fbq('track', 'Lead', { content_name: CONFIG.EVENT_NAME }); } catch (e) {}
     showSuccess();   // stays as the fallback if the redirect below is blocked or the visitor comes back
     // Upsell: send the new registrant straight to the Blueprint page. Their confirmation
     // (which Friday, add-to-calendar, Meet link if any) travels with them in sessionStorage.
@@ -1280,6 +1290,8 @@ form.addEventListener('submit', async e => {
     // sent keeps going, and the Emailer picks the registration up from Supabase within minutes.
     try { await Promise.race([handoff, new Promise(r => setTimeout(r, CONFIG.EMAILER_WAIT_MS))]); }
     catch (err) { /* the registration is already saved; going on to /blueprint regardless */ }
+    // Give the Pixel's request a moment to leave before the page does (only when the Pixel has actually loaded).
+    if (window.fbq && typeof window.fbq.callMethod === 'function') await new Promise(r => setTimeout(r, 250));
     window.location.assign('/blueprint/');
     return;
   }
