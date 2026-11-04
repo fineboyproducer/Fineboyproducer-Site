@@ -29,7 +29,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Fonts load without blocking the first paint: on a slow or flaky connection the page shows at once in the fallback fonts and swaps when the fonts arrive. -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
 
 <script type="application/ld+json">
 {
@@ -357,6 +359,9 @@ ul,ol{list-style:none;padding:0}
 .err{margin-top:.45rem;font-size:.9rem;color:var(--error);min-height:0}
 .err:empty{display:none}
 .form-error{margin-bottom:1.25rem;padding:.9rem 1rem;border:1px solid rgba(232,138,124,.5);color:var(--error);font-size:.95rem;border-radius:2px}
+/* Shown only if the page's script could not start (very old browser, blocked script): the page then still tells people what to do. */
+.boot-note{margin-bottom:1.25rem;padding:.9rem 1rem;border:1px solid rgba(179,154,92,.5);color:var(--paper);font-size:.95rem;border-radius:2px}
+html.js-ready .boot-note{display:none}
 .privacy{margin-top:1rem;font-size:.85rem;color:var(--mute);text-align:center}
 .hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
 
@@ -696,7 +701,8 @@ html{scroll-padding-top:84px}
     </div>
 
     <div class="reg-card">
-      <form id="reg-form" novalidate autocomplete="on">
+      <form id="reg-form" novalidate autocomplete="on" onsubmit="return false;">
+        <p class="boot-note">This form needs a newer browser. Open this page in Chrome or Safari, or message @fineboyproducer_ on Instagram and we will add you.</p>
         <p class="form-error" id="form-error" role="alert" hidden></p>
 
         <div class="field">
@@ -792,6 +798,7 @@ html{scroll-padding-top:84px}
 <script>
 (() => {
 'use strict';
+document.documentElement.classList.add('js-ready');   // hides the "needs a newer browser" note; if this line never runs, the note stays visible
 
 /* ==========================================================
    CONFIG — everything you need to connect lives here
@@ -839,8 +846,8 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 const loadedAt = Date.now();
 
 const store = {
-  get(k){ try { return localStorage.getItem(k); } catch { return null; } },
-  set(k, v){ try { localStorage.setItem(k, v); } catch {} }
+  get(k){ try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v){ try { localStorage.setItem(k, v); } catch (e) {} }
 };
 
 /* ---------- SESSION: which Friday is "this week", worked out from the visitor's clock ---------- */
@@ -858,7 +865,18 @@ function computeSession(nowMs){
   return { startMs, endMs: startMs + DUR, dateKey };
 }
 let session = computeSession(Date.now());
-const dateLabel = ms => new Intl.DateTimeFormat('en-US', { timeZone: 'Africa/Lagos', weekday: 'long', month: 'long', day: 'numeric' }).format(new Date(ms));
+// Some older phone browsers lack time-zone support in Intl and would throw here and take the whole
+// page's script down with them, so fall back to working the label out by hand (WAT is a fixed UTC+1).
+const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const dateLabel = ms => {
+  try {
+    return new Intl.DateTimeFormat('en-US', { timeZone: 'Africa/Lagos', weekday: 'long', month: 'long', day: 'numeric' }).format(new Date(ms));
+  } catch (e) {
+    const d = new Date(ms + CONFIG.SESSION_UTC_OFFSET_MIN * 60000);
+    return DAY_NAMES[d.getUTCDay()] + ', ' + MONTH_NAMES[d.getUTCMonth()] + ' ' + d.getUTCDate();
+  }
+};
 
 function paintSessionDate(){
   const label = dateLabel(session.startMs);
@@ -937,7 +955,7 @@ function refreshLocalTimeHint(){
     const t = new Intl.DateTimeFormat(undefined, { weekday: 'long', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }).format(new Date(session.startMs));
     el.textContent = 'In your time: ' + t;
     el.hidden = false;
-  } catch { el.hidden = true; }
+  } catch (e) { el.hidden = true; }
 }
 refreshLocalTimeHint();
 
@@ -1059,12 +1077,19 @@ function normalizePhone(raw){
   return null;
 }
 
+// Letters from any alphabet. The \p{L} form is written as a string so that a browser too old to understand it
+// falls back to a simpler check instead of failing to read the entire script (a regex literal would do that).
+const NAME_RE = (() => {
+  try { return new RegExp("^[\\p{L}\\p{M}][\\p{L}\\p{M}' .\\-]*$", 'u'); }
+  catch (e) { return /^[^0-9@#$%^&*()_+=\[\]{}<>\\\/|~`]+$/; }
+})();
+
 const validators = {
   first_name(v){
     v = v.trim();
     if (!v) return 'Enter your first name.';
     if (v.length < 2) return 'Your first name needs at least 2 letters.';
-    if (!/^[\p{L}\p{M}][\p{L}\p{M}' .\-]*$/u.test(v)) return 'Use letters only for your name.';
+    if (!NAME_RE.test(v)) return 'Use letters only for your name.';
     return '';
   },
   email(v){
@@ -1126,8 +1151,9 @@ async function saveRegistration(payload){
     }
     return { ok: false, reason: 'not_configured' };
   }
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 15000);
+  // AbortController is missing on older browsers; without it the request simply has no time limit.
+  const ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+  const timer = ctrl ? setTimeout(() => ctrl.abort(), 15000) : null;
   try {
     const res = await fetch(CONFIG.SUPABASE_URL.replace(/\/$/, '') + '/rest/v1/' + CONFIG.SUPABASE_TABLE, {
       method: 'POST',
@@ -1137,11 +1163,11 @@ async function saveRegistration(payload){
         'Prefer': 'return=minimal'
       }, CONFIG.SUPABASE_ANON_KEY.startsWith('eyJ') ? { 'Authorization': 'Bearer ' + CONFIG.SUPABASE_ANON_KEY } : {}),
       body: JSON.stringify(payload),
-      signal: ctrl.signal
+      signal: ctrl ? ctrl.signal : undefined
     });
     if (res.ok) return { ok: true };
     if (res.status === 409) return { ok: true, duplicate: true };     // same email already registered for this event
-    let body = null; try { body = await res.json(); } catch {}
+    let body = null; try { body = await res.json(); } catch (e) {}
     if (body && body.code === '23505') return { ok: true, duplicate: true };
     console.error('[registration] Supabase error', res.status, body);
     return { ok: false, reason: 'server' };
@@ -1149,7 +1175,7 @@ async function saveRegistration(payload){
     console.error('[registration] network error', err);
     return { ok: false, reason: 'network' };
   } finally {
-    clearTimeout(timer);
+    if (timer) clearTimeout(timer);
   }
 }
 
@@ -1227,7 +1253,10 @@ form.addEventListener('submit', async e => {
 
   setLoading(true);
   store.set('fp_live_last_submit', String(Date.now()));
-  const result = await saveRegistration(payload);
+  // Whatever happens inside, the button must never be left stuck on "Saving your spot".
+  let result;
+  try { result = await saveRegistration(payload); }
+  catch (err) { console.error('[registration] unexpected error', err); result = { ok: false, reason: 'network' }; }
   setLoading(false);
 
   if (result.ok) {
@@ -1244,11 +1273,12 @@ form.addEventListener('submit', async e => {
         label: dateLabel(session.startMs),
         meetUrl: watchUrlForSession() || ''
       }));
-    } catch {}
+    } catch (e) {}
     // Leaving the page cancels any retries still waiting on a timer, so give the Emailer a moment to
     // confirm it has the registration. If it is slow (waking up), move on anyway: the request already
     // sent keeps going, and the Emailer picks the registration up from Supabase within minutes.
-    await Promise.race([handoff, new Promise(r => setTimeout(r, CONFIG.EMAILER_WAIT_MS))]);
+    try { await Promise.race([handoff, new Promise(r => setTimeout(r, CONFIG.EMAILER_WAIT_MS))]); }
+    catch (err) { /* the registration is already saved; going on to /blueprint regardless */ }
     window.location.assign('/blueprint/');
     return;
   }
