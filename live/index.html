@@ -1073,6 +1073,7 @@ const formError = $('#form-error');
 const successBox = $('#reg-success');
 const fields = ['first_name', 'email', 'whatsapp', 'artist_name'];
 let submitting = false;
+let registered = false;   // set once a registration has saved; used if the visitor returns to this page with the Back button
 
 /* Normalise a phone number to +<digits>. Returns null if it can't be a real number. */
 function normalizePhone(raw){
@@ -1237,6 +1238,9 @@ function showSuccess(){
   regSection.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
 }
 
+// Coming back to this page (Back button) after registering: show the confirmation instead of a stuck button.
+window.addEventListener('pageshow', e => { if (e.persisted && registered) showSuccess(); });
+
 form.addEventListener('submit', async e => {
   e.preventDefault();
   if (submitting) return;
@@ -1266,13 +1270,19 @@ form.addEventListener('submit', async e => {
   let result;
   try { result = await saveRegistration(payload); }
   catch (err) { console.error('[registration] unexpected error', err); result = { ok: false, reason: 'network' }; }
-  setLoading(false);
+  // On success the button stays on "Saving your spot" until the Blueprint loads, so nothing on screen changes
+  // or swaps in the meantime. On failure it goes back to normal so they can try again.
+  if (!result.ok) setLoading(false);
 
   if (result.ok) {
     const handoff = sendToEmailer(payload);   // started first so it is already on the wire; never awaited for longer than EMAILER_WAIT_MS
     // Meta Pixel: count the registration (name/email/phone are NOT sent to Meta). Never allowed to break the sign-up.
     try { if (window.fbq) window.fbq('track', 'Lead', { content_name: CONFIG.EVENT_NAME }); } catch (e) {}
-    showSuccess();   // stays as the fallback if the redirect below is blocked or the visitor comes back
+    // No visible change while the redirect is on its way. The "You're in" message is only a fallback: it appears
+    // if the redirect has not happened a few seconds later (blocked, or a very slow connection), or if the visitor
+    // comes back to this page with the Back button.
+    registered = true;
+    setTimeout(showSuccess, CONFIG.EMAILER_WAIT_MS + 2500);
     // Upsell: send the new registrant straight to the Blueprint page. Their confirmation
     // (which Friday, add-to-calendar, Meet link if any) travels with them in sessionStorage.
     try {
