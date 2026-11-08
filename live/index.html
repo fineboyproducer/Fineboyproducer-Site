@@ -514,6 +514,14 @@ html{scroll-padding-top:84px}
   .js .rule{transform:none}
 }
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XMVM0S0ZKM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XMVM0S0ZKM');
+</script>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -1278,6 +1286,7 @@ form.addEventListener('submit', async e => {
     const handoff = sendToEmailer(payload);   // started first so it is already on the wire; never awaited for longer than EMAILER_WAIT_MS
     // Meta Pixel: count the registration (name/email/phone are NOT sent to Meta). Never allowed to break the sign-up.
     try { if (window.fbq) window.fbq('track', 'Lead', { content_name: CONFIG.EVENT_NAME }); } catch (e) {}
+    try { if (window.gtag) window.gtag('event', 'generate_lead', { lead_source: CONFIG.EVENT_NAME }); } catch (e) {}
     // No visible change while the redirect is on its way. The "You're in" message is only a fallback: it appears
     // if the redirect has not happened a few seconds later (blocked, or a very slow connection), or if the visitor
     // comes back to this page with the Back button.

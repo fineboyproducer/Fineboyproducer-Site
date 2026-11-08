@@ -50,6 +50,14 @@
 .dock-price small{display:block;margin-top:.3rem;font-family:var(--sans);font-size:.68rem;font-weight:500;letter-spacing:.06em;color:var(--mute)}
 .dock .btn{width:auto;flex:none;min-height:50px;padding:0 1.3rem;font-size:.8rem}
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XMVM0S0ZKM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XMVM0S0ZKM');
+</script>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -246,11 +254,12 @@ fbq('track', 'PageView');
 })();
 </script>
 <script>
-/* Meta Pixel events for this page. Wrapped so a blocked or slow Pixel can never affect the page or a payment link. */
+/* Meta Pixel and Google Analytics events for this page. Wrapped so a blocked or slow Pixel can never affect the page or a payment link. */
 (function () {
   var P = { name: 'No Gimmicks Release Today Checklist', id: 'release-checklist', value: 5500 };   /* value in NGN */
   function track(ev) {
     try { if (window.fbq) window.fbq('track', ev, { content_name: P.name, content_ids: [P.id], content_type: 'product', value: P.value, currency: 'NGN' }); } catch (e) {}
+    try { if (window.gtag) window.gtag('event', ev === 'ViewContent' ? 'view_item' : 'begin_checkout', { currency: 'NGN', value: P.value, items: [{ item_id: P.id, item_name: P.name, price: P.value, quantity: 1 }], transport_type: 'beacon' }); } catch (e) {}
   }
   track('ViewContent');
   Array.prototype.forEach.call(document.querySelectorAll('[data-pay], a[href^="https://paystack.shop/"]'), function (a) {
