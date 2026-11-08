@@ -29,6 +29,14 @@
 .help .btn{margin-top:1.75rem}
 @media(max-width:520px){.help .btn{width:100%}}
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XMVM0S0ZKM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XMVM0S0ZKM');
+</script>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -109,9 +117,9 @@ fbq('track', 'PageView');
 })();
 </script>
 <script>
-/* Meta Pixel: count the purchase. Paystack sends buyers here after paying, normally adding ?reference=... to the address.
-   With a reference: one Purchase per reference (refresh/return visits don't count again) and the reference is Meta's event ID.
-   Without one: at most one Purchase per browser. Nothing personal is sent; a blocked Pixel can never affect the page. */
+/* Count the purchase in Meta and Google Analytics. Paystack sends buyers here after paying, normally adding ?reference=... to the address.
+   With a reference: one purchase per reference (refresh/return visits don't count again) and the reference is the order ID.
+   Without one: at most one purchase per browser. Nothing personal is sent; a blocked Pixel or tag can never affect the page. */
 (function () {
   var P = { name: '100K Streams Artist Blueprint', id: 'blueprint', value: 35000 };
   try {
@@ -119,10 +127,16 @@ fbq('track', 'PageView');
     var ref = m ? m[1] : '';
     var key = 'fp_purchase_blueprint_' + (ref || 'noref');
     try { if (window.localStorage.getItem(key)) return; } catch (e) {}
-    if (!window.fbq) return;
-    var params = { content_name: P.name, content_ids: [P.id], content_type: 'product', value: P.value, currency: 'NGN' };
-    if (ref) window.fbq('track', 'Purchase', params, { eventID: ref });
-    else window.fbq('track', 'Purchase', params);
+    try {
+      if (window.gtag) window.gtag('event', 'purchase', { transaction_id: ref || ('blueprint-' + Date.now()), value: P.value, currency: 'NGN', items: [{ item_id: P.id, item_name: P.name, price: P.value, quantity: 1 }] });
+    } catch (e) {}
+    try {
+      if (window.fbq) {
+        var params = { content_name: P.name, content_ids: [P.id], content_type: 'product', value: P.value, currency: 'NGN' };
+        if (ref) window.fbq('track', 'Purchase', params, { eventID: ref });
+        else window.fbq('track', 'Purchase', params);
+      }
+    } catch (e) {}
     try { window.localStorage.setItem(key, '1'); } catch (e) {}
   } catch (e) {}
 })();
