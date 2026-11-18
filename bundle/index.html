@@ -107,6 +107,19 @@ html.is-closed .top .timer-pill, html.is-closed main, html.is-closed footer, htm
 .video .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--mute);
   background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(236,232,223,.025) 14px 15px)}
 .video .ph b{display:block;font-family:var(--display);font-stretch:80%;text-transform:uppercase;letter-spacing:.12em;color:var(--bone);margin-bottom:6px}
+
+/* clean video player: no Vimeo title, byline or controls */
+.vbtn{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent;cursor:pointer;display:grid;place-items:center;padding:0;z-index:2;-webkit-tap-highlight-color:transparent}
+.vbtn:focus-visible{outline:2px solid var(--gold);outline-offset:-4px}
+.vbtn .vicon{width:clamp(68px,12vw,104px);aspect-ratio:1;border-radius:50%;background:var(--gold);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(179,154,92,.22),0 18px 50px rgba(0,0,0,.55);transition:transform .25s ease,opacity .25s ease}
+.vbtn:hover .vicon{transform:scale(1.07)}
+.vbtn .vicon svg{width:38%;height:38%;margin-left:6%;fill:#000}
+.video.playing .vbtn .vicon{opacity:0;transform:scale(.85)}
+.video.playing .vbtn{cursor:pointer}
+.vbar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(236,232,223,.14);z-index:3;pointer-events:none}
+.vbar i{display:block;height:100%;width:0;background:var(--gold)}
+@media(prefers-reduced-motion:reduce){.vbtn .vicon{transition:none}}
+
 .hero-cta{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
 .hero-cta small{color:var(--mute);font-size:.85rem;max-width:30ch;line-height:1.4}
 
@@ -673,8 +686,38 @@ var VIMEO_ID  = "1248104380";   // Vimeo video id for the SLO video. Empty = pla
 /* ---------- video ---------- */
 (function(){
   if(!VIMEO_ID) return;
-  var v=document.getElementById('video');
-  v.innerHTML='<iframe src="https://player.vimeo.com/video/'+VIMEO_ID+'?autopause=0&app_id=58479" title="The Artist Growth Bundle" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+  var box=document.getElementById('video');
+  var base='https://player.vimeo.com/video/'+VIMEO_ID+'?autopause=0&app_id=58479&title=0&byline=0&portrait=0&badge=0&dnt=1&playsinline=1';
+
+  function iframe(controls){
+    box.innerHTML='<iframe src="'+base+(controls?'':'&controls=0')+'" title="The Artist Growth Bundle" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+    return box.firstChild;
+  }
+
+  // Fallback: if Vimeo's player script can't load, show the plain player (still no title or byline).
+  function plain(){ iframe(true); }
+
+  var el=iframe(false), s=document.createElement('script');
+  s.src='https://player.vimeo.com/api/player.js';
+  s.onerror=plain;
+  s.onload=function(){
+    try{
+      var player=new Vimeo.Player(el), playing=false;
+      var btn=document.createElement('button'), bar=document.createElement('div');
+      btn.className='vbtn'; btn.type='button'; btn.setAttribute('aria-label','Play video');
+      btn.innerHTML='<span class="vicon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span>';
+      bar.className='vbar'; bar.innerHTML='<i></i>';
+      box.appendChild(btn); box.appendChild(bar);
+      var fill=bar.firstChild;
+      function state(on){ playing=on; box.classList.toggle('playing',on); btn.setAttribute('aria-label',on?'Pause video':'Play video'); }
+      btn.addEventListener('click',function(){ (playing?player.pause():player.play()).catch(function(){}); });
+      player.on('play',function(){state(true)});
+      player.on('pause',function(){state(false)});
+      player.on('ended',function(){state(false);fill.style.width='100%'});
+      player.on('timeupdate',function(d){ fill.style.width=(d.percent*100)+'%'; });
+    }catch(err){ plain(); }
+  };
+  document.head.appendChild(s);
 })();
 
 /* ---------- countdown ---------- */
