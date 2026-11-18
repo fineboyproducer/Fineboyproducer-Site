@@ -49,6 +49,19 @@ img{max-width:100%;display:block}
 p+p{margin-top:1.15em}
 strong{font-weight:600;color:#fff}
 
+
+/* offer closed */
+#closed{display:none;min-height:100vh;min-height:100dvh;flex-direction:column}
+html.is-closed #closed{display:flex}
+html.is-closed .top .timer-pill, html.is-closed main, html.is-closed footer, html.is-closed .bar{display:none !important}
+#closed .c-main{flex:1;display:flex;align-items:center;padding:clamp(48px,9vw,120px) 0}
+#closed h1{font-size:clamp(3.4rem,13vw,9.5rem);margin:20px 0 clamp(24px,3vw,40px)}
+#closed h1 span{color:var(--gold)}
+#closed p.t{max-width:34em;color:#d8d4ca}
+#closed .c-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(28px,4vw,44px)}
+#closed .btn.ghost{background:transparent;color:var(--bone);border:1px solid rgba(236,232,223,.4)}
+#closed .btn.ghost:hover{background:var(--bone);color:#000}
+
 /* header */
 .top{
   position:sticky;top:0;z-index:40;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);
@@ -233,6 +246,33 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
 }
 @media(min-width:900px){.bar{display:none}footer{padding-bottom:40px}}
 </style>
+<script>
+/* Owner bypass. Visit any page on this site once with ?owner=fineboy-preview to see the live offer on that device. ?owner=off turns it off. */
+(function(){try{
+  var q=new URLSearchParams(location.search).get('owner');
+  if(q==='fineboy-preview') localStorage.setItem('fp_owner','1');
+  else if(q==='off') localStorage.removeItem('fp_owner');
+  if(localStorage.getItem('fp_owner')==='1') document.documentElement.classList.add('fp-owner');
+}catch(e){}})();
+
+/* Offer timer. Config lives here so the page can close before it paints. */
+var OFFER_END   = "";   // Optional fixed close time, e.g. "2026-11-18T18:00:00+01:00". Empty = OFFER_HOURS per visitor from first visit.
+var OFFER_HOURS = 3;
+(function(){
+  var owner=document.documentElement.classList.contains('fp-owner'), E;
+  if(owner){ E=Date.now()+OFFER_HOURS*3600000; }          // owner device: timer restarts on every visit, never closes
+  else if(OFFER_END && !isNaN(new Date(OFFER_END).getTime())){ E=new Date(OFFER_END).getTime(); }
+  else{
+    try{
+      var s=localStorage.getItem('agb_offer_start');
+      if(!s){ s=String(Date.now()); localStorage.setItem('agb_offer_start',s); }
+      E=parseInt(s,10)+OFFER_HOURS*3600000;
+    }catch(e){ E=Date.now()+OFFER_HOURS*3600000; }
+  }
+  window.__offerEnd=E;
+  if(Date.now()>=E) document.documentElement.classList.add('is-closed');
+})();
+</script>
 </head>
 <body>
 
@@ -242,6 +282,23 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
     <div class="timer-pill" aria-live="off"><i></i><span>Offer ends in <b class="mono" data-countdown>03:00:00</b></span></div>
   </div>
 </header>
+
+<section id="closed" aria-labelledby="closed-title">
+  <div class="c-main">
+    <div class="wrap">
+      <p class="kicker">Offer closed</p>
+      <h1 class="display" id="closed-title">The offer <span>is gone.</span></h1>
+      <p class="t">The Artist Growth Bundle is no longer available at this price. The window has closed.</p>
+      <p class="t" style="margin-top:1.1em">If you missed it, you don't have to keep guessing with your promo. Come to my free live masterclass and learn how to stop wasting money promoting your songs.</p>
+      <div class="c-actions">
+        <a class="btn" href="/live/">Join the free live masterclass
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn ghost" href="mailto:fineboyproducer@gmail.com">Email me</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <main id="top">
 
@@ -612,8 +669,6 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
 <script>
 /* ---------- CONFIG ---------- */
 var VIMEO_ID  = "1248104380";   // Vimeo video id for the SLO video. Empty = placeholder is shown.
-var OFFER_END = "";   // Optional fixed close time, e.g. "2026-11-18T18:00:00+01:00". Empty = 3 hours per visitor from first visit.
-var OFFER_HOURS = 3;
 
 /* ---------- video ---------- */
 (function(){
@@ -624,16 +679,7 @@ var OFFER_HOURS = 3;
 
 /* ---------- countdown ---------- */
 (function(){
-  function end(){
-    if(OFFER_END){var t=new Date(OFFER_END).getTime(); if(!isNaN(t)) return t;}
-    try{
-      var s=localStorage.getItem('agb_offer_start');
-      if(!s){s=String(Date.now());localStorage.setItem('agb_offer_start',s);}
-      return parseInt(s,10)+OFFER_HOURS*3600000;
-    }catch(e){return Date.now()+OFFER_HOURS*3600000;}
-  }
-  var E=end(), ctas=[].slice.call(document.querySelectorAll('[data-cta]'));
-  ctas.forEach(function(a){a.setAttribute('data-href',a.getAttribute('href'));a.setAttribute('data-label',a.innerHTML);});
+  var E=window.__offerEnd, root=document.documentElement;
   function p(n){return n<10?'0'+n:''+n}
   function tick(){
     var d=Math.max(0,E-Date.now()), h=Math.floor(d/3600000), m=Math.floor(d%3600000/60000), s=Math.floor(d%60000/1000);
@@ -642,7 +688,9 @@ var OFFER_HOURS = 3;
     var H=document.querySelector('[data-h]'),M=document.querySelector('[data-m]'),S=document.querySelector('[data-s]');
     if(H){H.textContent=p(h);M.textContent=p(m);S.textContent=p(s);}
     if(d===0){
-      ctas.forEach(function(a){a.removeAttribute('href');a.setAttribute('aria-disabled','true');a.textContent='This offer window has closed';});
+      root.classList.add('is-closed');
+      [].forEach.call(document.querySelectorAll('[data-cta]'),function(a){a.removeAttribute('href');a.setAttribute('aria-disabled','true');});
+      window.scrollTo(0,0);
       clearInterval(timer);
     }
   }
