@@ -80,7 +80,7 @@ strong{font-weight:600;color:#fff}
 .btn.block{width:100%}
 
 /* hero */
-.hero{padding:clamp(56px,9vw,120px) 0 clamp(48px,7vw,96px);position:relative}
+.hero{padding:clamp(56px,9vw,120px) 0 clamp(48px,7vw,96px);position:relative;overflow:hidden}
 .hero::after{content:"";position:absolute;left:50%;top:0;width:900px;height:600px;transform:translateX(-50%);
   background:radial-gradient(closest-side,rgba(179,154,92,.14),transparent);pointer-events:none}
 .hero h1{font-size:clamp(3rem,11.5vw,8.6rem);margin:22px 0 28px}
@@ -179,6 +179,11 @@ section{position:relative}
   .item:nth-child(even) .shot{order:2}
 }
 
+
+/* product covers are portrait */
+.item .shot{aspect-ratio:3/4;max-width:420px;width:100%;margin:0 auto;box-shadow:0 30px 80px -30px rgba(179,154,92,.35)}
+.item .shot img{object-fit:cover}
+
 /* offer */
 .offer{background:var(--panel);border:1px solid var(--gold-deep);padding:clamp(28px,5vw,64px);margin-top:clamp(36px,5vw,64px);text-align:center}
 .offer .was{font-family:var(--display);font-stretch:75%;font-weight:700;font-size:clamp(1.6rem,4vw,2.4rem);color:var(--mute);text-decoration:line-through;text-decoration-color:var(--gold)}
@@ -248,7 +253,7 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
     <p class="sub">Hundreds of thousands. Maybe even millions. <b>Spent on promo</b> with no significant result from your promotional effort.</p>
 
     <div class="video" id="video">
-      <div class="ph"><div><b>Your video goes here</b>Set VIDEO_ID in the script at the bottom of this file</div></div>
+      <div class="ph"><div><b>Your video goes here</b>Set VIMEO_ID in the script at the bottom of this file</div></div>
     </div>
 
     <div class="hero-cta">
@@ -476,7 +481,7 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
           <p>Documenting everything I learned, including the strategies over the years that have generated ₦32m+ for me, and the exponential growth for the artists who applied it to their careers.</p>
           <p class="win">What could this do for you? ₦32m+ from your music revenue? Hundreds and hundreds of thousands of streams in the coming months?</p>
         </div>
-        <figure class="shot" data-label="Screenshot: The Secret Playbook"><img src="assets/playbook.jpg" alt="The Secret Playbook preview" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
+        <figure class="shot" data-label="Screenshot: The Secret Playbook"><img src="assets/playbook.jpg" alt="The Secret Playbook cover" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
       </article>
 
       <article class="item rv">
@@ -487,7 +492,7 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
           <p>It shows you exactly where, and where not, to promote your music to get the best result.</p>
           <p class="win">Never second guess where to promote, or how, again. Start moving with precision to get your desired outcome.</p>
         </div>
-        <figure class="shot" data-label="Screenshot: The No BS Promo Guide"><img src="assets/promo-guide.jpg" alt="The No BS Promo Guide preview" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
+        <figure class="shot" data-label="Screenshot: The No BS Promo Guide"><img src="assets/promo-guide.jpg" alt="No BS Promo Guide cover" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
       </article>
 
       <article class="item rv">
@@ -498,7 +503,7 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
           <p>Your day-by-day roadmap for the 30 days after release.</p>
           <p class="win">You no longer release and disappear after a few weeks. You now know what to do for 30 days after your release, to get the maximum discovery for your work.</p>
         </div>
-        <figure class="shot" data-label="Screenshot: 30 Days Release Plan"><img src="assets/release-plan.jpg" alt="30 Days Release Plan preview" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
+        <figure class="shot" data-label="Screenshot: 30 Days Release Plan"><img src="assets/release-plan.jpg" alt="Do It Or Break It: The 30 Days Release Plan cover" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
       </article>
 
       <article class="item rv">
@@ -508,7 +513,7 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
           <h3>Artist Community Access</h3>
           <p>Join a community of independent artists applying and growing their careers alongside others, on Telegram.</p>
         </div>
-        <figure class="shot" data-label="Screenshot: Artist Community"><img src="assets/community.jpg" alt="Artist community preview" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
+        <figure class="shot" data-label="Screenshot: Artist Community"><img src="assets/community.jpg" alt="Artist Community Access cover" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
       </article>
 
       <article class="item rv">
@@ -518,7 +523,7 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
           <h3>The 100K Streams Artist Blueprint</h3>
           <p>A reliable scorecard and checklist to track your growth and review, and connections to the right promoters that can help you play the entire system.</p>
         </div>
-        <figure class="shot" data-label="Screenshot: 100K Streams Artist Blueprint"><img src="assets/blueprint.jpg" alt="100K Streams Artist Blueprint preview" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
+        <figure class="shot" data-label="Screenshot: 100K Streams Artist Blueprint"><img src="assets/blueprint.jpg" alt="100K Streams Artist Blueprint cover" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
       </article>
     </div>
   </div>
@@ -606,15 +611,15 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
 
 <script>
 /* ---------- CONFIG ---------- */
-var VIDEO_ID  = "";   // YouTube video id for the SLO video. Empty = placeholder is shown.
+var VIMEO_ID  = "1248104380";   // Vimeo video id for the SLO video. Empty = placeholder is shown.
 var OFFER_END = "";   // Optional fixed close time, e.g. "2026-11-18T18:00:00+01:00". Empty = 3 hours per visitor from first visit.
 var OFFER_HOURS = 3;
 
 /* ---------- video ---------- */
 (function(){
-  if(!VIDEO_ID) return;
+  if(!VIMEO_ID) return;
   var v=document.getElementById('video');
-  v.innerHTML='<iframe src="https://www.youtube.com/embed/'+VIDEO_ID+'?rel=0&modestbranding=1" title="The Artist Growth Bundle" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+  v.innerHTML='<iframe src="https://player.vimeo.com/video/'+VIMEO_ID+'?autopause=0&app_id=58479" title="The Artist Growth Bundle" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
 })();
 
 /* ---------- countdown ---------- */
