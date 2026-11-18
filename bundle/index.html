@@ -119,6 +119,26 @@ html.is-closed .top .timer-pill, html.is-closed main, html.is-closed footer, htm
 .vbar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(236,232,223,.14);z-index:3;pointer-events:none}
 .vbar i{display:block;height:100%;width:0;background:var(--gold)}
 @media(prefers-reduced-motion:reduce){.vbtn .vicon{transition:none}}
+/* control bar: mute, time, fullscreen */
+.vctl{position:absolute;left:0;right:0;bottom:3px;z-index:4;display:none;align-items:center;justify-content:space-between;gap:12px;padding:28px 10px 6px 16px;
+  background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,0));transition:opacity .3s ease}
+.video.ready .vctl{display:flex}
+.video.playing.idle .vctl{opacity:0;pointer-events:none}
+.video.playing.idle{cursor:none}
+.vctl .vtime{font-family:var(--body);font-size:.8rem;letter-spacing:.06em;color:var(--bone);font-variant-numeric:tabular-nums;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.vctl .vgrp{display:flex;align-items:center;gap:2px}
+.vctl button{width:44px;height:44px;border:0;background:transparent;color:var(--bone);cursor:pointer;display:grid;place-items:center;padding:0;-webkit-tap-highlight-color:transparent;transition:color .2s}
+.vctl button:hover{color:var(--gold)}
+.vctl button:focus-visible{outline:2px solid var(--gold);outline-offset:-4px}
+.vctl svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vctl .on-alt{display:none}
+.vctl button.alt .on-alt{display:block}
+.vctl button.alt .on-main{display:none}
+/* fullscreen: fill the screen, player letterboxes itself */
+.video:fullscreen{aspect-ratio:auto;width:100vw;height:100vh;border:0;background:#000}
+.video:-webkit-full-screen{aspect-ratio:auto;width:100vw;height:100vh;border:0;background:#000}
+@media(prefers-reduced-motion:reduce){.vctl{transition:none}}
+
 
 .hero-cta{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
 .hero-cta small{color:var(--mute);font-size:.85rem;max-width:30ch;line-height:1.4}
@@ -693,31 +713,90 @@ var VIMEO_ID  = "1248104380";   // Vimeo video id for the SLO video. Empty = pla
     box.innerHTML='<iframe src="'+base+(controls?'':'&controls=0')+'" title="The Artist Growth Bundle" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
     return box.firstChild;
   }
-
   // Fallback: if Vimeo's player script can't load, show the plain player (still no title or byline).
   function plain(){ iframe(true); }
 
-  var el=iframe(false), s=document.createElement('script');
-  s.src='https://player.vimeo.com/api/player.js';
-  s.onerror=plain;
-  s.onload=function(){
+  function fmt(t){ t=Math.max(0,Math.floor(t||0)); var m=Math.floor(t/60),s=t%60; return m+':'+(s<10?'0':'')+s; }
+  var ICON={
+    vol:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
+    mute:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6M21 9l-5 6"/></svg>',
+    full:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
+    exit:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>'
+  };
+
+  var el=iframe(false), sc=document.createElement('script');
+  sc.src='https://player.vimeo.com/api/player.js';
+  sc.onerror=plain;
+  sc.onload=function(){
     try{
-      var player=new Vimeo.Player(el), playing=false;
-      var btn=document.createElement('button'), bar=document.createElement('div');
+      var player=new Vimeo.Player(el), playing=false, muted=false, dur=0, idleT;
+
+      // big play / pause surface
+      var btn=document.createElement('button');
       btn.className='vbtn'; btn.type='button'; btn.setAttribute('aria-label','Play video');
       btn.innerHTML='<span class="vicon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span>';
-      bar.className='vbar'; bar.innerHTML='<i></i>';
-      box.appendChild(btn); box.appendChild(bar);
+
+      // progress line (display only, no scrubbing)
+      var bar=document.createElement('div'); bar.className='vbar'; bar.innerHTML='<i></i>';
       var fill=bar.firstChild;
-      function state(on){ playing=on; box.classList.toggle('playing',on); btn.setAttribute('aria-label',on?'Pause video':'Play video'); }
+
+      // control bar
+      var ctl=document.createElement('div'); ctl.className='vctl';
+      ctl.innerHTML='<span class="vtime" aria-live="off">0:00 / 0:00</span><span class="vgrp">'
+        +'<button type="button" data-mute aria-label="Mute"><span class="on-main">'+ICON.vol+'</span><span class="on-alt">'+ICON.mute+'</span></button>'
+        +'<button type="button" data-full aria-label="Full screen"><span class="on-main">'+ICON.full+'</span><span class="on-alt">'+ICON.exit+'</span></button>'
+        +'</span>';
+      var tm=ctl.querySelector('.vtime'), bMute=ctl.querySelector('[data-mute]'), bFull=ctl.querySelector('[data-full]');
+
+      box.appendChild(btn); box.appendChild(bar); box.appendChild(ctl);
+      box.classList.add('ready');
+
+      function time(cur){ tm.textContent=fmt(cur)+' / '+fmt(dur); }
+      function wake(){
+        box.classList.remove('idle'); clearTimeout(idleT);
+        if(playing) idleT=setTimeout(function(){ box.classList.add('idle'); },2500);
+      }
+      function state(on){
+        playing=on; box.classList.toggle('playing',on);
+        btn.setAttribute('aria-label',on?'Pause video':'Play video'); wake();
+      }
+      function setMuted(m){
+        muted=m; bMute.classList.toggle('alt',m); bMute.setAttribute('aria-label',m?'Unmute':'Mute');
+      }
+      function isFull(){ return document.fullscreenElement===box || document.webkitFullscreenElement===box; }
+      function fullState(){
+        var f=isFull(); bFull.classList.toggle('alt',f); bFull.setAttribute('aria-label',f?'Exit full screen':'Full screen');
+      }
+      function toggleFull(){
+        try{
+          if(isFull()){ (document.exitFullscreen||document.webkitExitFullscreen).call(document); return; }
+          var rq=box.requestFullscreen||box.webkitRequestFullscreen;
+          if(rq){ var r=rq.call(box); if(r&&r.catch) r.catch(function(){ player.requestFullscreen().catch(function(){}); }); }
+          else player.requestFullscreen().catch(function(){});   // e.g. iPhone: the player goes full screen itself
+        }catch(e){ try{ player.requestFullscreen(); }catch(_){} }
+      }
+      function toggleMute(){ var next=!muted; setMuted(next); player.setMuted(next).catch(function(){ setMuted(!next); }); }
+
       btn.addEventListener('click',function(){ (playing?player.pause():player.play()).catch(function(){}); });
+      bMute.addEventListener('click',toggleMute);
+      bFull.addEventListener('click',toggleFull);
+      ['pointermove','pointerdown','touchstart','focusin'].forEach(function(ev){ box.addEventListener(ev,wake,{passive:true}); });
+      box.addEventListener('keydown',function(e){
+        if(e.key==='f'||e.key==='F') toggleFull();
+        else if(e.key==='m'||e.key==='M') toggleMute();
+      });
+      document.addEventListener('fullscreenchange',fullState);
+      document.addEventListener('webkitfullscreenchange',fullState);
+
       player.on('play',function(){state(true)});
       player.on('pause',function(){state(false)});
       player.on('ended',function(){state(false);fill.style.width='100%'});
-      player.on('timeupdate',function(d){ fill.style.width=(d.percent*100)+'%'; });
+      player.on('timeupdate',function(d){ dur=d.duration||dur; fill.style.width=(d.percent*100)+'%'; time(d.seconds); });
+      player.getDuration().then(function(d){ dur=d; time(0); }).catch(function(){});
+      player.getMuted().then(setMuted).catch(function(){});
     }catch(err){ plain(); }
   };
-  document.head.appendChild(s);
+  document.head.appendChild(sc);
 })();
 
 /* ---------- countdown ---------- */
