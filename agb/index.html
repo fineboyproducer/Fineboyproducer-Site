@@ -92,6 +92,7 @@
 .apply-grid .sub{color:var(--mute);max-width:34ch;font-size:clamp(1.1rem,2.4vw,1.3rem);line-height:1.4;margin:0 0 2rem}
 .note{color:var(--mute);font-size:.95rem;margin:1.25rem 0 0}
 @media(min-width:900px){.apply-grid{grid-template-columns:1.1fr .9fr;align-items:end}.apply-grid .full{grid-column:1/-1}}
+[hidden]{display:none!important}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XMVM0S0ZKM"></script>
@@ -219,6 +220,19 @@ fbq('track', 'PageView');
   </div>
 </section>
 
+<section class="section" id="pack" aria-labelledby="pack-h" hidden>
+  <div class="wrap">
+    <div class="head">
+      <h2 class="display h2" id="pack-h">Your bonus: <span class="gold">100 Afrobeat Pack.</span></h2>
+      <p class="sub">100 ready-to-use Afrobeat beats on a basic license. Download them below.</p>
+    </div>
+    <div class="body" style="max-width:34em">
+      <a class="btn" id="pack-dl" href="#" target="_blank" rel="noopener noreferrer" hidden>Download the 100 Afrobeat Pack</a>
+      <p class="note" id="pack-wait">Your pack link is being added. If you don't see the download button here soon, reach out on the <a href="/contact/">contact page</a> and it will be sent to you.</p>
+    </div>
+  </div>
+</section>
+
 <section class="section band" id="apply" aria-labelledby="apply-h">
   <div class="wrap apply-grid">
     <div class="full">
@@ -318,6 +332,9 @@ fbq('track', 'PageView');
    Without one: at most one purchase per browser. Nothing is sent from the owner device. Nothing personal is sent; a blocked Pixel or tag can never affect the page. */
 (function () {
   var P = { name: 'Artist Growth Bundle', id: 'artist-growth-bundle', value: 27750 };   /* NGN, same as /access and /bundle */
+  var PACK = /[?&]pack=1\b/.test(window.location.search);   /* the checkout order bump: Bundle + 100 Afrobeat Pack (+₦25,000) */
+  var items = [{ item_id: P.id, item_name: P.name, price: P.value, quantity: 1 }];
+  if (PACK) { items.push({ item_id: 'afrobeat-pack-100', item_name: '100 Afrobeat Pack (basic license)', price: 25000, quantity: 1 }); P.value += 25000; }
   try {
     try { if (window.localStorage.getItem('fp_owner') === '1') return; } catch (e) {}
     var m = /[?&](?:reference|trxref)=([A-Za-z0-9._-]{1,64})/.exec(window.location.search);
@@ -325,18 +342,30 @@ fbq('track', 'PageView');
     var key = 'fp_purchase_bundle_' + (ref || 'noref');
     try { if (window.localStorage.getItem(key)) return; } catch (e) {}
     try {
-      if (window.gtag) window.gtag('event', 'purchase', { transaction_id: ref || ('bundle-' + Date.now()), value: P.value, currency: 'NGN', items: [{ item_id: P.id, item_name: P.name, price: P.value, quantity: 1 }] });
+      if (window.gtag) window.gtag('event', 'purchase', { transaction_id: ref || ('bundle-' + Date.now()), value: P.value, currency: 'NGN', items: items });
     } catch (e) {}
     try {
       if (window.fbq) {
-        var params = { content_name: P.name, content_ids: [P.id], content_type: 'product', value: P.value, currency: 'NGN' };
+        var params = { content_name: P.name, content_ids: items.map(function (i) { return i.item_id; }), content_type: 'product', value: P.value, currency: 'NGN' };
         if (ref) window.fbq('track', 'Purchase', params, { eventID: ref });
         else window.fbq('track', 'Purchase', params);
       }
     } catch (e) {}
-    try { window.fpTrack && window.fpTrack('purchase', { value: P.value, label: P.id }); } catch (e) {}
+    try { window.fpTrack && window.fpTrack('purchase', { value: P.value, label: PACK ? 'bundle+pack' : P.id }); } catch (e) {}
     try { window.localStorage.setItem(key, '1'); } catch (e) {}
   } catch (e) {}
+})();
+</script>
+<script>
+/* 100 Afrobeat Pack (checkout order bump). Buyers who add it come back from Paystack to /agb/?pack=1; it is remembered on their device. */
+(function () {
+  var PACK_URL = '';   /* <- paste the download link (Drive, Dropbox...) for the 100 Afrobeat Pack here */
+  var has = /[?&]pack=1\b/.test(window.location.search);
+  try { if (has) window.localStorage.setItem('fp_pack_ok', '1'); else has = window.localStorage.getItem('fp_pack_ok') === '1'; } catch (e) {}
+  if (!has) return;
+  var s = document.getElementById('pack'); if (!s) return;
+  s.hidden = false;
+  if (PACK_URL) { var a = document.getElementById('pack-dl'); a.href = PACK_URL; a.hidden = false; document.getElementById('pack-wait').hidden = true; }
 })();
 </script>
 </body>
