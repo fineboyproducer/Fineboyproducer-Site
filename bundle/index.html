@@ -141,6 +141,10 @@ html.is-closed .top .timer-pill, html.is-closed main, html.is-closed footer, htm
 
 
 
+
+.hero-cta{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
+.hero-cta small{color:var(--mute);font-size:.85rem;max-width:30ch;line-height:1.4}
+
 /* sections */
 section{position:relative}
 .sec{padding:clamp(64px,10vw,128px) 0;border-top:1px solid var(--line)}
@@ -370,6 +374,13 @@ var OFFER_HOURS = 3;
 
     <div class="video" id="video">
       <div class="ph"><div><b>Your video goes here</b>Set VIMEO_ID in the script at the bottom of this file</div></div>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn" data-cta href="https://paystack.shop/pay/467yzkwwx4">Get the Bundle — ₦27,750
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <small>Secure checkout. 30-day guarantee.</small>
     </div>
   </div>
 </section>
@@ -880,13 +891,13 @@ var VIMEO_ID  = "1248104380";   // Vimeo video id for the SLO video. Empty = pla
   els.forEach(function(e){io.observe(e)});
 })();
 
-/* ---------- sticky price bar (phones): appears once the five items come into view ---------- */
+/* ---------- sticky price bar (phones): appears after the hero button scrolls away ---------- */
 (function(){
-  var bar=document.getElementById('bar'), items=document.querySelector('.items'), q=false;
+  var bar=document.getElementById('bar'), items=document.querySelector('.hero-cta'), q=false;
   if(!bar||!items) return;
   function check(){
     q=false;
-    var on=items.getBoundingClientRect().top < window.innerHeight*0.85;
+    var on=items.getBoundingClientRect().bottom < 0;
     if(bar.classList.contains('on')!==on){ bar.classList.toggle('on',on); bar.setAttribute('aria-hidden',on?'false':'true'); }
   }
   function queue(){ if(!q){ q=true; requestAnimationFrame(check); } }
