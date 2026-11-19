@@ -9,10 +9,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#000;--panel:#0c0c0b;--line:#1f1e1a;--bone:#ece8df;--mute:#8d887b;--gold:#b39a5c;--good:#6fbf8b;--bad:#d8776b;--warn:#d9b45a;
---disp:'Archivo','Arial Narrow',Arial,sans-serif;--body:'Instrument Sans',system-ui,sans-serif}
+:root{--bg:#f5f2ea;--panel:#ffffff;--line:#e2ddd0;--bone:#17150f;--mute:#6b6657;--gold:#8a7336;--bar:#a98f4a;--on-gold:#ffffff;--track:#ece7da;--good:#2a8350;--bad:#bf4536;--warn:#9a7410;
+--disp:'Archivo','Arial Narrow',Arial,sans-serif;--body:'Instrument Sans',system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--panel:#0c0c0b;--line:#1f1e1a;--bone:#ece8df;--mute:#8d887b;--gold:#b39a5c;--bar:#b39a5c;--on-gold:#000;--track:#14130f;--good:#6fbf8b;--bad:#d8776b;--warn:#d9b45a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#000;--panel:#0c0c0b;--line:#1f1e1a;--bone:#ece8df;--mute:#8d887b;--gold:#b39a5c;--bar:#b39a5c;--on-gold:#000;--track:#14130f;--good:#6fbf8b;--bad:#d8776b;--warn:#d9b45a;color-scheme:dark}
 *{box-sizing:border-box}
-html{color-scheme:dark}
 body{margin:0;background:var(--bg);color:var(--bone);font:15px/1.5 var(--body);padding-block:0 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .wrap{max-width:1100px;margin:0 auto}
 h1,h2,h3{font-family:var(--disp);text-transform:uppercase;letter-spacing:.02em;margin:0}
@@ -21,7 +22,7 @@ h1,h2,h3{font-family:var(--disp);text-transform:uppercase;letter-spacing:.02em;m
 .ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
 .seg button{background:none;border:0;color:var(--mute);font:600 13px var(--body);padding:8px 13px;cursor:pointer}
-.seg button[aria-pressed=true]{background:var(--gold);color:#000}
+.seg button[aria-pressed=true]{background:var(--gold);color:var(--on-gold)}
 .btn{background:none;border:1px solid var(--line);color:var(--bone);font:600 13px var(--body);padding:8px 13px;border-radius:6px;cursor:pointer}
 .btn:hover,.seg button:hover{border-color:var(--gold)}
 button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
@@ -49,8 +50,8 @@ td .pct{color:var(--mute);font-size:12px;margin-left:6px}
 .chip.good{color:var(--good);border-color:var(--good)}.chip.bad{color:var(--bad);border-color:var(--bad)}.chip.warn{color:var(--warn);border-color:var(--warn)}
 .funnel{display:grid;gap:8px}
 .frow{display:grid;grid-template-columns:minmax(120px,190px) 1fr 120px;gap:12px;align-items:center}
-.frow .bar{height:26px;background:#14130f;border-radius:4px;overflow:hidden}
-.frow .bar i{display:block;height:100%;background:var(--gold);min-width:2px}
+.frow .bar{height:26px;background:var(--track);border-radius:4px;overflow:hidden}
+.frow .bar i{display:block;height:100%;background:var(--bar);min-width:2px}
 .frow .n{text-align:right;font-variant-numeric:tabular-nums;font-size:13px}
 .frow .n span{color:var(--mute)}
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:14px}
@@ -62,7 +63,7 @@ select{background:var(--panel);color:var(--bone);border:1px solid var(--line);bo
 #gate{max-width:380px;margin:18vh auto 0;text-align:center}
 #gate h1{font-size:26px;margin-bottom:8px}
 #gate input{width:100%;margin:18px 0 10px;padding:13px 14px;background:var(--panel);border:1px solid var(--line);color:var(--bone);border-radius:6px;font:16px var(--body)}
-#gate .btn{width:100%;background:var(--gold);color:#000;border-color:var(--gold);padding:13px}
+#gate .btn{width:100%;background:var(--gold);color:var(--on-gold);border-color:var(--gold);padding:13px}
 #err{color:var(--bad);min-height:22px;margin-top:10px;font-size:14px}
 .empty{color:var(--mute);padding:6px 0}
 @media (max-width:560px){.grid2{grid-template-columns:1fr}.frow{grid-template-columns:1fr 90px}.frow .bar{grid-column:1/-1;order:3}}
@@ -99,7 +100,7 @@ select{background:var(--panel);color:var(--bone);border:1px solid var(--line);bo
 
   <section><h2>Overview</h2><div class="tiles" id="tiles"></div></section>
   <section><h2>Daily traffic <small>unique visitors per page, added up per day</small></h2>
-    <div class="card"><div class="legend"><span><i style="background:var(--gold)"></i>Visitors</span><span><i style="background:var(--bone)"></i>Checkout clickers</span><span><i style="background:var(--good)"></i>Purchases</span></div><div id="trend"></div></div></section>
+    <div class="card"><div class="legend"><span><i style="background:var(--bar)"></i>Visitors</span><span><i style="background:var(--bone)"></i>Checkout clickers</span><span><i style="background:var(--good)"></i>Purchases</span></div><div id="trend"></div></div></section>
   <section><h2>Bundle funnel <small>unique visitors at each step</small></h2><div class="card"><div class="funnel" id="funnel"></div></div></section>
   <section><h2>Pages <small>conversion = share of that page's visitors who did it</small></h2>
     <div class="card scroll"><table id="pages"></table></div></section>
@@ -185,17 +186,17 @@ function trend(){
   keys.forEach(function(k){max=Math.max(max,m[k].v,m[k].c,m[k].p)});
   var step=Math.pow(10,Math.floor(Math.log10(max))), nice=[1,2,5,10].map(function(x){return x*step}).filter(function(x){return x>=max})[0]||max;
   var ph=H-B-T, bw=(W-L)/n, s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Daily visitors, checkout clickers and purchases">';
-  for(var g=0;g<=4;g++){var y=T+ph-ph*g/4;s+='<line x1="'+L+'" x2="'+W+'" y1="'+y+'" y2="'+y+'" stroke="#1f1e1a"/><text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end">'+Math.round(nice*g/4)+'</text>'}
+  for(var g=0;g<=4;g++){var y=T+ph-ph*g/4;s+='<line x1="'+L+'" x2="'+W+'" y1="'+y+'" y2="'+y+'" style="stroke:var(--line)"/><text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end">'+Math.round(nice*g/4)+'</text>'}
   var every=Math.ceil(n/10);
   keys.forEach(function(k,i){
     var o=m[k],x=L+i*bw,w=Math.max(2,bw*.7),h=function(v){return ph*v/nice};
-    s+='<rect x="'+(x+bw*.15)+'" y="'+(T+ph-h(o.v))+'" width="'+w+'" height="'+h(o.v)+'" fill="#b39a5c"><title>'+k+': '+o.v+' visitors, '+o.c+' checkout clickers, '+o.p+' purchases</title></rect>';
+    s+='<rect x="'+(x+bw*.15)+'" y="'+(T+ph-h(o.v))+'" width="'+w+'" height="'+h(o.v)+'" style="fill:var(--bar)"><title>'+k+': '+o.v+' visitors, '+o.c+' checkout clickers, '+o.p+' purchases</title></rect>';
     if(i%every===0)s+='<text x="'+(x+bw/2)+'" y="'+(H-8)+'" text-anchor="middle">'+k.slice(5)+'</text>';
   });
   function line(f,c){var pts=keys.map(function(k,i){return (L+i*bw+bw/2)+','+(T+ph-ph*m[k][f]/nice)}).join(' ');
-    return '<polyline points="'+pts+'" fill="none" stroke="'+c+'" stroke-width="2.5" stroke-linejoin="round"/>'+
-      keys.map(function(k,i){return m[k][f]?'<circle cx="'+(L+i*bw+bw/2)+'" cy="'+(T+ph-ph*m[k][f]/nice)+'" r="3.5" fill="'+c+'"/>':''}).join('')}
-  s+=line('c','#ece8df')+line('p','#6fbf8b')+'</svg>';
+    return '<polyline points="'+pts+'" fill="none" style="stroke:'+c+'" stroke-width="2.5" stroke-linejoin="round"/>'+
+      keys.map(function(k,i){return m[k][f]?'<circle cx="'+(L+i*bw+bw/2)+'" cy="'+(T+ph-ph*m[k][f]/nice)+'" r="3.5" style="fill:'+c+'"/>':''}).join('')}
+  s+=line('c','var(--bone)')+line('p','var(--good)')+'</svg>';
   $('trend').innerHTML=s;
 }
 
