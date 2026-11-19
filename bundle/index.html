@@ -304,6 +304,33 @@ var OFFER_HOURS = 3;
   if(Date.now()>=E) document.documentElement.classList.add('is-closed');
 })();
 </script>
+<!-- Analytics: Google tag + Meta Pixel (same IDs as the rest of the site). Not loaded on the owner device. -->
+<script>
+(function(){
+  if(document.documentElement.classList.contains('fp-owner')) return;
+  var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id=G-XMVM0S0ZKM';
+  document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){dataLayer.push(arguments);};
+  gtag('js',new Date()); gtag('config','G-XMVM0S0ZKM');
+})();
+</script>
+<script>
+(function(){
+  if(document.documentElement.classList.contains('fp-owner')) return;
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1790149552042782');
+  fbq('track','PageView');
+})();
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1790149552042782&ev=PageView&noscript=1" alt=""></noscript>
 </head>
 <body>
 
@@ -691,6 +718,37 @@ var OFFER_HOURS = 3;
 </div>
 
 <script>
+/* Events for the Meta Pixel and Google Analytics. Wrapped so a blocked or slow tracker can never affect the page or a payment link.
+   Nothing is sent from the owner device (the trackers aren't loaded there), and the closed page isn't counted as a product view. */
+(function () {
+  var P = { name: 'Artist Growth Bundle', id: 'artist-growth-bundle', value: 27750 };   /* value in NGN, same as /access */
+  function track(ev) {
+    try { if (window.fbq) window.fbq('track', ev, { content_name: P.name, content_ids: [P.id], content_type: 'product', value: P.value, currency: 'NGN' }); } catch (e) {}
+    try { if (window.gtag) window.gtag('event', ev === 'ViewContent' ? 'view_item' : 'begin_checkout', { currency: 'NGN', value: P.value, items: [{ item_id: P.id, item_name: P.name, price: P.value, quantity: 1 }], transport_type: 'beacon' }); } catch (e) {}
+  }
+  /* video: start and 25/50/75/95% watched */
+  window.__trkVideo = function (pct) {
+    try { if (window.fbq) window.fbq('trackCustom', pct ? 'VideoWatched' + pct : 'VideoStart', { content_name: P.name, percent: pct || 0 }); } catch (e) {}
+    try { if (window.gtag) window.gtag('event', pct ? 'video_progress' : 'video_start', { video_title: 'Artist Growth Bundle video', video_percent: pct || 0, transport_type: 'beacon' }); } catch (e) {}
+  };
+  if (!document.documentElement.classList.contains('is-closed')) track('ViewContent');
+  Array.prototype.forEach.call(document.querySelectorAll('[data-cta], a[href^="https://paystack.shop/"]'), function (a) {
+    a.addEventListener('click', function (e) {
+      try {
+        track('InitiateCheckout');
+        var href = a.href;
+        var plain = e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && a.target !== '_blank';
+        /* Give the Pixel's request a moment to leave before the page does (only when the Pixel has actually loaded). */
+        if (plain && /^https:\/\//.test(href) && window.fbq && typeof window.fbq.callMethod === 'function') {
+          e.preventDefault();
+          setTimeout(function () { window.location.href = href; }, 250);
+        }
+      } catch (err) {}
+    });
+  });
+})();
+</script>
+<script>
 /* ---------- CONFIG ---------- */
 var VIMEO_ID  = "1248104380";   // Vimeo video id for the SLO video. Empty = placeholder is shown.
 
@@ -779,10 +837,12 @@ var VIMEO_ID  = "1248104380";   // Vimeo video id for the SLO video. Empty = pla
       document.addEventListener('fullscreenchange',fullState);
       document.addEventListener('webkitfullscreenchange',fullState);
 
-      player.on('play',function(){state(true)});
+      var seen={};
+      function hit(k){ if(!seen[k]){ seen[k]=1; try{ window.__trkVideo&&window.__trkVideo(k); }catch(e){} } }
+      player.on('play',function(){state(true);hit(0)});
       player.on('pause',function(){state(false)});
       player.on('ended',function(){state(false);fill.style.width='100%'});
-      player.on('timeupdate',function(d){ dur=d.duration||dur; fill.style.width=(d.percent*100)+'%'; time(d.seconds); });
+      player.on('timeupdate',function(d){ dur=d.duration||dur; fill.style.width=(d.percent*100)+'%'; time(d.seconds); [25,50,75,95].forEach(function(m){ if(d.percent*100>=m) hit(m); }); });
       player.getDuration().then(function(d){ dur=d; time(0); }).catch(function(){});
       player.getMuted().then(setMuted).catch(function(){});
     }catch(err){ plain(); }
