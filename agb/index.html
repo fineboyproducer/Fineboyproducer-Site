@@ -228,6 +228,8 @@ fbq('track', 'PageView');
     </div>
     <div class="body" style="max-width:34em">
       <a class="btn" id="pack-dl" href="#" target="_blank" rel="noopener noreferrer" hidden>Download the 100 Afrobeat Pack</a>
+      <h3 style="margin:1.6rem 0 .6rem;font-size:1rem">Your basic license</h3>
+      <ul class="note" style="padding-left:1.1rem;display:grid;gap:.35rem"><li>Non-exclusive license: you can use each beat on one song, and other artists can license the same beats too.</li><li>Use it for one commercial release, with up to 100,000 combined streams.</li><li>Credit &quot;Prod. by Fineboy Producer&quot; wherever the song is released.</li><li>You can't resell, share or re-upload the beats on their own, or register them with Content ID.</li><li>Fineboy Producer keeps ownership of the beats. Need more streams or exclusive rights? Contact me for an upgrade.</li></ul>
       <p class="note" id="pack-wait">Your pack link is being added. If you don't see the download button here soon, reach out on the <a href="/contact/">contact page</a> and it will be sent to you.</p>
     </div>
   </div>
@@ -359,7 +361,7 @@ fbq('track', 'PageView');
 <script>
 /* 100 Afrobeat Pack (checkout order bump). Buyers who add it come back from Paystack to /agb/?pack=1; it is remembered on their device. */
 (function () {
-  var PACK_URL = '';   /* <- paste the download link (Drive, Dropbox...) for the 100 Afrobeat Pack here */
+  var PACK_URL = 'https://drive.google.com/drive/folders/1jdPc-u8BLYSttyS2MTxEb0AIA2XHsbki';   /* <- paste the download link (Drive, Dropbox...) for the 100 Afrobeat Pack here */
   var has = /[?&]pack=1\b/.test(window.location.search);
   try { if (has) window.localStorage.setItem('fp_pack_ok', '1'); else has = window.localStorage.getItem('fp_pack_ok') === '1'; } catch (e) {}
   if (!has) return;
