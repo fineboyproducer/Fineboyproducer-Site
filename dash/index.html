@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Traffic &amp; Conversions · Fineboy Producer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--panel:#0c0c0b;--line:#1f1e1a;--bone:#ece8df;--mute:#8d887b;--gold:#b39a5c;--good:#6fbf8b;--bad:#d8776b;--warn:#d9b45a;
+--disp:'Archivo','Arial Narrow',Arial,sans-serif;--body:'Instrument Sans',system-ui,sans-serif}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--bone);font:15px/1.5 var(--body);padding-block:0 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1100px;margin:0 auto}
+h1,h2,h3{font-family:var(--disp);text-transform:uppercase;letter-spacing:.02em;margin:0}
+.top{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;padding:22px 0 18px;border-bottom:1px solid var(--line)}
+.top h1{font-size:22px;font-weight:800}.top h1 span{color:var(--gold)}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{background:none;border:0;color:var(--mute);font:600 13px var(--body);padding:8px 13px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--gold);color:#000}
+.btn{background:none;border:1px solid var(--line);color:var(--bone);font:600 13px var(--body);padding:8px 13px;border-radius:6px;cursor:pointer}
+.btn:hover,.seg button:hover{border-color:var(--gold)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.note{color:var(--mute);font-size:13px}
+.banner{margin:16px 0 0;padding:10px 14px;border:1px solid var(--gold);color:var(--gold);border-radius:6px;font-size:13px}
+section{padding-top:34px}
+section>h2,.h2{font-family:var(--disp);text-transform:uppercase;letter-spacing:.02em;margin:0 0 14px;font-size:15px;color:var(--gold);font-weight:800;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.h2 small{font:400 13px var(--body);text-transform:none;letter-spacing:0;color:var(--mute)}
+section>h2{font-size:15px;color:var(--gold);margin-bottom:14px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+section>h2 small{font:400 13px var(--body);text-transform:none;letter-spacing:0;color:var(--mute)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.tile .k{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
+.tile .v{font:800 30px var(--disp);margin-top:4px;font-variant-numeric:tabular-nums}
+.tile .s{font-size:12px;color:var(--mute);margin-top:2px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:560px}
+th,td{text-align:right;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font:600 11px var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+th:first-child,td:first-child{text-align:left}
+tr:last-child td{border-bottom:0}
+td .pct{color:var(--mute);font-size:12px;margin-left:6px}
+.chip{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;font-weight:600;border:1px solid var(--line);color:var(--mute)}
+.chip.good{color:var(--good);border-color:var(--good)}.chip.bad{color:var(--bad);border-color:var(--bad)}.chip.warn{color:var(--warn);border-color:var(--warn)}
+.funnel{display:grid;gap:8px}
+.frow{display:grid;grid-template-columns:minmax(120px,190px) 1fr 120px;gap:12px;align-items:center}
+.frow .bar{height:26px;background:#14130f;border-radius:4px;overflow:hidden}
+.frow .bar i{display:block;height:100%;background:var(--gold);min-width:2px}
+.frow .n{text-align:right;font-variant-numeric:tabular-nums;font-size:13px}
+.frow .n span{color:var(--mute)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:14px}
+.grid2>*{min-width:0}
+svg text{fill:var(--mute);font:11px var(--body)}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--mute);margin-bottom:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+select{background:var(--panel);color:var(--bone);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:500 13px var(--body)}
+#gate{max-width:380px;margin:18vh auto 0;text-align:center}
+#gate h1{font-size:26px;margin-bottom:8px}
+#gate input{width:100%;margin:18px 0 10px;padding:13px 14px;background:var(--panel);border:1px solid var(--line);color:var(--bone);border-radius:6px;font:16px var(--body)}
+#gate .btn{width:100%;background:var(--gold);color:#000;border-color:var(--gold);padding:13px}
+#err{color:var(--bad);min-height:22px;margin-top:10px;font-size:14px}
+.empty{color:var(--mute);padding:6px 0}
+@media (max-width:560px){.grid2{grid-template-columns:1fr}.frow{grid-template-columns:1fr 90px}.frow .bar{grid-column:1/-1;order:3}}
+</style>
+</head>
+<body>
+<div id="gate">
+  <h1>Fineboy <span style="color:var(--gold)">Dashboard</span></h1>
+  <div class="note">Traffic and conversions across fineboyproducer.com.ng</div>
+  <form id="gf" autocomplete="off">
+    <input id="pw" type="password" placeholder="Passcode" aria-label="Passcode" autocomplete="current-password">
+    <button class="btn" type="submit">Open dashboard</button>
+  </form>
+  <div id="err" role="alert"></div>
+  <div class="note"><a href="?demo" style="color:var(--gold)">See it with sample data</a></div>
+</div>
+
+<div class="wrap" id="app" hidden>
+  <div class="top">
+    <h1>Traffic &amp; Conversions <span>/ fineboyproducer.com.ng</span></h1>
+    <div class="ctl">
+      <div class="seg" id="range" role="group" aria-label="Date range">
+        <button data-d="1" aria-pressed="false">Today</button>
+        <button data-d="7" aria-pressed="false">7 days</button>
+        <button data-d="30" aria-pressed="true">30 days</button>
+        <button data-d="90" aria-pressed="false">90 days</button>
+      </div>
+      <button class="btn" id="refresh">Refresh</button>
+      <button class="btn" id="lock">Lock</button>
+    </div>
+  </div>
+  <div class="banner" id="demoBanner" hidden>Sample data. Nothing here is real. Open the dashboard without ?demo after setup to see your numbers.</div>
+  <div class="note" id="stamp" style="margin-top:12px"></div>
+
+  <section><h2>Overview</h2><div class="tiles" id="tiles"></div></section>
+  <section><h2>Daily traffic <small>unique visitors per page, added up per day</small></h2>
+    <div class="card"><div class="legend"><span><i style="background:var(--gold)"></i>Visitors</span><span><i style="background:var(--bone)"></i>Checkout clickers</span><span><i style="background:var(--good)"></i>Purchases</span></div><div id="trend"></div></div></section>
+  <section><h2>Bundle funnel <small>unique visitors at each step</small></h2><div class="card"><div class="funnel" id="funnel"></div></div></section>
+  <section><h2>Pages <small>conversion = share of that page's visitors who did it</small></h2>
+    <div class="card scroll"><table id="pages"></table></div></section>
+  <section><h2>A/B tests <small>compare variants on one page</small></h2>
+    <div class="card"><div class="ctl" style="margin-bottom:12px"><label for="abPage" class="note">Page</label><select id="abPage"></select></div>
+    <div class="scroll"><table id="ab"></table></div><p class="note" id="abNote"></p></div></section>
+  <section class="grid2">
+    <div><h2 class="h2">Traffic sources</h2><div class="card scroll"><table id="src"></table></div></div>
+    <div><h2 class="h2">Buy buttons <small>which button got the click</small></h2><div class="card scroll"><table id="btns"></table></div></div>
+  </section>
+  <section><h2>Devices</h2><div class="card scroll"><table id="dev"></table></div></section>
+  <p class="note" style="margin-top:30px">Your own device is never counted. Open any page once with <code>?owner=fineboy-preview</code> to exclude a browser. Lagos time.</p>
+</div>
+
+<script>
+(function(){
+'use strict';
+var SB='https://nynedxlhwephelzckjoe.supabase.co/rest/v1/rpc/fp_dashboard';
+var KEY='sb_publishable_nvbgjEhrZjS7wg_YAre5qw_JdwTL6A_';
+var DEMO=/[?&]demo\b/.test(location.search);
+var days=30, data=null, pass='';
+var $=function(id){return document.getElementById(id)};
+function store(k,v){try{if(v===undefined)return sessionStorage.getItem(k);v===null?sessionStorage.removeItem(k):sessionStorage.setItem(k,v)}catch(e){}return null}
+var nf=new Intl.NumberFormat('en-NG');
+function num(n){return nf.format(Math.round(n))}
+function naira(n){return '₦'+nf.format(Math.round(n))}
+function pct(a,b){return b>0?(100*a/b):0}
+function pf(a,b){return b>0?(pct(a,b).toFixed(pct(a,b)<10?1:0)+'%'):'–'}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+/* ---------- sample data ---------- */
+function demo(d){
+  var T=[],D=[],pages=[['/bundle',900,.32,.12],['/access',160,.55,.35],['/live',700,.5,.18],['/blueprint',260,.5,.14]];
+  var vs=['','hero:A','hero:B'];
+  pages.forEach(function(p){vs.forEach(function(v,vi){ if(p[0]!=='/bundle'&&v)return;
+    var share=p[0]==='/bundle'?(v===''?0:.5):1, u=Math.round(p[1]*share*d/30*(v==='hero:B'?1.04:1)); if(!u)return;
+    var add=function(ev,n,u2,val,lab){T.push({page:p[0],event:ev,variant:v,label:lab||'',source:'x',device:'',n:n,u:u2,v:val||0})};
+    add('pageview',Math.round(u*1.2),u);add('scroll_50',0,Math.round(u*p[2]));add('scroll_90',0,Math.round(u*p[2]*.6));
+    var cc=Math.round(u*p[3]*(v==='hero:B'?1.3:1));add('checkout_click',cc,cc,0,'offer');
+    if(p[0]==='/bundle'){add('video_start',0,Math.round(u*.62));add('video_50',0,Math.round(u*.31));add('video_95',0,Math.round(u*.14));}
+  });});
+  var bu=Math.round(900*d/30);
+  [['hero:A',.011],['hero:B',.016]].forEach(function(x){var n=Math.round(bu/2*x[1]);T.push({page:'/agb',event:'purchase',variant:x[0],label:'artist-growth-bundle',source:'x',device:'',n:n,u:n,v:n*27750})});
+  var srcs=[['instagram',.46],['facebook',.3],['direct',.14],['whatsapp',.1]];
+  srcs.forEach(function(s){T.push({page:'/bundle',event:'pageview',variant:'',label:'',source:s[0],device:'',n:Math.round(bu*s[1]*1.2),u:Math.round(bu*s[1]*.9),v:0});T.push({page:'/bundle',event:'checkout_click',variant:'',label:'',source:s[0],device:'',n:Math.round(bu*s[1]*.1),u:Math.round(bu*s[1]*.1),v:0})});
+  ['mobile','desktop'].forEach(function(s,i){var f=i?.14:.86;T.push({page:'/bundle',event:'pageview',variant:'',label:'',source:'direct',device:s,n:Math.round(bu*f),u:Math.round(bu*f),v:0});T.push({page:'/bundle',event:'checkout_click',variant:'',label:'',source:'direct',device:s,n:Math.round(bu*f*(i?.06:.11)),u:Math.round(bu*f*(i?.06:.11)),v:0})});
+  var now=new Date(),dl=[];
+  for(var i=d-1;i>=0;i--){var dt=new Date(now-i*864e5),ds=dt.toISOString().slice(0,10),w=.8+.4*Math.sin(i/2.3)+(i<5?.3:0);
+    dl.push({d:ds,page:'/bundle',event:'pageview',n:0,u:Math.round(32*w)});dl.push({d:ds,page:'/bundle',event:'checkout_click',n:0,u:Math.round(4*w)});if(Math.sin(i*1.7)>-.2)dl.push({d:ds,page:'/agb',event:'purchase',n:0,u:Math.max(0,Math.round(w*.9))});}
+  return {totals:T,daily:dl};
+}
+
+/* ---------- helpers on totals ---------- */
+function sum(f,field){return data.totals.reduce(function(s,r){return f(r)?s+Number(r[field]):s},0)}
+function uv(page,ev,variant){return sum(function(r){return r.page===page&&r.event===ev&&(variant==null||r.variant===variant)},'u')}
+/* A visitor on the same page with the same label split across sources/devices is counted once per row, so totals by page are an upper bound when a person switches device or source. */
+function ev(r,e){return r.event===e}
+
+function render(){
+  var tot=data.totals;
+  var pv=sum(function(r){return ev(r,'pageview')},'n'), vis=sum(function(r){return ev(r,'pageview')},'u');
+  var ck=sum(function(r){return ev(r,'checkout_click')},'u'), pu=sum(function(r){return ev(r,'purchase')},'n'), rev=sum(function(r){return ev(r,'purchase')},'v');
+  var leads=sum(function(r){return ev(r,'lead')},'n');
+  $('tiles').innerHTML=[
+    ['Visitors',num(vis),num(pv)+' page views'],
+    ['Checkout clicks',num(ck),pf(ck,vis)+' of visitors'],
+    ['Purchases',num(pu),pf(pu,vis)+' of visitors'],
+    ['Revenue',naira(rev),pu?naira(rev/pu)+' per sale':'–'],
+    ['Leads',num(leads),'live registrations']
+  ].map(function(t){return '<div class="tile"><div class="k">'+t[0]+'</div><div class="v">'+t[1]+'</div><div class="s">'+t[2]+'</div></div>'}).join('');
+
+  trend(); funnel(); pagesTable(); abInit(); breakdowns();
+  $('stamp').textContent='Updated '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+' · last '+(days===1?'24 hours':days+' days');
+}
+
+function trend(){
+  var m={};
+  data.daily.forEach(function(r){var o=m[r.d]||(m[r.d]={v:0,c:0,p:0});
+    if(r.event==='pageview')o.v+=r.u; else if(r.event==='checkout_click')o.c+=r.u; else if(r.event==='purchase')o.p+=r.u;});
+  var keys=Object.keys(m).sort();
+  if(!keys.length){$('trend').innerHTML='<div class="empty">No visits recorded in this period yet.</div>';return}
+  var W=1000,H=240,L=38,B=26,T=10,n=keys.length, max=1;
+  keys.forEach(function(k){max=Math.max(max,m[k].v,m[k].c,m[k].p)});
+  var step=Math.pow(10,Math.floor(Math.log10(max))), nice=[1,2,5,10].map(function(x){return x*step}).filter(function(x){return x>=max})[0]||max;
+  var ph=H-B-T, bw=(W-L)/n, s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Daily visitors, checkout clickers and purchases">';
+  for(var g=0;g<=4;g++){var y=T+ph-ph*g/4;s+='<line x1="'+L+'" x2="'+W+'" y1="'+y+'" y2="'+y+'" stroke="#1f1e1a"/><text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end">'+Math.round(nice*g/4)+'</text>'}
+  var every=Math.ceil(n/10);
+  keys.forEach(function(k,i){
+    var o=m[k],x=L+i*bw,w=Math.max(2,bw*.7),h=function(v){return ph*v/nice};
+    s+='<rect x="'+(x+bw*.15)+'" y="'+(T+ph-h(o.v))+'" width="'+w+'" height="'+h(o.v)+'" fill="#b39a5c"><title>'+k+': '+o.v+' visitors, '+o.c+' checkout clickers, '+o.p+' purchases</title></rect>';
+    if(i%every===0)s+='<text x="'+(x+bw/2)+'" y="'+(H-8)+'" text-anchor="middle">'+k.slice(5)+'</text>';
+  });
+  function line(f,c){var pts=keys.map(function(k,i){return (L+i*bw+bw/2)+','+(T+ph-ph*m[k][f]/nice)}).join(' ');
+    return '<polyline points="'+pts+'" fill="none" stroke="'+c+'" stroke-width="2.5" stroke-linejoin="round"/>'+
+      keys.map(function(k,i){return m[k][f]?'<circle cx="'+(L+i*bw+bw/2)+'" cy="'+(T+ph-ph*m[k][f]/nice)+'" r="3.5" fill="'+c+'"/>':''}).join('')}
+  s+=line('c','#ece8df')+line('p','#6fbf8b')+'</svg>';
+  $('trend').innerHTML=s;
+}
+
+function funnel(){
+  var steps=[['Saw the offer page','/bundle','pageview'],['Started the video','/bundle','video_start'],['Watched half','/bundle','video_50'],['Watched 95%','/bundle','video_95'],['Clicked buy','/bundle','checkout_click'],['Opened checkout','/access','pageview'],['Purchased','/agb','purchase']];
+  var vals=steps.map(function(s){return s[2]==='purchase'?sum(function(r){return r.page===s[1]&&r.event==='purchase'},'n'):uv(s[1],s[2])});
+  var top=Math.max.apply(null,vals)||1;
+  $('funnel').innerHTML=steps.map(function(s,i){
+    var share=i?pf(vals[i],vals[0]):'';
+    return '<div class="frow"><div>'+s[0]+'</div><div class="bar"><i style="width:'+(100*vals[i]/top)+'%"></i></div><div class="n">'+num(vals[i])+(share?' <span>· '+share+'</span>':'')+'</div></div>'}).join('')+
+    '<div class="note">The percentage beside each step is the share of everyone who saw the offer page. Video steps need the video watched on /bundle.</div>';
+}
+
+function pagesTable(){
+  var ps={};
+  data.totals.forEach(function(r){var o=ps[r.page]||(ps[r.page]={});o[r.event]=o[r.event]||{n:0,u:0,v:0};o[r.event].n+=r.n;o[r.event].u+=r.u;o[r.event].v+=r.v});
+  var rows=Object.keys(ps).sort(function(a,b){return (ps[b].pageview?ps[b].pageview.u:0)-(ps[a].pageview?ps[a].pageview.u:0)});
+  var g=function(p,e,f){return ps[p][e]?ps[p][e][f]:0};
+  $('pages').innerHTML='<thead><tr><th>Page</th><th>Visitors</th><th>Views</th><th>Read to 50%</th><th>Checkout clicks</th><th>Leads</th><th>Purchases</th><th>Revenue</th></tr></thead><tbody>'+
+   (rows.length?rows.map(function(p){var v=g(p,'pageview','u');
+    return '<tr><td>'+esc(p)+'</td><td>'+num(v)+'</td><td>'+num(g(p,'pageview','n'))+'</td><td>'+num(g(p,'scroll_50','u'))+'<span class="pct">'+pf(g(p,'scroll_50','u'),v)+'</span></td><td>'+num(g(p,'checkout_click','u'))+'<span class="pct">'+pf(g(p,'checkout_click','u'),v)+'</span></td><td>'+num(g(p,'lead','n'))+'<span class="pct">'+pf(g(p,'lead','n'),v)+'</span></td><td>'+num(g(p,'purchase','n'))+'<span class="pct">'+pf(g(p,'purchase','n'),v)+'</span></td><td>'+naira(g(p,'purchase','v'))+'</td></tr>'}).join(''):'<tr><td colspan="8" class="empty">No data yet.</td></tr>')+'</tbody>';
+}
+
+/* two-proportion z-test, returns confidence that the rates differ (0..1) */
+function erf(x){var s=x<0?-1:1;x=Math.abs(x);var t=1/(1+.3275911*x);return s*(1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x))}
+function conf(x1,n1,x2,n2){if(n1<1||n2<1)return 0;var p1=x1/n1,p2=x2/n2,p=(x1+x2)/(n1+n2),se=Math.sqrt(p*(1-p)*(1/n1+1/n2));if(!se)return 0;var z=Math.abs(p1-p2)/se;return erf(z/Math.SQRT2)}
+
+function abInit(){
+  var pages={};data.totals.forEach(function(r){if(r.variant)pages[r.page]=(pages[r.page]||0)+(r.event==='pageview'?r.u:0)});
+  var list=Object.keys(pages).sort(function(a,b){return pages[b]-pages[a]}), sel=$('abPage'), cur=sel.value;
+  sel.innerHTML=list.length?list.map(function(p){return '<option>'+esc(p)+'</option>'}).join(''):'<option value="">No tests running</option>';
+  if(cur&&list.indexOf(cur)>=0)sel.value=cur; abRender();
+}
+function abRender(){
+  var page=$('abPage').value, t=$('ab');
+  if(!page){t.innerHTML='<tbody><tr><td class="empty">No A/B test has recorded data yet. To start one, give a page <code>&lt;meta name="fp-variant" content="B"&gt;</code>, or call <code>fpTrack.variant("hero",["A","B"])</code>.</td></tr></tbody>';$('abNote').textContent='';return}
+  var vs={};data.totals.forEach(function(r){if(!r.variant)return;var o=vs[r.variant]||(vs[r.variant]={v:0,c:0,p:0,rev:0});
+    if(r.page===page&&r.event==='pageview')o.v+=r.u; if(r.page===page&&r.event==='checkout_click')o.c+=r.u; if(r.event==='purchase'){o.p+=r.n;o.rev+=r.v}});
+  var names=Object.keys(vs).filter(function(k){return vs[k].v>0}).sort(), base=vs[names[0]];
+  t.innerHTML='<thead><tr><th>Variant</th><th>Visitors</th><th>Checkout clicks</th><th>Click rate</th><th>Purchases</th><th>Sale rate</th><th>Revenue</th><th>Result vs '+esc(names[0]||'')+'</th></tr></thead><tbody>'+
+  names.map(function(k,i){var o=vs[k],res='<span class="chip">Control</span>';
+    if(i){var c1=conf(base.c,base.v,o.c,o.v),c2=conf(base.p,base.v,o.p,o.v),c=Math.max(c1,c2),better=(o.p/o.v>base.p/base.v)||(o.p===base.p&&o.c/o.v>base.c/base.v);
+      res=Math.min(o.v,base.v)<100?'<span class="chip warn">Too early</span>':c>=.95?'<span class="chip '+(better?'good':'bad')+'">'+(better?'Winning':'Losing')+' · '+Math.round(c*100)+'%</span>':'<span class="chip">No clear difference · '+Math.round(c*100)+'%</span>'}
+    return '<tr><td>'+esc(k)+'</td><td>'+num(o.v)+'</td><td>'+num(o.c)+'</td><td>'+pf(o.c,o.v)+'</td><td>'+num(o.p)+'</td><td>'+pf(o.p,o.v)+'</td><td>'+naira(o.rev)+'</td><td>'+res+'</td></tr>'}).join('')+'</tbody>';
+  $('abNote').textContent='Confidence is the chance the gap is real and not luck. Wait for 95% or more and at least 100 visitors per variant before choosing a winner. Purchases count every sale tagged with that variant, on any page.';
+}
+
+function breakdowns(){
+  function by(field,ev2){var m={};data.totals.forEach(function(r){var k=r[field]||'(none)';var o=m[k]||(m[k]={v:0,c:0,p:0});
+    if(r.event==='pageview')o.v+=r.u; else if(r.event==='checkout_click')o.c+=r.u; else if(r.event==='purchase')o.p+=r.n});return m}
+  function tbl(id,m,label){var keys=Object.keys(m).sort(function(a,b){return m[b].v-m[a].v});
+    $(id).innerHTML='<thead><tr><th>'+label+'</th><th>Visitors</th><th>Checkout clicks</th><th>Click rate</th><th>Purchases</th></tr></thead><tbody>'+(keys.length?keys.map(function(k){var o=m[k];return '<tr><td>'+esc(k)+'</td><td>'+num(o.v)+'</td><td>'+num(o.c)+'</td><td>'+pf(o.c,o.v)+'</td><td>'+num(o.p)+'</td></tr>'}).join(''):'<tr><td colspan="5" class="empty">No data yet.</td></tr>')+'</tbody>'}
+  tbl('src',by('source'),'Source');tbl('dev',by('device'),'Device');
+  var b={};data.totals.forEach(function(r){if(r.event==='checkout_click'){var k=r.page+' · '+(r.label||'button');b[k]=(b[k]||0)+r.u}});
+  var keys=Object.keys(b).sort(function(x,y){return b[y]-b[x]});
+  $('btns').innerHTML='<thead><tr><th>Button</th><th>Clickers</th></tr></thead><tbody>'+(keys.length?keys.map(function(k){return '<tr><td>'+esc(k)+'</td><td>'+num(b[k])+'</td></tr>'}).join(''):'<tr><td colspan="2" class="empty">No clicks yet.</td></tr>')+'</tbody>';
+}
+
+/* ---------- loading ---------- */
+function load(){
+  $('err').textContent='';
+  if(DEMO){data=demo(days);show();return Promise.resolve()}
+  return fetch(SB,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify({pass:pass,days:days})})
+  .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
+  .then(function(x){
+    if(!x.ok){var m=(x.j&&(x.j.message||x.j.hint))||'';
+      if(/wrong passcode/i.test(m)||(x.j&&x.j.code==='28000')){store('fp_dash',null);throw new Error('That passcode is not right.')}
+      if(/Could not find the function|does not exist|schema cache/i.test(m))throw new Error('Setup not finished. Run dash/setup.sql in Supabase first.');
+      throw new Error('Could not load data ('+m.slice(0,80)+').')}
+    data=x.j;store('fp_dash',pass);show();
+  });
+}
+function show(){$('gate').hidden=true;$('app').hidden=false;$('demoBanner').hidden=!DEMO;render()}
+function fail(e){$('gate').hidden=false;$('app').hidden=true;$('err').textContent=e.message||'Could not connect. Check your internet and try again.'}
+
+$('gf').addEventListener('submit',function(e){e.preventDefault();pass=$('pw').value;if(!pass)return;load().catch(fail)});
+$('range').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;days=+b.dataset.d;
+  Array.prototype.forEach.call($('range').children,function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});load().catch(fail)});
+$('refresh').addEventListener('click',function(){load().catch(fail)});
+$('lock').addEventListener('click',function(){store('fp_dash',null);pass='';data=null;$('app').hidden=true;$('gate').hidden=false;$('pw').value=''});
+$('abPage').addEventListener('change',abRender);
+var saved=store('fp_dash');
+if(DEMO){load()}else if(saved){pass=saved;load().catch(fail)}
+})();
+</script>
+</body>
+</html>

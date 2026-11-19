@@ -331,6 +331,7 @@ var OFFER_HOURS = 3;
 })();
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1790149552042782&ev=PageView&noscript=1" alt=""></noscript>
+<script src="/track.js" defer></script>
 </head>
 <body>
 
@@ -728,6 +729,7 @@ var OFFER_HOURS = 3;
   }
   /* video: start and 25/50/75/95% watched */
   window.__trkVideo = function (pct) {
+    try { if (window.fpTrack) window.fpTrack(pct ? 'video_' + pct : 'video_start'); } catch (e) {}
     try { if (window.fbq) window.fbq('trackCustom', pct ? 'VideoWatched' + pct : 'VideoStart', { content_name: P.name, percent: pct || 0 }); } catch (e) {}
     try { if (window.gtag) window.gtag('event', pct ? 'video_progress' : 'video_start', { video_title: 'Artist Growth Bundle video', video_percent: pct || 0, transport_type: 'beacon' }); } catch (e) {}
   };

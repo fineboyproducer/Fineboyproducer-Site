@@ -537,6 +537,7 @@ fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1790149552042782&ev=PageView&noscript=1" alt=""></noscript>
 <!-- End Meta Pixel Code -->
+<script src="/track.js" defer></script>
 </head>
 
 <body>
@@ -1286,6 +1287,7 @@ form.addEventListener('submit', async e => {
     const handoff = sendToEmailer(payload);   // started first so it is already on the wire; never awaited for longer than EMAILER_WAIT_MS
     // Meta Pixel: count the registration (name/email/phone are NOT sent to Meta). Never allowed to break the sign-up.
     try { if (window.fbq) window.fbq('track', 'Lead', { content_name: CONFIG.EVENT_NAME }); } catch (e) {}
+    try { if (window.fpTrack) window.fpTrack('lead', { label: CONFIG.EVENT_NAME }); } catch (e) {}
     try { if (window.gtag) window.gtag('event', 'generate_lead', { lead_source: CONFIG.EVENT_NAME }); } catch (e) {}
     // No visible change while the redirect is on its way. The "You're in" message is only a fallback: it appears
     // if the redirect has not happened a few seconds later (blocked, or a very slow connection), or if the visitor

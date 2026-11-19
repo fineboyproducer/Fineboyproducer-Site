@@ -116,6 +116,7 @@ fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1790149552042782&ev=PageView&noscript=1" alt=""></noscript>
 <!-- End Meta Pixel Code -->
+<script src="/track.js" defer></script>
 </head>
 
 <body>
@@ -333,6 +334,7 @@ fbq('track', 'PageView');
         else window.fbq('track', 'Purchase', params);
       }
     } catch (e) {}
+    try { window.fpTrack && window.fpTrack('purchase', { value: P.value, label: P.id }); } catch (e) {}
     try { window.localStorage.setItem(key, '1'); } catch (e) {}
   } catch (e) {}
 })();
