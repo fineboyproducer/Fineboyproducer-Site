@@ -11,7 +11,7 @@ window.FP_COPY_B['/live'] = [
  ],
  [
   "Join Fineboy Producer for a free live session this Friday, on how to stop throwing money at music promotion that isn't producing real results.",
-  "It's not your song and it's not bad luck. Nobody ever gave you the strategy behind promotion. This Friday, live and free, I'll show you where your promo money has been going, why it hasn't worked, and the strategy that makes every naira you spend work for you."
+  "It's not about your talent, and it's not bad luck. Nobody ever gave you the strategy behind promotion. This Friday, live and free, I'll show you where your promo money has been going, why it hasn't worked, and the strategy that makes every naira you spend work for you."
  ],
  [
   "Are you spending money on promotion and still not seeing results?",
@@ -79,7 +79,7 @@ window.FP_COPY_B['/live'] = [
  ],
  [
   "You want to stop guessing and start making smarter promotion decisions.",
-  "You want fans who know your lyrics word for word, shows, and a dashboard that climbs while you sleep."
+  "You want fans who know your lyrics word for word, shows, and results that pour in even while you sleep."
  ],
  [
   "Fineboy Producer is a music strategist and producer who helps independent artists understand how to grow their music using strategy, systems and practical promotion.",
@@ -105,7 +105,7 @@ window.FP_COPY_B['/live'] = [
 window.FP_COPY_B['/'] = [
  [
   "I help serious independent artists turn their music into real streams, real fans, and real growth — using strategy, not guesswork.",
-  "You've spent money on promo and got almost nothing back. It's not your music. It's the missing strategy. I help independent artists turn releases into real streams, real fans and a music career that finally pays off."
+  "You've spent money on promo and got almost nothing back. It's not about your talent. It's the missing strategy. I help independent artists turn releases into real streams, real fans and a music career that finally pays off."
  ],
  [
   "For independent artists who are ready to take their music seriously.",
@@ -121,7 +121,7 @@ window.FP_COPY_B['/'] = [
  ],
  [
   "You can make great music and still struggle to get heard.",
-  "All that effort, money and hard work gone into thin air. That's not bad luck and it's not your talent. It's missing strategy, the one big thing that makes all promotion work."
+  "All that effort, money and hard work gone into thin air. That's not bad luck, and it's not about your talent. It's missing strategy, the one big thing that makes all promotion work."
  ],
  [
   "You're releasing music without knowing what you're actually trying to achieve.",
@@ -169,7 +169,7 @@ window.FP_COPY_B['/'] = [
  ],
  [
   "You have the resources to invest in your career.",
-  "You want fans who know your lyrics word for word, shows, and a dashboard that climbs while you sleep."
+  "You want fans who know your lyrics word for word, shows, and results that pour in even while you sleep."
  ],
  [
   "You're tired of random promotion.",
