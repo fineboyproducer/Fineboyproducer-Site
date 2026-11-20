@@ -191,6 +191,31 @@ section{position:relative}
 .gate .q{font-family:var(--display);font-stretch:72%;font-weight:800;text-transform:uppercase;font-size:clamp(1.5rem,4.6vw,3rem);line-height:1;margin-bottom:22px}
 .gate .q span{color:var(--gold)}
 
+/* readability pass: more air, calmer type, shorter lines */
+p+p{margin-top:1.3em}
+.narrow{max-width:38em}
+.narrow p,.chapter .txt p,.gate p,.guarantee p{line-height:1.75}
+.chapter{padding:clamp(48px,7vw,92px) 0}
+.chapter .num{font-size:clamp(2.6rem,7vw,4.4rem)}
+.chapter h3{font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.04;margin-bottom:26px;max-width:18em}
+.chapter .txt{max-width:36em}
+.sec{padding:clamp(80px,12vw,152px) 0}
+.pull{margin:clamp(40px,6vw,76px) 0}
+.pull p{font-size:clamp(1.6rem,4.8vw,3.2rem)}
+.lede{line-height:1.55}
+.dialog{margin:30px 0}
+.gate p+p{margin-top:1.3em}
+.gate{max-width:46em}
+.points{list-style:none;display:grid;gap:16px;margin:30px 0 32px}
+.points li{position:relative;padding-left:34px;line-height:1.55;color:var(--bone)}
+.points li::before{content:"";position:absolute;left:2px;top:.55em;width:14px;height:7px;border-left:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(-45deg)}
+.items{gap:clamp(56px,8vw,110px)}
+.item h3{font-size:clamp(1.6rem,3.8vw,2.5rem);line-height:1}
+.item p{line-height:1.7}
+.tcta .t{font-size:clamp(1.8rem,5vw,3.2rem)}
+
+.pull+.chapter{border-top:0;padding-top:clamp(24px,4vw,48px)}
+
 /* shots */
 .shot{position:relative;aspect-ratio:16/10;background:var(--panel);border:1px solid var(--line);overflow:hidden}
 .shot img{width:100%;height:100%;object-fit:cover}
@@ -370,7 +395,7 @@ var OFFER_HOURS = 3;
   <div class="wrap">
     <p class="kicker">The Artist Growth Bundle</p>
     <h1 class="display">It happened again, <em>didn't it?</em></h1>
-    <p class="sub">Hundreds of thousands. Maybe even millions. <b>Spent on promo</b> with no significant result from your promotional effort.</p>
+    <p class="sub">You spent hundreds of thousands on promo. Maybe even millions. <b>And almost nothing came of it.</b></p>
 
     <div class="video" id="video">
       <div class="ph"><div><b>Your video goes here</b>Set VIMEO_ID in the script at the bottom of this file</div></div>
@@ -390,13 +415,13 @@ var OFFER_HOURS = 3;
   <div class="wrap">
     <div class="dream">
       <p class="rv"><small>Quick question</small>I've got a quick question <span>for you.</span></p>
-      <p class="rv">Have you ever wanted to watch your fans across the world sing your song <span>word for word?</span></p>
-      <p class="rv">Have you ever wanted to tour the world <span>performing your music?</span></p>
-      <p class="rv">Have you ever wanted to relax one day at home, refreshing your Spotify dashboard and watching <span>those stream numbers increase?</span></p>
+      <p class="rv">Have you ever wanted to watch fans across the world sing your song <span>word for word?</span></p>
+      <p class="rv">Have you ever dreamed of touring the world, <span>performing your music?</span></p>
+      <p class="rv">Have you ever wanted to relax at home, refresh your Spotify dashboard and watch <span>your stream numbers climb?</span></p>
     </div>
     <div class="admit" style="margin-top:clamp(56px,8vw,100px)">
-      <p class="lede rv" style="max-width:34ch">Come on. You want these kinds of results. You want a successful music career where all your promotional efforts finally give you all your desired results.</p>
-      <p class="big rv">That kind of results that <span>all artist dream about.</span></p>
+      <p class="lede rv" style="max-width:32ch">Come on. You want these results. A music career where your promo finally pays off.</p>
+      <p class="big rv">The kind of results every artist <span>dreams of.</span></p>
     </div>
   </div>
 </section>
@@ -409,29 +434,28 @@ var OFFER_HOURS = 3;
       <h2 class="display rv">So why hasn't it happened <span class="gold">for you yet?</span></h2>
     </div>
     <div class="narrow">
-      <p class="lede rv">Come on, admit it. This isn't the first time you're looking for the right way to promote your music, is it?</p>
-      <p class="rv">When you finish reading this page, you're going to discover the one big thing you've been missing in your music career.</p>
+      <p class="lede rv">Be honest. This isn't the first time you've gone looking for the right way to promote your music, is it?</p>
+      <p class="rv">By the end of this page, you'll know the one big thing that's been missing from your music career.</p>
     </div>
 
-    <div style="margin-top:clamp(48px,7vw,88px)">
+    <div style="margin-top:clamp(56px,8vw,104px)">
 
       <article class="chapter rv">
         <div class="num">01</div>
         <div>
           <h3>2015. I sat down, hopeless.</h3>
           <div class="txt">
-            <p>It was somewhere around 2015. I had just finished recording my song, my first single. The producer had finished the mixing and mastering.</p>
+            <p>It was 2015. I had just finished recording my first single, and the producer had finished mixing and mastering it.</p>
             <div class="dialog">
               <p class="me">"Is it ready?" I asked.</p>
-              <p>"Yes, and I have also helped you upload it online."</p>
+              <p>"Yes. I've already uploaded it online for you."</p>
             </div>
-            <p>For years, as long as I could remember, this was the dream. I had sat down a couple of times dreaming and fantasizing about this exact moment.</p>
-            <p>And yet here I was, living the particular moment I'd always dreamed about, and I still felt hopeless. A deep feeling in my gut. <strong>Is that it?</strong> I kept asking myself.</p>
-            <p>I got home and shared the song with my friends at the time. They laughed.</p>
+            <p>I had dreamed about this exact moment for years. Now it was here, and I felt hopeless. A deep feeling in my gut. <strong>Is that it?</strong> I kept asking myself.</p>
+            <p>I went home and shared the song with my friends. They laughed.</p>
             <div class="dialog">
-              <p>"Is it only you, your producer and your DJ that will play the song?"</p>
+              <p>"So it's only you, your producer and your DJ who will play this song?"</p>
             </div>
-            <p>That's when reality dawned on me.</p>
+            <p>That's when reality hit me.</p>
           </div>
         </div>
       </article>
@@ -439,25 +463,26 @@ var OFFER_HOURS = 3;
       <article class="chapter rv">
         <div class="num">02</div>
         <div>
-          <h3>It wasn't just about making music.</h3>
+          <h3>Making the music wasn't enough.</h3>
           <div class="txt">
-            <p>It's about knowing how to get the right people to listen to it. Getting the right people to listen. That's promotion.</p>
-            <p>I kept on making music. I tried various ways of promotion. I still couldn't get the results I wanted.</p>
-            <p>The big problem was this: I knew I needed to promote, but I didn't know how. No matter what I did, nothing worked. Because I didn't know how to promote, and even if I did, I didn't have what they call <strong>strategy</strong>. The one big thing that makes all promotion work.</p>
+            <p>Making the song was the easy part. The hard part is getting the right people to listen. That's promotion.</p>
+            <p>So I tried different ways to promote. None gave me the results I wanted.</p>
+            <p>The problem was simple. I knew I had to promote, but I didn't know how. And even when I tried, I had no <strong>strategy</strong>, the one big thing that makes all promotion work.</p>
           </div>
-          <div class="pull"><p>The one big thing that makes <span>all promotion work.</span></p></div>
         </div>
       </article>
+
+      <div class="pull rv"><p>The one big thing that makes <span>all promotion work.</span></p></div>
 
       <article class="chapter rv">
         <div class="num">03</div>
         <div>
           <h3>The "Ah-ha" moment.</h3>
           <div class="txt">
-            <p>That's when I had my big "Ah-ha" moment. That's when I decided I had to make a change.</p>
-            <p>Before then, I had spent so much time in the studio that, as a result, I started to know how to produce my songs. Other artists loved my work and started working with me too. I started producing for them as well.</p>
-            <p>That's when I realized the problem was general. It was common with most independent artists.</p>
-            <p>It's not about making a great song. It's not about endless advertising, or spending money to promote your song randomly. It's about having a strategy to back up your promotion. Making sure every naira you spend on promotion works for you. That's where the desired result comes from.</p>
+            <p>That's when I decided something had to change.</p>
+            <p>I had spent so much time in the studio that I'd become good at producing songs. Other artists loved my work and started hiring me to produce for them.</p>
+            <p>Working with them, I noticed something. They had the same problem I had. It wasn't just me. It was common among independent artists.</p>
+            <p>It's not about making a great song. It's not about endless ads, or spending money on promo at random. It's about having a strategy behind your promotion, so every naira you spend works for you. That's where results come from.</p>
           </div>
         </div>
       </article>
@@ -467,10 +492,10 @@ var OFFER_HOURS = 3;
         <div>
           <h3>Years of trial and error.</h3>
           <div class="txt">
-            <p>I ventured into working with more and more artists. The problem was the same and similar, so I thought I should do something about that myself.</p>
-            <p>I had been trying to build a fanbase and a brand for myself over all those years. Learning how to promote my work through trial and error.</p>
-            <p>I tried content promotion. It failed. I tried running ads, and it failed. By the way, that's the fastest way to burn your money if you don't know what you're doing.</p>
-            <p>Then I tried studying what those who were bigger than me were doing, and getting the results I wanted. And I realized it wasn't just about running ads, paying influencers or posting content. It was about their intention behind those activities. <strong>It all came from one particular thing: strategy.</strong></p>
+            <p>I kept working with more artists, and the same problem kept showing up. So I decided to do something about it myself.</p>
+            <p>All those years, I had also been building my own fanbase and brand, learning promotion through trial and error.</p>
+            <p>I tried content promotion. It failed. I tried running ads. That failed too. Ads, by the way, are the fastest way to burn your money when you don't know what you're doing.</p>
+            <p>Then I studied artists who were bigger than me and getting the results I wanted. I realized it wasn't just ads, influencers or posting content. It was the intention behind those activities. <strong>It all came down to one thing: strategy.</strong></p>
           </div>
         </div>
       </article>
@@ -481,9 +506,9 @@ var OFFER_HOURS = 3;
           <h3>Then I applied strategy to my own promo.</h3>
           <div class="txt">
             <p>And guess what? It worked.</p>
-            <p>I started to get results. I began to build a fanbase and grow it. I began to make money, working with artists both inside and outside the continent.</p>
-            <p>Remember, years ago my friends, my producer and my DJ were the only ones who would play and listen to my work. Now my work is heard overseas.</p>
-            <p>I began to post the right content, and the relationship between me and my fanbase began to grow. All of this because I understood the one big thing that guides and governs all promotion: <strong>strategy.</strong></p>
+            <p>I started getting results. I built a fanbase and grew it. I began making money, working with artists both inside and outside the continent.</p>
+            <p>Remember, years earlier, only my friends, my producer and my DJ would listen to my music. Now it's heard overseas.</p>
+            <p>I started posting the right content, and my relationship with my fans grew. All because I understood the one thing that governs all promotion: <strong>strategy.</strong></p>
           </div>
         </div>
       </article>
@@ -491,11 +516,11 @@ var OFFER_HOURS = 3;
       <article class="chapter rv">
         <div class="num">06</div>
         <div>
-          <h3>But I was skeptical. So I tested it on someone else.</h3>
+          <h3>But I was skeptical. So I tested it on another artist.</h3>
           <div class="txt">
-            <p>I wasn't sure it would work for anyone else. I wasn't sure it would work for an artist who wasn't me. Even though the method was universal, I was still curious to see how it would work for another artist.</p>
-            <p>So I found one of the artists I was producing for at the time. He was spending money on promo: paying influencers, paying promoters, running content. He was stuck. No results. Remember the big problem artists face? Nothing was working despite spending money on promo.</p>
-            <p>I decided to bring strategy into the picture. The same thing that worked for me. And guess what happened?</p>
+            <p>I wasn't sure it would work for anyone but me. The method was universal, but I wanted proof.</p>
+            <p>So I picked one of the artists I was producing for. He was spending money on promo: paying influencers, paying promoters, running content. And he was stuck. No results. Sound familiar?</p>
+            <p>I brought in the same strategy that worked for me. And guess what happened?</p>
           </div>
 
           <div class="stats">
@@ -514,15 +539,15 @@ var OFFER_HOURS = 3;
     <div class="pull rv"><p>Nobody told me <span>about strategy.</span></p></div>
 
     <div class="narrow rv">
-      <p class="lede">I didn't have this when I was starting out. Nobody told me about strategy. Why?</p>
+      <p class="lede">I didn't have this when I was starting out. Why did nobody tell me?</p>
     </div>
 
     <div class="gate rv">
       <p class="q">Because the industry is built for independent artists <span>without connections to fail.</span></p>
-      <p>If all independent artists knew how to blow up by themselves, how would labels survive? I'll leave that for you to answer.</p>
-      <p>My years of struggling as an artist weren't my fault at all. The industry is rigged against independent artists by gatekeeping the very information that would allow them to grow.</p>
-      <p>For years we've been told that in order to succeed you need a label, or you need to spend money. Money is important to run your music. But why is it that even when you spend it, you still don't get the results you want?</p>
-      <p><strong>Because the industry has kept the right information from us and fed us with lies.</strong> The real problem is this information, strategy, that has been gatekept from us for years.</p>
+      <p>If every independent artist knew how to grow on their own, how would labels survive? I'll let you answer that.</p>
+      <p>My years of struggling weren't my fault. The information that would have helped me grow was being kept out of reach.</p>
+      <p>For years we've been told that to succeed you need a label, or you need to spend money. Money matters. But why do so many artists spend it and still get nothing?</p>
+      <p><strong>Because the right information has been kept from us.</strong> That missing information is strategy.</p>
     </div>
   </div>
 </section>
@@ -535,17 +560,16 @@ var OFFER_HOURS = 3;
       <h2 class="display rv">Once I saw the truth, I started <span class="gold">growing fast.</span></h2>
     </div>
     <div class="narrow">
-      <p class="rv">Once I realized this truth, that's when I started growing fast. Personally, I did over ₦32 million+ from music production, working with artists here and overseas. I applied the same strategy for an artist, well over 100K streams, making waves, and I documented all of it.</p>
-      <p class="rv">I put that strategy into material and sold it to artists. The result has been amazing.</p>
-      <p class="rv">One artist had been doing music for 3 good years without any significant result, despite spending money on promo. In two months, he was able to go from that to crossing over 50K streams on Spotify. Just by getting the material.</p>
-      <p class="rv">A couple of artists have found clarity in their music after years of confusion, trial and error. They finally have a strategy. A system to win.</p>
+      <p class="rv">Personally, I've made over ₦32 million from music production, working with artists here and overseas.</p>
+      <p class="rv">I applied the same strategy for another artist and took him past 100K streams. I documented all of it.</p>
+      <p class="rv">Then I put that strategy into material and sold it to artists. The results have been amazing.</p>
+      <p class="rv">One artist had been making music for three good years with no significant result, despite spending money on promo. Within two months of getting the material, he crossed 50K streams on Spotify.</p>
+      <p class="rv">A few others finally found clarity after years of confusion and trial and error. They now have a strategy. A system to win.</p>
     </div>
 
-    <div class="pull rv"><p>I didn't realize something <span>when I started.</span></p></div>
-
-    <div class="narrow rv">
-      <p>This didn't just make me money and make me fulfilled. It also meant seeing this secret transform artists' lives. Taking stages they never thought they could perform on. Featuring artists they never thought they could feature. Getting numbers they only thought were impossible. Giving hope to artists who thought all hope was lost.</p>
-      <p>It has given me a new meaning and a real fulfilment. It has put me in a place where I could be of massive help to that artist who is almost like where I was five years ago.</p>
+    <div class="narrow rv" style="margin-top:clamp(40px,6vw,72px)">
+      <p>What I didn't expect was how it would feel. I've watched this strategy change artists' lives. Artists taking stages they never thought they'd stand on. Featuring artists they never thought they could feature. Hitting numbers they thought were impossible. Giving hope to artists who thought all hope was lost.</p>
+      <p>It has given me real fulfilment. And now I can help the artist who is almost exactly where I was five years ago.</p>
     </div>
   </div>
 </section>
@@ -558,10 +582,16 @@ var OFFER_HOURS = 3;
       <h2 class="display rv">And that's why I created the <span class="gold">Artist Growth Bundle.</span></h2>
     </div>
     <div class="narrow">
-      <p class="lede rv">This took over 5 years of careful study, trial and error to put together, and over ₦5m spent on promo to figure out. But it was totally worth it.</p>
-      <p class="rv">Without going through years and years of trial and error, it makes your promo easier and so much more effective. What took me 5 years, I can now achieve in 3 months.</p>
-      <p class="rv">Inside the bundle, you get materials that show you the exact strategy that's transforming artists' careers. It shows you where, and where not, to promote, so you can get the best result from any promotion you do. It gives you the strategy to use so that your promotion works for you. It shows you how to run ads and build your fanbase, so that people will begin to choose you and your music over any other one out there, waiting for you to drop new music so they can go listen.</p>
-      <p class="rv">It shows you where to place your music, so you can get real listeners on autopilot while you sleep. But don't just take my word for it.</p>
+      <p class="lede rv">It took over 5 years of careful study and trial and error to put together, and over ₦5m spent on promo to figure out. It was totally worth it.</p>
+      <p class="rv">It spares you those years of trial and error. Your promo gets easier and far more effective. What took me 5 years, you can now do in 3 months.</p>
+      <p class="rv">Inside the bundle is the exact strategy that's transforming artists' careers. It shows you:</p>
+      <ul class="points rv">
+        <li>Where to promote, and where not to</li>
+        <li>How to make every promo you run work for you</li>
+        <li>How to run ads and build a fanbase that chooses your music over anyone else's and waits for your next drop</li>
+        <li>Where to place your music so real listeners find it, even while you sleep</li>
+      </ul>
+      <p class="rv">But don't just take my word for it.</p>
     </div>
 
     <div style="margin-top:clamp(48px,6vw,80px)">
@@ -569,18 +599,18 @@ var OFFER_HOURS = 3;
       <div class="tgrid">
         <figure class="tst rv">
           <div class="shot tall" data-label="Testimonial screenshot 1"><img src="assets/testimonial-1.jpg" alt="An artist says the 100K Streams Artist Blueprint was helpful in terms of knowledge and empowerment" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></div>
-          <figcaption><b>Knowledge and empowerment.</b>This artist picked up the 100K Streams Artist Blueprint, and that's what he took from it. Not a trick. Not a lucky break. The knowledge to promote with confidence. That's the whole point of strategy: you stop guessing, and every naira and every post starts working for you.</figcaption>
+          <figcaption><b>Knowledge and empowerment.</b>He picked up the 100K Streams Artist Blueprint and came away with knowledge and the confidence to promote. That's what strategy does. You stop guessing.</figcaption>
         </figure>
         <figure class="tst rv">
           <div class="shot tall" data-label="Testimonial screenshot 2"><img src="assets/testimonial-2.jpg" alt="An artist shooting three songs at once and focusing on physical PR first, crediting the contribution for how far it is going" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></div>
-          <figcaption><b>Knowing where to put your energy.</b>Three songs shot in one go, a professional video on the way, and a clear decision to focus on physical PR first, with credit for how far it's going. When you know what works, you stop scattering your effort. You choose where to push, and you push with purpose.</figcaption>
+          <figcaption><b>Knowing where to put your energy.</b>Three songs shot in one go, a professional video on the way, and a clear decision to start with physical PR. He credits what he learned for how far it's going.</figcaption>
         </figure>
       </div>
     </div>
 
-    <div class="pull rv"><p>For less than 10% of what you may waste on your <span>next promo</span> without a strategy, you get access to everything.</p></div>
+    <div class="pull rv"><p>For less than 10% of what your next promo could waste without a strategy, you get <span>everything.</span></p></div>
 
-    <p class="lede rv narrow">Now, while it would be impossible to show you every benefit of the Artist Growth Bundle, here are some of the things you'll experience as soon as you're on the inside.</p>
+    <p class="lede rv narrow">Here's what you get as soon as you're on the inside.</p>
 
     <div class="items">
 
@@ -589,8 +619,8 @@ var OFFER_HOURS = 3;
           <div class="idx">I</div>
           <span class="tag">The core</span>
           <h3>The Secret Playbook</h3>
-          <p>Documenting everything I learned, including the strategies over the years that have generated ₦32m+ for me, and the exponential growth for the artists who applied it to their careers.</p>
-          <p class="win">What could this do for you? ₦32m+ from your music revenue? Hundreds and hundreds of thousands of streams in the coming months?</p>
+          <p>Everything I've learned, including the strategies that have generated ₦32m+ for me and driven fast growth for the artists who applied them.</p>
+          <p class="win">Imagine what it could do for your own music revenue and your streams over the coming months.</p>
         </div>
         <figure class="shot" data-label="Screenshot: The Secret Playbook"><img src="assets/playbook.jpg" alt="The Secret Playbook cover" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
       </article>
@@ -600,8 +630,8 @@ var OFFER_HOURS = 3;
           <div class="idx">II</div>
           <span class="tag">Where to promote</span>
           <h3>The No BS Promo Guide</h3>
-          <p>It shows you exactly where, and where not, to promote your music to get the best result.</p>
-          <p class="win">Never second guess where to promote, or how, again. Start moving with precision to get your desired outcome.</p>
+          <p>Shows you exactly where, and where not, to promote your music.</p>
+          <p class="win">Stop second-guessing where and how to promote. Start moving with precision.</p>
         </div>
         <figure class="shot" data-label="Screenshot: The No BS Promo Guide"><img src="assets/promo-guide.jpg" alt="No BS Promo Guide cover" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
       </article>
@@ -611,8 +641,8 @@ var OFFER_HOURS = 3;
           <div class="idx">III</div>
           <span class="tag">After release</span>
           <h3>Do It Or Break It: 30 Days Release Plan</h3>
-          <p>Your day-by-day roadmap for the 30 days after release.</p>
-          <p class="win">You no longer release and disappear after a few weeks. You now know what to do for 30 days after your release, to get the maximum discovery for your work.</p>
+          <p>Your day-by-day roadmap for the 30 days after you release.</p>
+          <p class="win">No more releasing and disappearing after a few weeks. You'll know what to do every day to get the most discovery from your work.</p>
         </div>
         <figure class="shot" data-label="Screenshot: 30 Days Release Plan"><img src="assets/release-plan.jpg" alt="Do It Or Break It: The 30 Days Release Plan cover" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
       </article>
@@ -622,7 +652,7 @@ var OFFER_HOURS = 3;
           <div class="idx">IV</div>
           <span class="tag">Telegram</span>
           <h3>Artist Community Access</h3>
-          <p>Join a community of independent artists applying and growing their careers alongside others, on Telegram.</p>
+          <p>Join a community of independent artists on Telegram, applying the strategy and growing their careers together.</p>
         </div>
         <figure class="shot" data-label="Screenshot: Artist Community"><img src="assets/community.jpg" alt="Artist Community Access cover" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
       </article>
@@ -632,17 +662,16 @@ var OFFER_HOURS = 3;
           <div class="idx">+</div>
           <span class="tag">Plus, you get</span>
           <h3>The 100K Streams Artist Blueprint</h3>
-          <p>A reliable scorecard and checklist to track your growth and review, and connections to the right promoters that can help you play the entire system.</p>
+          <p>A scorecard and checklist to track and review your growth, plus connections to the right promoters.</p>
         </div>
         <figure class="shot" data-label="Screenshot: 100K Streams Artist Blueprint"><img src="assets/blueprint.jpg" alt="100K Streams Artist Blueprint cover" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
       </article>
     </div>
 
-      <div class="tcta rv" style="margin-top:clamp(56px,8vw,110px)">
-        <p class="t">Different artists. Different stages. <span>Same strategy.</span></p>
-        <p>Most artists start right where you are: spending, posting, hoping. What changes things isn't a better song. It's knowing exactly what to do with it.</p>
-        <p>The Bundle puts that strategy in your hands for ₦27,750, backed by my 30-day guarantee. If it doesn't work for you, you get your money back. The only way to lose is to keep guessing.</p>
-      </div>
+    <div class="tcta rv" style="margin-top:clamp(56px,8vw,110px)">
+      <p class="t">Different artists. Different stages. <span>Same strategy.</span></p>
+      <p>Most artists start right where you are: spending, posting, hoping. What changes things isn't a better song. It's knowing exactly what to do with it.</p>
+    </div>
   </div>
 </section>
 
@@ -651,9 +680,9 @@ var OFFER_HOURS = 3;
   <div class="wrap">
     <div class="narrow">
       <p class="kicker" style="margin-bottom:18px">The offer</p>
-      <p class="lede rv">The total value of all this is ₦450,000, because it's going to save you millions down the line that you'd have wasted promoting without this entire system.</p>
-      <p class="rv">If all this did was help you start getting the result you've always dreamed of, would it be worth it?</p>
-      <p class="rv">If all this did was save you years of struggle through trial and error, and millions wasted trying to figure all this out for yourself, would it have been worth it?</p>
+      <p class="lede rv">The total value of all this is ₦450,000. It will save you the millions you'd otherwise waste promoting without a system.</p>
+      <p class="rv">If all this did was help you start getting the results you've always dreamed of, would it be worth it?</p>
+      <p class="rv">If it saved you years of struggle, and the millions you'd waste trying to figure this out alone, would it be worth it?</p>
     </div>
 
     <div class="offer rv">
@@ -664,7 +693,7 @@ var OFFER_HOURS = 3;
       </div>
       <div class="was">₦450,000</div>
       <div class="now"><small>₦</small>27,750</div>
-      <p>I'm not going to charge you ₦450,000 for the Artist Growth Bundle. I'm only going to charge you ₦27,750.</p>
+      <p>I'm not going to charge you ₦450,000 for the Artist Growth Bundle. I'm only charging you ₦27,750.</p>
       <ul class="list">
         <li><span>The Secret Playbook</span><span>Included</span></li>
         <li><span>The No BS Promo Guide</span><span>Included</span></li>
@@ -675,20 +704,20 @@ var OFFER_HOURS = 3;
       <a class="btn block" data-cta href="/checkout/">Get the Artist Growth Bundle
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <p class="secure">Secure order form. After payment you go straight to a member area to download all the materials and the bonuses.</p>
+      <p class="secure">Secure checkout. After payment you go straight to the member area to download everything, including the bonuses.</p>
     </div>
 
     <div class="guarantee rv">
       <p class="kicker">My guarantee</p>
       <h3>30 days. <span>No long talk.</span></h3>
-      <p>I'm going to take all the risk and give you my fair-proof guarantee. If you applied this system in your career and you don't start seeing results, contact me at <a href="mailto:fineboyproducer@gmail.com">fineboyproducer@gmail.com</a>, and I'll refund your money. I'll even open with an apology.</p>
-      <p>But you must act now, because I'm taking this offer down in the next 3 hours and it'll be gone.</p>
+      <p>I'll take all the risk. If you apply this system and don't start seeing results, email me at <a href="mailto:fineboyproducer@gmail.com">fineboyproducer@gmail.com</a> and I'll refund your money. I'll even open with an apology.</p>
+      <p>But act now. I'm taking this offer down in the next 3 hours, and then it's gone.</p>
     </div>
 
-    <p class="imagine rv">Just imagine what your life will be like when your promo starts to work. Your fans, here and there, can't stop singing your music <span>word for word,</span> and can't wait to watch you perform live. Just because you applied this system.</p>
+    <p class="imagine rv">Imagine your promo finally working. Fans everywhere singing your music <span>word for word,</span> can't wait to watch you perform live. All because you applied this system.</p>
 
     <div class="narrow rv" style="margin-top:44px">
-      <p class="lede">So click the button below right now. You'll be taken to a secure order form. After you make payment, you'll be taken to a secure member area where you can download all the materials and the bonuses.</p>
+      <p class="lede">So click the button below. You'll go to a secure checkout, and straight after payment you'll get access to all the materials and bonuses.</p>
       <p style="margin-top:28px"><a class="btn" data-cta href="/checkout/">Get the Bundle — ₦27,750
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a></p>
@@ -701,10 +730,10 @@ var OFFER_HOURS = 3;
   <div class="wrap">
     <div class="narrow">
       <p class="kicker" style="margin-bottom:18px">Before you go</p>
-      <p class="lede rv">For those who are already getting the Artist Growth Bundle right now, this is what's going to happen next. You'll start implementing the strategy, and you'll start experiencing results you never thought possible in your music, through your promotion, just like other artists.</p>
-      <p class="rv">You see, it doesn't matter to me if you get the Artist Growth Bundle right now or not. I will still be going about my daily business, working on my goals, and helping as many artists as I can reach, whether you get the Bundle or not.</p>
-      <p class="rv">However, without the help in this material, you'll always be working harder than you really need to.</p>
-      <p class="rv">I know it sounds kind of harsh, but I think you'll agree with me.</p>
+      <p class="lede rv">If you're getting the Artist Growth Bundle right now, here's what happens next. You start applying the strategy, and you start seeing results from your promo that you never thought were possible, just like other artists.</p>
+      <p class="rv">It doesn't matter to me whether you get it today. I'll still be working on my goals and helping as many artists as I can.</p>
+      <p class="rv">But without the help in this material, you'll always be working harder than you need to.</p>
+      <p class="rv">I know that sounds harsh. I think you'll agree.</p>
       <p class="rv" style="margin-top:34px"><a class="btn" data-cta href="/checkout/">Get the Bundle — ₦27,750
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a></p>
