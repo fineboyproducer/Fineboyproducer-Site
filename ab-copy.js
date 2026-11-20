@@ -188,3 +188,83 @@ window.FP_COPY_B['/'] = [
   "Strategy is what separates artists who get heard from artists who keep paying. Get it before your next release."
  ]
 ];
+window.FP_COPY_B['/work with me'] = [
+ [
+  "I work with serious artists and music businesses that want more than another release — they want a clearer strategy, stronger positioning, and measurable growth.",
+  "You’ve spent money on promo and nothing happened. I work with serious artists and music businesses to build the strategy that makes every naira work: clearer positioning, real fans, and growth you can measure."
+ ],
+ [
+  "Stop guessing.",
+  "Stop burning money on promo."
+ ],
+ [
+  "A personalized deep dive into your music career, positioning, content, platforms and growth strategy.",
+  "A personalized deep dive into your music, positioning, content and platforms, so you know exactly what to do, where to spend and what to stop paying for."
+ ],
+ [
+  "We look at your music career, social platforms and DSP profiles.",
+  "We go through your music career, your social platforms and your DSP profiles line by line."
+ ],
+ [
+  "What’s working?",
+  "Where did your promo money go?"
+ ],
+ [
+  "What’s not?",
+  "What actually worked?"
+ ],
+ [
+  "You leave knowing what to do next — from content and release strategy to promotion and audience growth.",
+  "You leave knowing exactly what to do next, from content and release strategy to promotion and audience growth, so your next release is not another gamble."
+ ],
+ [
+  "The objective isn’t vanity numbers.",
+  "Not vanity numbers. Fans who know your lyrics word for word, and results that keep coming even while you sleep."
+ ],
+ [
+  "You already take your music seriously.",
+  "You’ve released music and put real money behind it."
+ ],
+ [
+  "Your music doesn’t need more guesswork.",
+  "Your music doesn’t need more promo money."
+ ],
+ [
+  "It needs a system.",
+  "It needs a strategy that works."
+ ],
+ [
+  "If you’re ready to approach your music like a business, let’s build the strategy.",
+  "If you’re done watching your effort disappear into thin air, let’s build the strategy that makes it count."
+ ]
+];
+window.FP_COPY_B['/about'] = [
+ [
+  "I started as a producer. Working with artists eventually made me realize that making great music is only part of the equation.",
+  "I started as a producer. Then I watched artist after artist with good songs spend money on promo and get nothing back. That’s when I knew the music is only half the work."
+ ],
+ [
+  "At the time, I didn’t have a big platform, major promotion or industry connections. I was simply trying to figure out how to make something I believed in.",
+  "At the time, I had no big platform, no promotion and no industry connections. I finished my first single, uploaded it and shared it with my friends. They laughed. “So it’s only you, your producer and your DJ who will play this?” That’s when I learned that making the song is the easy part."
+ ],
+ [
+  "A lot of artists weren’t struggling because their music was necessarily bad.",
+  "Many of the artists I worked with weren’t struggling because of talent. Their songs were good."
+ ],
+ [
+  "They were struggling because they didn’t have a clear strategy behind the music.",
+  "They were struggling because nobody had given them a strategy behind the music."
+ ],
+ [
+  "That’s when my focus started changing.",
+  "That’s when my focus changed. I stopped asking how to make better songs and started asking why good songs go nowhere."
+ ],
+ [
+  "But more activity doesn’t automatically create growth.",
+  "More activity is not growth. It’s more money gone into thin air."
+ ],
+ [
+  "Artists who want to build something that lasts beyond one song.",
+  "Artists who want fans who know their lyrics word for word, and a career that keeps paying off."
+ ]
+];
