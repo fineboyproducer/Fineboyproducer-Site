@@ -3,67 +3,67 @@ window.FP_COPY_B = window.FP_COPY_B || {};
 window.FP_COPY_B['/live'] = [
  [
   "Most artists don't have a promotion problem.",
-  "You paid for the promo."
+  "You spent the money on promo."
  ],
  [
   "They have a strategy problem.",
-  "Where did the money go?"
+  "And almost nothing came of it."
  ],
  [
   "Join Fineboy Producer for a free live session this Friday, on how to stop throwing money at music promotion that isn't producing real results.",
-  "Friday, live and free, I'll show you where promotion money disappears, how to spot a promoter who can't prove results, and where your next naira should go instead. You'll leave with a plan for your next release."
+  "It's not your song. It's not bad luck. Nobody ever gave you the strategy behind promotion. This Friday, live and free, I'll show you where your promo money has been going, why it hasn't worked, and the strategy that makes every naira you spend work for you."
  ],
  [
   "Are you spending money on promotion and still not seeing results?",
-  "If you've paid for promotion, you've been here:"
+  "It happened again, didn't it?"
  ],
  [
   "Paying for promotion without knowing what you're actually getting.",
-  "You paid, and nobody showed you where the money went."
+  "You paid for the promo, and nobody showed you where the money went."
  ],
  [
   "Spending money on playlists, pages, influencers or ads without a clear strategy.",
-  "The plays came in. The fans didn't."
+  "The plays came in. The fans didn't. Nobody is singing your song."
  ],
  [
   "Getting streams but no real fans.",
-  "The promoter promised on a call, then went quiet. No breakdown. No refund."
+  "You trusted a promoter's word, then got silence. No breakdown. No refund."
  ],
  [
   "Promoting your songs to the wrong audience.",
-  "You've tried the page, the playlist, the influencer, the ad, and still can't say which one did anything."
+  "You tried the page, the playlist, the influencer, the ads. You still can't say which one did anything."
  ],
  [
   "Repeating the same promotion methods because “that’s what everyone does.”",
-  "Every release costs more, and you're still guessing."
+  "Every release costs more, and you're back at zero again."
  ],
  [
   "Spending more money every release without understanding what actually works.",
-  "Your next release is coming, and you can't afford to waste it again."
+  "Meanwhile, other artists are touring, trending and featuring big names. And you're refreshing your dashboard."
  ],
  [
   "Why some promotion campaigns produce numbers but no real growth",
-  "The questions to ask any promoter before you pay them a kobo"
+  "Why your promo money keeps disappearing, and how to stop it"
  ],
  [
   "How to identify promotion that is wasting your money",
-  "How to tell real listeners from fake numbers, and why bought streams can get your song taken down"
+  "Why ads are the fastest way to burn money when you don't have a strategy"
  ],
  [
   "Where artists should focus their money first",
-  "Where your first naira should go when your budget is small"
+  "Where to promote, where not to, and how to make every promo you run work for you"
  ],
  [
   "How to think about promotion strategically",
-  "How to read your own numbers and know what's working"
+  "How to build fans who choose your music over anyone else's and wait for your next drop"
  ],
  [
   "How to build a promotion system around your actual goals",
-  "What to do before, during and after your next release"
+  "How to read your own numbers, spot fake plays and know what's actually working"
  ],
  [
   "You release music consistently but struggle to get meaningful results.",
-  "You've released music and the results don't match the work."
+  "You've released music, put real money behind it, and the results don't match the work."
  ],
  [
   "You've paid for promotion before and weren't sure what you actually got from it.",
@@ -71,61 +71,61 @@ window.FP_COPY_B['/live'] = [
  ],
  [
   "You keep hearing about different promotion methods but don't know what to trust.",
-  "You're done being told to \"just push your song\"."
+  "You're tired of \"just push your song\" advice with no plan behind it."
  ],
  [
   "You want streams, but you also want real listeners and long-term growth.",
-  "You want real listeners, not numbers that look good and mean nothing."
+  "You want real fans, not numbers that look good and mean nothing."
  ],
  [
   "You want to stop guessing and start making smarter promotion decisions.",
-  "Your next release is coming and you want a plan, not another gamble."
+  "You want what this is supposed to lead to: shows, fans who know your words, and a dashboard that climbs while you sleep."
  ],
  [
   "Fineboy Producer is a music strategist and producer who helps independent artists understand how to grow their music using strategy, systems and practical promotion.",
-  "Fineboy Producer has worked with 237+ artists and built a campaign that took an artist past 100,000 Audiomack streams. He teaches artists to stop guessing and start proving what works."
+  "Fineboy Producer released his first single in 2015 and nobody listened. He spent over ₦5m on promo to learn what actually works, then used strategy to take an artist past 100K Audiomack streams. He has worked with 237+ artists."
  ],
  [
   "Stop guessing.",
-  "Don't pay for"
+  "Your next release"
  ],
  [
   "Start promoting with a strategy.",
-  "another silent release."
+  "is not another gamble."
  ],
  [
   "Your next release doesn't need more random promotion.",
-  "One live session. Free. Know where your money should go before you spend it again."
+  "Come this Friday and learn the strategy that makes every naira you spend work for you."
  ],
  [
   "It needs a better plan.",
-  "Friday, 8PM. Bring your next release."
+  "Free. Live. Friday, 8PM."
  ]
 ];
 window.FP_COPY_B['/'] = [
  [
   "I help serious independent artists turn their music into real streams, real fans, and real growth — using strategy, not guesswork.",
-  "Stop paying for promotion you can't measure. I help upcoming artists turn releases into real streams, real fans and real growth, with a plan that shows what's working."
+  "You've spent money on promo and got almost nothing back. It's not your music. It's the missing strategy. I help independent artists turn releases into real streams, real fans and a music career that finally pays off."
  ],
  [
   "For independent artists who are ready to take their music seriously.",
-  "237+ artists worked with. One campaign past 100,000 Audiomack streams."
+  "237+ artists worked with. One artist taken past 100K Audiomack streams with strategy."
  ],
  [
   "GOOD MUSIC",
-  "STOP PAYING"
+  "YOU PAID."
  ],
  [
   "ISN'T ENOUGH.",
-  "FOR SILENCE."
+  "NOTHING BACK."
  ],
  [
   "You can make great music and still struggle to get heard.",
-  "You can make a great song, pay for promotion and still hear nothing back. That's not bad luck. That's no strategy."
+  "Great song. Real money on promo. Almost no result. That's not bad luck and it's not your talent. It's missing strategy, the one big thing that makes all promotion work."
  ],
  [
   "You're releasing music without knowing what you're actually trying to achieve.",
-  "No plan means every release is a guess, and every guess costs you."
+  "You release and hope. Without a strategy every drop is a gamble, and you're the one paying for it."
  ],
  [
   "Wrong Promotion",
@@ -133,7 +133,7 @@ window.FP_COPY_B['/'] = [
  ],
  [
   "You're spending money without knowing what's actually moving your career.",
-  "You paid the page, the playlist, the influencer. Nobody showed you what you got."
+  "Pages, playlists, influencers, ads. You paid, and nobody showed you what you got. Ads are the fastest way to burn money when you don't know what you're doing."
  ],
  [
   "Every release starts from zero instead of building on what worked before.",
@@ -141,15 +141,15 @@ window.FP_COPY_B['/'] = [
  ],
  [
   "The problem isn't always the music. Sometimes, it's what happens after you make it.",
-  "The problem isn't always the music. It's what happens after you release it, and that part can be fixed."
+  "The problem isn't the music. It's what happens after you release it. And that is fixable."
  ],
  [
   "Put your attention, money and resources where they can actually matter.",
-  "Know what you're paying for before you pay. Put your money where you can see what it did."
+  "Know where to promote and where not to. Make every naira you spend work for you."
  ],
  [
   "A practical system for independent artists who want to understand how to promote their music, get discovered and work toward 100K+ streams without relying on guesswork.",
-  "The system for promoting a song the right way: what to do, what to skip, what to stop paying for, and how to build toward 100K+ streams."
+  "The strategy behind every promo that works: where to promote, what to stop paying for, and how to build toward 100K+ streams. Stop guessing. Start growing."
  ],
  [
   "LEARN HOW TO",
@@ -161,19 +161,19 @@ window.FP_COPY_B['/'] = [
  ],
  [
   "Practical strategies for independent artists who want more than random advice.",
-  "Free, straight talk for upcoming artists tired of \"just push your song\" advice."
+  "Free, straight talk for artists tired of \"just push your song\" advice. Learn what the industry never told you."
  ],
  [
   "You're already making serious music.",
-  "You've released music and you're serious about the next one."
+  "You've released music and put real money behind it."
  ],
  [
   "You have the resources to invest in your career.",
-  "You're ready to invest in a plan, not another gamble."
+  "You want shows, real fans and a dashboard that climbs while you sleep."
  ],
  [
   "You're tired of random promotion.",
-  "You're done paying for promotion you can't measure."
+  "You're done paying for promotion that goes nowhere."
  ],
  [
   "STOP GUESSING.",
@@ -181,10 +181,10 @@ window.FP_COPY_B['/'] = [
  ],
  [
   "START GROWING.",
-  "DESERVES A PLAN."
+  "NEEDS A STRATEGY."
  ],
  [
   "Your next move should have a strategy behind it.",
-  "Stop guessing. See where the money should go before you spend it."
+  "Strategy is what separates artists who get heard from artists who keep paying. Get it before your next release."
  ]
 ];
