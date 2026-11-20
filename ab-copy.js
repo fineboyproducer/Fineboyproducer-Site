@@ -3,15 +3,15 @@ window.FP_COPY_B = window.FP_COPY_B || {};
 window.FP_COPY_B['/live'] = [
  [
   "Most artists don't have a promotion problem.",
-  "You spent the money on promo."
+  "After spending money on promo, nothing happened."
  ],
  [
   "They have a strategy problem.",
-  "And almost nothing came of it."
+  "All that effort, money and hard work gone into thin air."
  ],
  [
   "Join Fineboy Producer for a free live session this Friday, on how to stop throwing money at music promotion that isn't producing real results.",
-  "It's not your song. It's not bad luck. Nobody ever gave you the strategy behind promotion. This Friday, live and free, I'll show you where your promo money has been going, why it hasn't worked, and the strategy that makes every naira you spend work for you."
+  "It's not your song and it's not bad luck. Nobody ever gave you the strategy behind promotion. This Friday, live and free, I'll show you where your promo money has been going, why it hasn't worked, and the strategy that makes every naira you spend work for you."
  ],
  [
   "Are you spending money on promotion and still not seeing results?",
@@ -79,7 +79,7 @@ window.FP_COPY_B['/live'] = [
  ],
  [
   "You want to stop guessing and start making smarter promotion decisions.",
-  "You want what this is supposed to lead to: shows, fans who know your words, and a dashboard that climbs while you sleep."
+  "You want fans who know your lyrics word for word, shows, and a dashboard that climbs while you sleep."
  ],
  [
   "Fineboy Producer is a music strategist and producer who helps independent artists understand how to grow their music using strategy, systems and practical promotion.",
@@ -113,15 +113,15 @@ window.FP_COPY_B['/'] = [
  ],
  [
   "GOOD MUSIC",
-  "YOU PAID."
+  "AFTER SPENDING MONEY ON PROMO,"
  ],
  [
   "ISN'T ENOUGH.",
-  "NOTHING BACK."
+  "NOTHING HAPPENED."
  ],
  [
   "You can make great music and still struggle to get heard.",
-  "Great song. Real money on promo. Almost no result. That's not bad luck and it's not your talent. It's missing strategy, the one big thing that makes all promotion work."
+  "All that effort, money and hard work gone into thin air. That's not bad luck and it's not your talent. It's missing strategy, the one big thing that makes all promotion work."
  ],
  [
   "You're releasing music without knowing what you're actually trying to achieve.",
@@ -169,7 +169,7 @@ window.FP_COPY_B['/'] = [
  ],
  [
   "You have the resources to invest in your career.",
-  "You want shows, real fans and a dashboard that climbs while you sleep."
+  "You want fans who know your lyrics word for word, shows, and a dashboard that climbs while you sleep."
  ],
  [
   "You're tired of random promotion.",
