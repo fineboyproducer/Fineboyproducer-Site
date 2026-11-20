@@ -135,7 +135,7 @@
 
   /* Hero */
   .hero{min-height:100svh;display:flex;align-items:center;padding-top:110px;padding-bottom:60px;}
-  .hero-grid{display:grid;grid-template-columns:1fr;gap:56px;align-items:center;}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:56px;align-items:center;}
   @media(min-width:1024px){.hero-grid{grid-template-columns:1.05fr 0.95fr;gap:40px;}}
   .hero-headline{font-size:clamp(44px,8vw,86px);}
   .portrait-frame{

@@ -244,7 +244,7 @@ html.js .hero .ha{opacity:0;animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards;
 html.js .shift-stage{height:230vh}
 .shift-sticky{position:sticky;top:0;height:100svh;display:flex;align-items:center;overflow:hidden}
 .swap{--m:0;--s:1;--p:1;width:100%}
-.swap-row{position:relative;display:block;width:max-content;max-width:100%;font-size:min(19vw,17.5rem);line-height:.88;white-space:nowrap}
+.swap-row{position:relative;display:block;width:max-content;max-width:100%;font-size:min(15.5vw,17.5rem);line-height:.88;white-space:nowrap}
 .swap-row .w-outline{display:block;color:transparent;-webkit-text-stroke:1px rgba(242,242,240,.34)}
 .swap-row .w-solid{position:absolute;inset:0;color:var(--white)}
 .swap-music .w-solid{opacity:var(--m)}
@@ -320,12 +320,12 @@ html.js .panel.in .curve-line{stroke-dashoffset:0}
 .philo-copy{grid-column:1 / span 5;position:sticky;top:calc(var(--nav-h) + 32px)}
 .philo-copy p + p{margin-top:1.25em}
 .philo-copy p:last-child{color:var(--white)}
-.fw{grid-column:7 / span 6;--indent:clamp(14px,5.5vw,96px);--drift:0px}
-.fw li{position:relative;padding-bottom:clamp(30px,4.2vw,60px);transform:translateX(calc(var(--i) * (var(--indent) + var(--drift))))}
+.fw{grid-column:7 / span 6;--indent:clamp(14px,3.6vw,64px);--drift:0px}
+.fw li{position:relative;padding-bottom:clamp(30px,4.2vw,60px);transform:translateX(calc(var(--i) * (var(--indent) + var(--drift))));width:calc(100% - var(--i) * (var(--indent) + var(--drift)))}
 .fw li:last-child{padding-bottom:0}
 .fw li:not(:last-child)::before{content:"";position:absolute;left:3px;top:calc(100% - clamp(30px,4.2vw,60px) + 8px);bottom:6px;width:1px;background:var(--gold);opacity:.8}
 .fw li:not(:last-child)::after{content:"";position:absolute;left:0;bottom:6px;width:7px;height:7px;border-right:1px solid var(--gold);border-bottom:1px solid var(--gold);transform:rotate(45deg) translate(-1px,-1px);opacity:.9}
-.fw-word{display:block;font-size:clamp(2.6rem,6.6vw,6.6rem);line-height:.95;transition:color .3s}
+.fw-word{display:block;font-size:clamp(2.6rem,5.2vw,6.6rem);line-height:.95;transition:color .3s}
 .fw li:hover .fw-word{color:var(--gold)}
 html.js .fw-word{opacity:0;transform:translateY(.35em);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1),color .3s;transition-delay:calc(var(--i) * 130ms),calc(var(--i) * 130ms),0s}
 html.js .fw li.in .fw-word{opacity:1;transform:none}
@@ -455,7 +455,7 @@ html.js .fw li.in .fw-word{opacity:1;transform:none}
   .belief p{max-width:30em}
 
   .fw{--indent:clamp(10px,4.4vw,32px)}
-  .fw-word{font-size:clamp(2.7rem,14.5vw,5.4rem)}
+  .fw-word{font-size:clamp(2.2rem,10.5vw,5.4rem)}
 
   .chain-row{flex-direction:column;align-items:flex-start;gap:14px}
   .chain-row .display{font-size:clamp(3rem,15vw,6.4rem)}
@@ -477,6 +477,8 @@ html.js .fw li.in .fw-word{opacity:1;transform:none}
 }
 
 @media (max-width:480px){
+  .swap-row{font-size:min(15.5vw,17.5rem)}
+  .pw li{font-size:clamp(2.4rem,12.5vw,13rem)}
   .ticks{font-size:.62rem;letter-spacing:.06em}
   .panel-top .label:last-child{flex-basis:100%}
 }
