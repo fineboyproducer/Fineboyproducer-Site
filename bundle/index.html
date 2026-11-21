@@ -297,6 +297,8 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
 .bar .p b{font-family:var(--display);font-stretch:75%;font-weight:800;font-size:1.4rem;color:var(--gold);display:block}
 .bar .p span{font-size:.7rem;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
 .bar .btn{padding:14px 20px;min-height:48px;font-size:.85rem}
+.bar:not(.priced) .p{display:none}
+.bar:not(.priced) .btn{flex:1;justify-content:center}
 
 /* reveal */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}
@@ -402,7 +404,7 @@ var OFFER_HOURS = 3;
     </div>
 
     <div class="hero-cta">
-      <a class="btn" data-cta href="/checkout/">Get the Bundle — ₦27,750
+      <a class="btn" data-cta href="/checkout/">Get the Bundle
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <small>Secure checkout. 30-day guarantee.</small>
@@ -925,6 +927,10 @@ var VIMEO_ID  = "1248104380";   // Vimeo video id for the SLO video. Empty = pla
     q=false;
     var on=items.getBoundingClientRect().bottom < 0;
     if(bar.classList.contains('on')!==on){ bar.classList.toggle('on',on); bar.setAttribute('aria-hidden',on?'false':'true'); }
+    /* price and countdown only show once the offer section (anchor + price reveal) has come into view */
+    var offer=document.getElementById('offer');
+    var priced=!!offer && offer.getBoundingClientRect().top < window.innerHeight*0.75;
+    if(bar.classList.contains('priced')!==priced) bar.classList.toggle('priced',priced);
   }
   function queue(){ if(!q){ q=true; requestAnimationFrame(check); } }
   window.addEventListener('scroll',queue,{passive:true});
