@@ -309,6 +309,27 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
   html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.timer-pill i{animation:none}.btn,.btn svg,.bar{transition:none}
 }
 @media(min-width:900px){.bar{display:none}footer{padding-bottom:40px}}
+
+/* quick question section */
+.qsec{max-width:1000px}
+.q-eyebrow{margin:0 0 14px;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.q-title{font-size:clamp(2.7rem,9.5vw,6.4rem);line-height:.92;margin:0}
+.q-list{list-style:none;display:grid;gap:clamp(22px,4vw,38px);margin:clamp(34px,6vw,64px) 0 0;padding:0}
+.q-list li{position:relative;padding-left:clamp(34px,5vw,58px);font-family:var(--display);font-stretch:75%;font-weight:700;text-transform:uppercase;line-height:1.03;font-size:clamp(1.55rem,4.8vw,2.9rem)}
+.q-list li::before{content:"";position:absolute;left:2px;top:.22em;width:.55em;height:.55em;border:2px solid var(--gold);transform:rotate(45deg)}
+.q-list li span{color:var(--gold)}
+/* bonus items */
+.item .tag.free{background:var(--gold);border-color:var(--gold);color:#000;font-weight:700}
+.item--text>div{max-width:760px}
+@media (min-width:900px){.items .item.item--text{grid-template-columns:1fr}}
+.item .points{margin:22px 0 4px}
+.item .points b{color:var(--gold);font-weight:700}
+/* price reveal */
+.offer .reveal-line{font-family:var(--display);font-stretch:75%;font-weight:700;text-transform:uppercase;font-size:clamp(1.55rem,4.6vw,2.7rem);line-height:1.05;color:var(--bone);max-width:26ch;margin:0 auto}
+.offer .reveal-line b{color:var(--gold);font-weight:800}
+.offer .was{font-size:clamp(3.6rem,14vw,8rem);line-height:1;margin:clamp(22px,3.5vw,38px) 0 0;text-decoration-thickness:.07em}
+.offer .now{margin:clamp(26px,4vw,40px) 0 0}
+.countbox{margin:22px 0 0}
 </style>
 <script>
 /* Owner bypass. Visit any page on this site once with ?owner=fineboy-preview to see the live offer on that device. ?owner=off turns it off. */
@@ -399,7 +420,7 @@ var OFFER_HOURS = 3;
   <div class="wrap">
     <p class="kicker">The Artist Growth Bundle</p>
     <h1 class="display">It happened again, <em>didn't it?</em></h1>
-    <p class="sub">You spent hundreds of thousands on promo. Maybe even millions. <b>And almost nothing came of it.</b></p>
+    <p class="sub">You spent hundreds of thousands on promo. Maybe even millions. <b>And almost nothing came out of it.</b></p>
 
     <div class="video" id="video">
       <div class="ph"><div><b>Your video goes here</b>Set VIMEO_ID in the script at the bottom of this file</div></div>
@@ -409,7 +430,7 @@ var OFFER_HOURS = 3;
       <a class="btn" href="#offer" data-jump>Get the Bundle
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <small>Secure checkout. 30-day guarantee.</small>
+      <small>Secure checkout. 90-day guarantee.</small>
     </div>
   </div>
 </section>
@@ -417,11 +438,14 @@ var OFFER_HOURS = 3;
 <!-- STAR: the dream -->
 <section class="sec">
   <div class="wrap">
-    <div class="dream">
-      <p class="rv"><small>Quick question</small>I've got a quick question <span>for you.</span></p>
-      <p class="rv">Have you ever wanted to watch fans across the world sing your song <span>word for word?</span></p>
-      <p class="rv">Have you ever dreamed of touring the world, <span>performing your music?</span></p>
-      <p class="rv">Have you ever wanted to relax at home, refresh your Spotify dashboard and watch <span>your stream numbers climb?</span></p>
+    <div class="qsec">
+      <p class="q-eyebrow rv">Quick question</p>
+      <h2 class="display q-title rv">I've got a quick question <span class="gold">for you.</span></h2>
+      <ul class="q-list">
+        <li class="rv">Have you ever wanted to watch fans across the world sing your song <span>word for word?</span></li>
+        <li class="rv">Have you ever dreamed of touring the world, <span>performing your music?</span></li>
+        <li class="rv">Have you ever wanted to relax at home, refresh your Spotify dashboard and watch <span>your stream numbers climb?</span></li>
+      </ul>
     </div>
     <div class="admit" style="margin-top:clamp(56px,8vw,100px)">
       <p class="lede rv" style="max-width:32ch">Come on. You want these results. A music career where your promo finally pays off.</p>
@@ -452,9 +476,9 @@ var OFFER_HOURS = 3;
             <p>It was 2015. I had just finished recording my first single, and the producer had finished mixing and mastering it.</p>
             <div class="dialog">
               <p class="me">"Is it ready?" I asked.</p>
-              <p>"Yes. I've already uploaded it online for you."</p>
+              <p>"Yes, and I also helped you upload it online."</p>
             </div>
-            <p>I had dreamed about this exact moment for years. Now it was here, and I felt hopeless. A deep feeling in my gut. <strong>Is that it?</strong> I kept asking myself.</p>
+            <p>I had dreamed about this exact moment for years. Now it was here, and I felt hopeless. A deep feeling in my gut. <strong>Is that it?</strong> How do I get people to go listen to it now that it's online? I kept asking myself.</p>
             <p>I went home and shared the song with my friends. They laughed.</p>
             <div class="dialog">
               <p>"So it's only you, your producer and your DJ who will play this song?"</p>
@@ -471,7 +495,7 @@ var OFFER_HOURS = 3;
           <div class="txt">
             <p>Making the song was the easy part. The hard part is getting the right people to listen. That's promotion.</p>
             <p>So I tried different ways to promote. None gave me the results I wanted.</p>
-            <p>The problem was simple. I knew I had to promote, but I didn't know how. And even when I tried, I had no <strong>strategy</strong>, the one big thing that makes all promotion work.</p>
+            <p>The problem was, I knew I had to promote, but I didn't know how. And even when I tried, I had no <strong>strategy</strong>, the one big thing that makes all promotion work.</p>
           </div>
         </div>
       </article>
@@ -566,7 +590,7 @@ var OFFER_HOURS = 3;
     <div class="narrow">
       <p class="rv">Personally, I've made over ₦32 million from music production, working with artists here and overseas.</p>
       <p class="rv">I applied the same strategy for another artist and took him past 100K streams. I documented all of it.</p>
-      <p class="rv">Then I put that strategy into material and sold it to artists. The results have been amazing.</p>
+      <p class="rv">Then I put that strategy into educational materials and sold it to artists. The results have been amazing.</p>
       <p class="rv">One artist had been making music for three good years with no significant result, despite spending money on promo. Within two months of getting the material, he crossed 50K streams on Spotify.</p>
       <p class="rv">A few others finally found clarity after years of confusion and trial and error. They now have a strategy. A system to win.</p>
     </div>
@@ -664,11 +688,50 @@ var OFFER_HOURS = 3;
       <article class="item rv">
         <div>
           <div class="idx">+</div>
-          <span class="tag">Plus, you get</span>
+          <span class="tag free">Plus, you get it free</span>
           <h3>The 100K Streams Artist Blueprint</h3>
-          <p>A scorecard and checklist to track and review your growth, plus connections to the right promoters.</p>
+          <p>The framework behind every promo that works. Yours free with the bundle.</p>
+          <ul class="points">
+            <li><b>Clarity.</b> Know exactly where you're going and why it matters.</li>
+            <li><b>Structure.</b> A system that gets stronger with every release.</li>
+            <li><b>Identity.</b> An artist brand that attracts momentum.</li>
+            <li><b>Momentum.</b> Turn consistency into growth that keeps building.</li>
+            <li>Includes the Artist Growth Framework, Release Strategy Blueprint, Identity &amp; Positioning System and Momentum &amp; Growth Principles.</li>
+          </ul>
         </div>
         <figure class="shot" data-label="Screenshot: 100K Streams Artist Blueprint"><img src="assets/blueprint.jpg" alt="100K Streams Artist Blueprint cover" loading="lazy" onerror="this.parentNode.classList.add('empty');this.remove()"></figure>
+      </article>
+
+      <article class="item item--text rv">
+        <div>
+          <div class="idx">+</div>
+          <span class="tag free">Free bonus</span>
+          <h3>The Practical Scorecard</h3>
+          <p>Score your music career against what actually moves the needle, so you stop guessing where you stand.</p>
+          <ul class="points">
+            <li>See exactly where you stand right now, release by release.</li>
+            <li>Spot the weak link that's holding your promo back.</li>
+            <li>Know what to fix first, so every naira goes where it counts.</li>
+            <li>Track your progress and watch your score climb.</li>
+          </ul>
+          <p class="win">No more "I think it's working." You'll know.</p>
+        </div>
+      </article>
+
+      <article class="item item--text rv">
+        <div>
+          <div class="idx">+</div>
+          <span class="tag free">Free bonus</span>
+          <h3>The Music Growth Checklist</h3>
+          <p>A checklist to track your music growth, review your progress and identify relevant promotional opportunities.</p>
+          <ul class="points">
+            <li>Track your music growth in one place.</li>
+            <li>Review your progress after every release and see what moved.</li>
+            <li>Find the promotional opportunities and promoters that actually fit your music.</li>
+            <li>Never miss a step before, during or after a release.</li>
+          </ul>
+          <p class="win">Stop forgetting steps. Start moving with a plan.</p>
+        </div>
       </article>
     </div>
 
@@ -682,39 +745,41 @@ var OFFER_HOURS = 3;
 <!-- OFFER -->
 <section class="sec" id="offer">
   <div class="wrap">
-    <div class="narrow">
+    <div class="offer rv" id="reveal">
       <p class="kicker" style="margin-bottom:18px">The offer</p>
-      <p class="lede rv">The total value of all this is ₦450,000. It will save you the millions you'd otherwise waste promoting without a system.</p>
-      <p class="rv">If all this did was help you start getting the results you've always dreamed of, would it be worth it?</p>
-      <p class="rv">If it saved you years of struggle, and the millions you'd waste trying to figure this out alone, would it be worth it?</p>
-    </div>
-
-    <div class="offer rv">
-      <div class="countbox" aria-label="Time left on this offer">
-        <div><b class="mono" data-h>03</b><span>Hours</span></div>
-        <div><b class="mono" data-m>00</b><span>Min</span></div>
-        <div><b class="mono" data-s>00</b><span>Sec</span></div>
-      </div>
+      <p class="reveal-line">I'm not going to charge you ₦450,000 for the Artist Growth Bundle. <b>I'm only charging you ₦27,750.</b></p>
       <div class="was">₦450,000</div>
-      <div class="now"><small>₦</small>27,750</div>
-      <p>I'm not going to charge you ₦450,000 for the Artist Growth Bundle. I'm only charging you ₦27,750.</p>
       <ul class="list">
         <li><span>The Secret Playbook</span><span>Included</span></li>
         <li><span>The No BS Promo Guide</span><span>Included</span></li>
         <li><span>30 Days Release Plan</span><span>Included</span></li>
         <li><span>Artist Community Access</span><span>Included</span></li>
-        <li><span>100K Streams Artist Blueprint</span><span>Included</span></li>
+        <li><span>100K Streams Artist Blueprint</span><span>Free bonus</span></li>
+        <li><span>The Practical Scorecard</span><span>Free bonus</span></li>
+        <li><span>The Music Growth Checklist</span><span>Free bonus</span></li>
       </ul>
+      <div class="now"><small>₦</small>27,750</div>
+      <div class="countbox" aria-label="Time left on this offer">
+        <div><b class="mono" data-h>03</b><span>Hours</span></div>
+        <div><b class="mono" data-m>00</b><span>Min</span></div>
+        <div><b class="mono" data-s>00</b><span>Sec</span></div>
+      </div>
       <a class="btn block" data-cta href="/checkout/">Get the Artist Growth Bundle
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <p class="secure">Secure checkout. After payment you go straight to the member area to download everything, including the bonuses.</p>
     </div>
 
+    <div class="narrow" style="margin-top:clamp(36px,5vw,64px)">
+      <p class="lede rv">The total value of all this is ₦450,000. It will save you the millions you'd otherwise waste promoting without a system.</p>
+      <p class="rv">If all this did was help you start getting the results you've always dreamed of, would it be worth it?</p>
+      <p class="rv">If it saved you years of struggle, and the millions you'd waste trying to figure this out alone, would it be worth it?</p>
+    </div>
+
     <div class="guarantee rv">
-      <p class="kicker">My guarantee</p>
-      <h3>30 days. <span>No long talk.</span></h3>
-      <p>I'll take all the risk. If you apply this system and don't start seeing results, email me at <a href="mailto:fineboyproducer@gmail.com">fineboyproducer@gmail.com</a> and I'll refund your money. I'll even open with an apology.</p>
+      <p class="kicker">My fail-proof money-back guarantee</p>
+      <h3>90 days. <span>No long talk.</span></h3>
+      <p>I'll take all the risk. If you apply this system and you don't start seeing results in the next 90 days, email me at <a href="mailto:fineboyproducer@gmail.com">fineboyproducer@gmail.com</a> and I'll refund your money. And I'll even write you an open apology.</p>
       <p>But act now. I'm taking this offer down in the next 3 hours, and then it's gone.</p>
     </div>
 
@@ -949,9 +1014,9 @@ var VIMEO_ID  = "1248104380";   // Vimeo video id for the SLO video. Empty = pla
     q=false;
     var on=items.getBoundingClientRect().bottom < 0;
     if(bar.classList.contains('on')!==on){ bar.classList.toggle('on',on); bar.setAttribute('aria-hidden',on?'false':'true'); }
-    /* price and countdown only show once the offer section (anchor + price reveal) has come into view */
-    var offer=document.getElementById('offer');
-    var priced=!!offer && offer.getBoundingClientRect().top < window.innerHeight*0.75;
+    /* the bar shows the price only once the price reveal itself reaches the middle of the screen */
+    var priceEl=document.querySelector('#offer .now');
+    var priced=!!priceEl && priceEl.getBoundingClientRect().top < window.innerHeight*0.5;
     if(bar.classList.contains('priced')!==priced) bar.classList.toggle('priced',priced);
   }
   function queue(){ if(!q){ q=true; requestAnimationFrame(check); } }
