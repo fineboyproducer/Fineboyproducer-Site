@@ -268,3 +268,67 @@ window.FP_COPY_B['/about'] = [
   "Artists who want fans who know their lyrics word for word, and a career that keeps paying off."
  ]
 ];
+window.FP_COPY_B['/beats'] = [
+ [
+  "Original beats for artists who want to make records people remember.",
+  "Original beats for artists who want records people sing back word for word."
+ ],
+ [
+  "The sound, the artist, the positioning, the release and the strategy all have to connect.",
+  "The sound, the artist, the positioning, the release and the strategy all have to connect, or the money you put into promo goes nowhere."
+ ],
+ [
+  "What happens next matters just as much.",
+  "Skip what happens next, and you’ll pay for promo and hear nothing back."
+ ]
+];
+window.FP_COPY_B['/contact'] = [
+ [
+  "Whether you're an artist trying to figure out your next move, or a company building something in music, tell me what you're working on.",
+  "Spent money on promo and nothing happened? Building something in music? Tell me what you’re working on."
+ ],
+ [
+  "Tell me where you are, what you’re working on, and where you’re trying to go.",
+  "Tell me what you’ve tried, what it cost you, and where you want your music to go."
+ ]
+];
+window.FP_COPY_B['/blueprint'] = [
+ [
+  "For those tired of living a life less than what they deserve.",
+  "For the artist who paid for promo, put in the work, and watched it disappear into thin air."
+ ],
+ [
+  "For those ready to start moving with intention.",
+  "For those ready to finally see it pay off."
+ ],
+ [
+  "They're losing because they're moving without structure. Without identity. Without intention.",
+  "They're losing because nobody gave them a strategy. They're releasing blind, paying for promo, and watching the money disappear."
+ ],
+ [
+  "Releasing music with no long-term direction.",
+  "Paying for promo and getting nothing back."
+ ],
+ [
+  "Working hard but staying invisible.",
+  "Working hard, spending money, and still staying invisible."
+ ],
+ [
+  "Your art, brand and numbers finally align and start growing.",
+  "Fans who know your lyrics word for word, shows, and results that pour in even while you sleep."
+ ]
+];
+window.FP_COPY_B['/apply'] = [
+ [
+  "A more focused approach to promotion",
+  "A promotion plan where every naira has a job"
+ ],
+ [
+  "You're releasing music but don't have a clear direction.",
+  "You keep releasing music, and nothing changes."
+ ],
+ [
+  "You're spending on promotion but you're not sure what's actually working.",
+  "You're spending money on promotion and nothing is coming back."
+ ]
+];
