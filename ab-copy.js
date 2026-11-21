@@ -31,7 +31,7 @@ window.FP_COPY_B['/live'] = [
  ],
  [
   "Promoting your songs to the wrong audience.",
-  "You tried the playlist, the influencer, the ads. You still can't say which one did anything."
+  "You tried playlisting, ran expensive ads, paid influencers outrageous amounts. And yet nothing changed. You got nothing back from it."
  ],
  [
   "Repeating the same promotion methods because “that’s what everyone does.”",
@@ -133,7 +133,7 @@ window.FP_COPY_B['/'] = [
  ],
  [
   "You're spending money without knowing what's actually moving your career.",
-  "Playlists, influencers, ads. You paid, and nobody showed you what you got. Ads are the fastest way to burn money when you don't know what you're doing."
+  "You tried playlisting, ran expensive ads, paid influencers outrageous amounts. And yet nothing changed, and nobody showed you where the money went."
  ],
  [
   "Every release starts from zero instead of building on what worked before.",
