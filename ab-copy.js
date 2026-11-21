@@ -105,7 +105,7 @@ window.FP_COPY_B['/live'] = [
 window.FP_COPY_B['/'] = [
  [
   "I help serious independent artists turn their music into real streams, real fans, and real growth — using strategy, not guesswork.",
-  "You've spent money on promo and got almost nothing back. It's not about your talent. It's the missing strategy. I help independent artists turn releases into real streams, real fans and a music career that finally pays off."
+  "You paid for promo, ran the ads, and got almost nothing back. It's not about your talent. It's the missing strategy. I help independent artists turn releases into real streams, real fans and a music career that finally pays off."
  ],
  [
   "For independent artists who are ready to take their music seriously.",
@@ -191,7 +191,7 @@ window.FP_COPY_B['/'] = [
 window.FP_COPY_B['/work with me'] = [
  [
   "I work with serious artists and music businesses that want more than another release — they want a clearer strategy, stronger positioning, and measurable growth.",
-  "You’ve spent money on promo and nothing happened. I work with serious artists and music businesses to build the strategy that makes every naira work: clearer positioning, real fans, and growth you can measure."
+  "You paid for promo. You ran the ads. You waited. And nothing happened. I work with serious artists and music businesses to build the strategy that makes every naira work: clearer positioning, real fans, and growth you can measure."
  ],
  [
   "Stop guessing.",
@@ -285,7 +285,7 @@ window.FP_COPY_B['/beats'] = [
 window.FP_COPY_B['/contact'] = [
  [
   "Whether you're an artist trying to figure out your next move, or a company building something in music, tell me what you're working on.",
-  "Spent money on promo and nothing happened? Building something in music? Tell me what you’re working on."
+  "Paid for promo, ran the ads, and nothing happened? Building something in music? Tell me what you’re working on."
  ],
  [
   "Tell me where you are, what you’re working on, and where you’re trying to go.",
@@ -307,7 +307,7 @@ window.FP_COPY_B['/blueprint'] = [
  ],
  [
   "Releasing music with no long-term direction.",
-  "Paying for promo and getting nothing back."
+  "Paying for promo, running ads, getting nothing back."
  ],
  [
   "Working hard but staying invisible.",
@@ -329,6 +329,6 @@ window.FP_COPY_B['/apply'] = [
  ],
  [
   "You're spending on promotion but you're not sure what's actually working.",
-  "You're spending money on promotion and nothing is coming back."
+  "You're paying for promotion, running ads, and nothing is coming back."
  ]
 ];
