@@ -142,8 +142,9 @@ html.is-closed .top .timer-pill, html.is-closed main, html.is-closed footer, htm
 
 
 
-.hero-cta{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
-.hero-cta small{color:var(--mute);font-size:.85rem;max-width:30ch;line-height:1.4}
+.hero-cta{margin-top:28px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.hero-cta small{color:var(--mute);font-size:.85rem;max-width:34ch;line-height:1.4}
+#offer{scroll-margin-top:72px}
 
 /* sections */
 section{position:relative}
@@ -298,6 +299,7 @@ footer a{text-decoration:none;border-bottom:1px solid var(--gold-deep)}
 .bar .p span{font-size:.7rem;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
 .bar .btn{padding:14px 20px;min-height:48px;font-size:.85rem}
 .bar:not(.priced) .p{display:none}
+.bar:not(.priced) .btn-buy,.bar.priced .btn-jump{display:none}
 .bar:not(.priced) .btn{flex:1;justify-content:center}
 
 /* reveal */
@@ -404,7 +406,7 @@ var OFFER_HOURS = 3;
     </div>
 
     <div class="hero-cta">
-      <a class="btn" data-cta href="/checkout/">Get the Bundle
+      <a class="btn" href="#offer" data-jump>Get the Bundle
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <small>Secure checkout. 30-day guarantee.</small>
@@ -754,7 +756,8 @@ var OFFER_HOURS = 3;
 
 <div class="bar" id="bar" aria-hidden="true">
   <div class="p"><b>₦27,750</b><span>Ends in <i class="mono" style="font-style:normal" data-countdown>03:00:00</i></span></div>
-  <a class="btn" data-cta href="/checkout/">Get the Bundle</a>
+  <a class="btn btn-jump" href="#offer" data-jump>Get the Bundle</a>
+  <a class="btn btn-buy" data-cta href="/checkout/">Get the Bundle</a>
 </div>
 
 <script>
@@ -917,6 +920,25 @@ var VIMEO_ID  = "1248104380";   // Vimeo video id for the SLO video. Empty = pla
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
   els.forEach(function(e){io.observe(e)});
+})();
+
+/* ---------- buttons before the price reveal jump to the offer section ---------- */
+(function(){
+  var offer=document.getElementById('offer');
+  if(!offer) return;
+  var calm=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function jump(e){
+    e.preventDefault();
+    try{ if(window.fpTrack) window.fpTrack('cta_jump'); }catch(err){}
+    var n=0;
+    (function go(){
+      offer.scrollIntoView({behavior:(n||calm)?'auto':'smooth',block:'start'});
+      /* images above the offer can finish loading mid-scroll and push it down, so check again and correct */
+      if(++n<5) setTimeout(function(){ if(Math.abs(offer.getBoundingClientRect().top-72)>4) go(); },n===1?1100:500);
+    })();
+    try{ history.replaceState(null,'','#offer'); }catch(err){}
+  }
+  [].forEach.call(document.querySelectorAll('[data-jump]'),function(a){a.addEventListener('click',jump)});
 })();
 
 /* ---------- sticky price bar (phones): appears after the hero button scrolls away ---------- */
