@@ -105,7 +105,7 @@ window.FP_COPY_B['/live'] = [
 window.FP_COPY_B['/'] = [
  [
   "I help serious independent artists turn their music into real streams, real fans, and real growth — using strategy, not guesswork.",
-  "You've spent money on promo and got almost nothing back. It's not about your talent. It's the missing strategy. I help independent artists turn releases into real streams, real fans and a music career that finally pays off."
+  "You paid for promo, ran the ads, and got almost nothing back. It's not about your talent. It's the missing strategy. I help independent artists turn releases into real streams, real fans and a music career that finally pays off."
  ],
  [
   "For independent artists who are ready to take their music seriously.",
@@ -191,7 +191,7 @@ window.FP_COPY_B['/'] = [
 window.FP_COPY_B['/work with me'] = [
  [
   "I work with serious artists and music businesses that want more than another release — they want a clearer strategy, stronger positioning, and measurable growth.",
-  "You’ve spent money on promo and nothing happened. I work with serious artists and music businesses to build the strategy that makes every naira work: clearer positioning, real fans, and growth you can measure."
+  "You paid for promo. You ran the ads. You waited. And nothing happened. I work with serious artists and music businesses to build the strategy that makes every naira work: clearer positioning, real fans, and growth you can measure."
  ],
  [
   "Stop guessing.",
@@ -266,5 +266,69 @@ window.FP_COPY_B['/about'] = [
  [
   "Artists who want to build something that lasts beyond one song.",
   "Artists who want fans who know their lyrics word for word, and a career that keeps paying off."
+ ]
+];
+window.FP_COPY_B['/beats'] = [
+ [
+  "Original beats for artists who want to make records people remember.",
+  "Original beats for artists who want records people sing back word for word."
+ ],
+ [
+  "The sound, the artist, the positioning, the release and the strategy all have to connect.",
+  "The sound, the artist, the positioning, the release and the strategy all have to connect, or the money you put into promo goes nowhere."
+ ],
+ [
+  "What happens next matters just as much.",
+  "Skip what happens next, and you’ll pay for promo and hear nothing back."
+ ]
+];
+window.FP_COPY_B['/contact'] = [
+ [
+  "Whether you're an artist trying to figure out your next move, or a company building something in music, tell me what you're working on.",
+  "Paid for promo, ran the ads, and nothing happened? Building something in music? Tell me what you’re working on."
+ ],
+ [
+  "Tell me where you are, what you’re working on, and where you’re trying to go.",
+  "Tell me what you’ve tried, what it cost you, and where you want your music to go."
+ ]
+];
+window.FP_COPY_B['/blueprint'] = [
+ [
+  "For those tired of living a life less than what they deserve.",
+  "For the artist who paid for promo, put in the work, and watched it disappear into thin air."
+ ],
+ [
+  "For those ready to start moving with intention.",
+  "For those ready to finally see it pay off."
+ ],
+ [
+  "They're losing because they're moving without structure. Without identity. Without intention.",
+  "They're losing because nobody gave them a strategy. They're releasing blind, paying for promo, and watching the money disappear."
+ ],
+ [
+  "Releasing music with no long-term direction.",
+  "Paying for promo, running ads, getting nothing back."
+ ],
+ [
+  "Working hard but staying invisible.",
+  "Working hard, spending money, and still staying invisible."
+ ],
+ [
+  "Your art, brand and numbers finally align and start growing.",
+  "Fans who know your lyrics word for word, shows, and results that pour in even while you sleep."
+ ]
+];
+window.FP_COPY_B['/apply'] = [
+ [
+  "A more focused approach to promotion",
+  "A promotion plan where every naira has a job"
+ ],
+ [
+  "You're releasing music but don't have a clear direction.",
+  "You keep releasing music, and nothing changes."
+ ],
+ [
+  "You're spending on promotion but you're not sure what's actually working.",
+  "You're paying for promotion, running ads, and nothing is coming back."
  ]
 ];
