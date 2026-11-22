@@ -17,6 +17,8 @@
   function rid() { return Math.random().toString(36).slice(2, 10) + Date.now().toString(36); }
 
   var off = get(ls, 'fp_owner') === '1';
+  /* Skip automated browsers and crawlers so they never count as visitors. */
+  try { if (navigator.webdriver || /bot|crawl|spider|slurp|headless|lighthouse|preview|facebookexternalhit/i.test(navigator.userAgent)) off = true; } catch (e) {}
   var q = new URLSearchParams(window.location.search);
 
   var vid = get(ls, 'fp_vid'); if (!vid) { vid = rid(); set(ls, 'fp_vid', vid); }

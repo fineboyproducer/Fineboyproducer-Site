@@ -144,6 +144,8 @@ select{background:var(--panel);color:var(--bone);border:1px solid var(--line);bo
       <div class="tiles" id="dayTiles"></div>
       <div class="scroll" style="margin-top:14px"><table id="dayPages"></table></div>
     </div></section>
+  <section><h2>Busiest days of the week <small>average visitors per day, last 90 days</small></h2>
+    <div class="card scroll"><table id="wk"></table></div></section>
   <section><h2>Last 12 weeks <small>darker means more visitors, a dot means a sale happened</small></h2><div class="card"><div class="heat" id="heat" role="img" aria-label="Daily visitors for the last 12 weeks"></div><div class="hl"><span><i></i>No visits</span><span><i style="background:var(--bar);opacity:.35"></i>Some</span><span><i style="background:var(--bar)"></i>Your best days</span><span><i style="background:var(--good);border-radius:50%;transform:scale(.55)"></i>Sale</span></div></div></section>
   <section><h2>Bundle funnel <small>unique visitors at each step</small></h2><div class="card"><div class="funnel" id="funnel"></div></div></section>
   <section><h2>Pages <small>conversion = share of that page's visitors who did it</small></h2>
@@ -216,7 +218,7 @@ function render(){
     ['Revenue',naira(rev),pu?naira(rev/pu)+' per sale':'–'],
     ['Leads',num(leads),'live registrations']
   ].map(function(t){return '<div class="tile"><div class="k">'+t[0]+'</div><div class="v">'+t[1]+'</div><div class="s">'+t[2]+'</div>'+(t[3]?delta(t[3]):'')+'</div>'}).join('');
-  hero(); heat(); dayRender();
+  hero(); heat(); dayRender(); weekdays();
   trend(); funnel(); pagesTable(); abInit(); breakdowns();
   $('stamp').textContent='Updated '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+' · last '+(days===1?'24 hours':days+' days');
 }
@@ -289,8 +291,11 @@ function abRender(){
   $('abNote').textContent='Confidence is the chance the gap is real and not luck. Wait for 95% or more and at least 100 visitors per variant before choosing a winner. Purchases count every sale tagged with that variant, on any page.';
 }
 
+/* Group the raw referrer hosts into one name per platform (old rows included). */
+var SRC=[[/(^|\.)(l\.|lm\.|m\.)?instagram\.com$|^ig$|^instagram/,'Instagram'],[/facebook\.com$|^fb$|^facebook|fb\.me$/,'Facebook'],[/whatsapp|^wa\.me$|^wa$/,'WhatsApp'],[/tiktok/,'TikTok'],[/youtube\.com$|youtu\.be$|^youtube/,'YouTube'],[/^t\.co$|twitter\.com$|(^|\.)x\.com$|^twitter$|^x$/,'X'],[/linkedin|lnkd\.in/,'LinkedIn'],[/^(www\.)?google\.[a-z.]+$/,'Google search'],[/bing\.com$|duckduckgo|yahoo\./,'Other search'],[/telegram|^t\.me$/,'Telegram'],[/^direct$|^\(none\)$/,'Direct']];
+function grp(x){x=String(x||'direct').toLowerCase();for(var i=0;i<SRC.length;i++)if(SRC[i][0].test(x))return SRC[i][1];return x}
 function breakdowns(){
-  function by(field,ev2){var m={};data.totals.forEach(function(r){var k=r[field]||'(none)';var o=m[k]||(m[k]={v:0,c:0,p:0});
+  function by(field,ev2){var m={};data.totals.forEach(function(r){var k=r[field]||'(none)';if(field==='source')k=grp(k);var o=m[k]||(m[k]={v:0,c:0,p:0});
     if(r.event==='pageview')o.v+=r.u; else if(r.event==='checkout_click')o.c+=r.u; else if(r.event==='purchase')o.p+=r.n});return m}
   function tbl(id,m,label){var keys=Object.keys(m).sort(function(a,b){return m[b].v-m[a].v});
     $(id).innerHTML='<thead><tr><th>'+label+'</th><th>Visitors</th><th>Checkout clicks</th><th>Click rate</th><th>Purchases</th></tr></thead><tbody>'+(keys.length?keys.map(function(k){var o=m[k];return '<tr><td>'+esc(k)+'</td><td>'+num(o.v)+'</td><td>'+num(o.c)+'</td><td>'+pf(o.c,o.v)+'</td><td>'+num(o.p)+'</td></tr>'}).join(''):'<tr><td colspan="5" class="empty">No data yet.</td></tr>')+'</tbody>'}
@@ -381,6 +386,19 @@ $('range').addEventListener('click',function(e){var b=e.target.closest('button')
 $('refresh').addEventListener('click',function(){load().catch(fail)});
 $('lock').addEventListener('click',function(){store('fp_dash',null);pass='';data=null;$('app').hidden=true;$('gate').hidden=false;$('pw').value=''});
 $('abPage').addEventListener('change',abRender);
+
+/* ---------- busiest days of the week ---------- */
+function weekdays(){
+  if(!hist||!$('wk'))return;
+  var names=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], tot=[0,0,0,0,0,0,0], cnt=[0,0,0,0,0,0,0], ck=[0,0,0,0,0,0,0], sal=[0,0,0,0,0,0,0], keep={};
+  for(var i=0;i<90;i++){var d=ymd(i);keep[d]=1;cnt[new Date(d+'T12:00:00Z').getUTCDay()]++}
+  hist.forEach(function(r){if(!keep[r.d])return;var w=new Date(r.d+'T12:00:00Z').getUTCDay();
+    if(r.event==='pageview')tot[w]+=r.u;else if(r.event==='checkout_click')ck[w]+=r.u;else if(r.event==='purchase')sal[w]+=r.n});
+  var rows=[1,2,3,4,5,6,0].map(function(w){return {n:names[w],a:cnt[w]?tot[w]/cnt[w]:0,t:tot[w],c:ck[w],p:sal[w]}});
+  var best=Math.max.apply(null,rows.map(function(r){return r.a}));
+  $('wk').innerHTML='<thead><tr><th>Day</th><th>Avg visitors per day</th><th>Total visitors</th><th>Checkout clicks</th><th>Purchases</th></tr></thead><tbody>'+
+    rows.map(function(r){return '<tr><td>'+r.n+(best>0&&r.a===best?' <span class="note">· busiest</span>':'')+'</td><td>'+(Math.round(r.a*10)/10)+'</td><td>'+num(r.t)+'</td><td>'+num(r.c)+'</td><td>'+num(r.p)+'</td></tr>'}).join('')+'</tbody>';
+}
 /* ---------- single day ---------- */
 var pickedDay=null;
 function dayRender(){
