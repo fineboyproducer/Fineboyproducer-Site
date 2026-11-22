@@ -144,6 +144,21 @@ select{background:var(--panel);color:var(--bone);border:1px solid var(--line);bo
       <div class="tiles" id="dayTiles"></div>
       <div class="scroll" style="margin-top:14px"><table id="dayPages"></table></div>
     </div></section>
+  <section><h2>Campaigns <small>visits from links with campaign tags (utm_campaign, utm_content), last range selected</small></h2>
+    <div class="card scroll"><table id="camp"></table></div></section>
+  <section><h2>Tagged link builder <small>make a link you can post, then watch it in the Campaigns table</small></h2>
+    <div class="card">
+      <div class="ctl" style="flex-wrap:wrap;gap:10px">
+        <select id="lbPage" aria-label="Page"><option value="/bundle/">/bundle</option><option value="/live/">/live</option><option value="/blueprint/">/blueprint</option><option value="/">Home</option></select>
+        <select id="lbSrc" aria-label="Source"><option>instagram</option><option>whatsapp</option><option>facebook</option><option>tiktok</option><option>youtube</option><option>x</option><option>telegram</option><option>email</option></select>
+        <select id="lbMed" aria-label="Medium"><option>story</option><option>post</option><option>reel</option><option>bio</option><option>status</option><option>dm</option><option>comment</option></select>
+        <input id="lbCamp" placeholder="campaign, e.g. nov-launch" aria-label="Campaign" style="background:var(--panel);color:var(--bone);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:500 13px var(--body)">
+        <input id="lbCont" placeholder="content, e.g. day1" aria-label="Content" style="background:var(--panel);color:var(--bone);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:500 13px var(--body)">
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap"><code id="lbOut" style="word-break:break-all;flex:1;min-width:200px"></code><button class="btn" id="lbCopy">Copy link</button></div>
+    </div></section>
+  <section><h2>Audience and active hours <small>new vs returning visitors, and the hours your visitors arrive (Lagos time)</small></h2>
+    <div class="card"><div class="tiles" id="aud"></div><div id="hours" style="margin-top:16px"></div></div></section>
   <section><h2>Busiest days of the week <small>average visitors per day, last 90 days</small></h2>
     <div class="card scroll"><table id="wk"></table></div></section>
   <section><h2>Last 12 weeks <small>darker means more visitors, a dot means a sale happened</small></h2><div class="card"><div class="heat" id="heat" role="img" aria-label="Daily visitors for the last 12 weeks"></div><div class="hl"><span><i></i>No visits</span><span><i style="background:var(--bar);opacity:.35"></i>Some</span><span><i style="background:var(--bar)"></i>Your best days</span><span><i style="background:var(--good);border-radius:50%;transform:scale(.55)"></i>Sale</span></div></div></section>
@@ -167,7 +182,7 @@ select{background:var(--panel);color:var(--bone);border:1px solid var(--line);bo
 var SB='https://nynedxlhwephelzckjoe.supabase.co/rest/v1/rpc/fp_dashboard';
 var KEY='sb_publishable_nvbgjEhrZjS7wg_YAre5qw_JdwTL6A_';
 var DEMO=/[?&]demo\b/.test(location.search);
-var days=30, data=null, pass='';
+var days=30, data=null, pass='', v2=null;
 var $=function(id){return document.getElementById(id)};
 function store(k,v){try{if(v===undefined)return sessionStorage.getItem(k);v===null?sessionStorage.removeItem(k):sessionStorage.setItem(k,v)}catch(e){}return null}
 var nf=new Intl.NumberFormat('en-NG');
@@ -199,6 +214,11 @@ function demo(d){
   return {totals:T,daily:dl};
 }
 
+function demoV2(d){var h=[];for(var i=0;i<24;i++)h.push({h:i,v:Math.round((i>=18&&i<=22?40:i>=7&&i<=17?22:6)*d/30)});
+  return {audience:{new:Math.round(520*d/30),returning:Math.round(160*d/30)},hours:h,campaigns:[
+    {source:'instagram',medium:'story',campaign:'nov-launch',content:'day1-money-pain',term:'',v:Math.round(210*d/30),c:Math.round(34*d/30),p:Math.round(6*d/30),rev:Math.round(6*d/30)*27750},
+    {source:'instagram',medium:'story',campaign:'nov-launch',content:'day3-my-story',term:'',v:Math.round(150*d/30),c:Math.round(30*d/30),p:Math.round(5*d/30),rev:Math.round(5*d/30)*27750},
+    {source:'whatsapp',medium:'status',campaign:'nov-launch',content:'day2-dream',term:'',v:Math.round(90*d/30),c:Math.round(11*d/30),p:Math.round(2*d/30),rev:Math.round(2*d/30)*27750}]}}
 /* ---------- helpers on totals ---------- */
 function sum(f,field){return data.totals.reduce(function(s,r){return f(r)?s+Number(r[field]):s},0)}
 function uv(page,ev,variant){return sum(function(r){return r.page===page&&r.event===ev&&(variant==null||r.variant===variant)},'u')}
@@ -218,7 +238,7 @@ function render(){
     ['Revenue',naira(rev),pu?naira(rev/pu)+' per sale':'–'],
     ['Leads',num(leads),'live registrations']
   ].map(function(t){return '<div class="tile"><div class="k">'+t[0]+'</div><div class="v">'+t[1]+'</div><div class="s">'+t[2]+'</div>'+(t[3]?delta(t[3]):'')+'</div>'}).join('');
-  hero(); heat(); dayRender(); weekdays();
+  hero(); heat(); dayRender(); weekdays(); phaseB();
   trend(); funnel(); pagesTable(); abInit(); breakdowns();
   $('stamp').textContent='Updated '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+' · last '+(days===1?'24 hours':days+' days');
 }
@@ -363,10 +383,13 @@ function heat(){
 /* ---------- loading ---------- */
 function rpc(d){return fetch(SB,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify({pass:pass,days:d})})
   .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})}
+var SB2=SB.replace('fp_dashboard','fp_dashboard_v2');
+function rpc2(d){return fetch(SB2,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify({pass:pass,days:d})})
+  .then(function(r){return r.ok?r.json():null}).catch(function(){return null})}
 function load(){
   $('err').textContent='';
   var HD=Math.max(days*2,91);
-  if(DEMO){data=demo(days);hist=demo(HD).daily;show();return Promise.resolve()}
+  if(DEMO){data=demo(days);hist=demo(HD).daily;v2=demoV2(days);show();return Promise.resolve()}
   return rpc(days)
   .then(function(x){
     if(!x.ok){var m=(x.j&&(x.j.message||x.j.hint))||'';
@@ -374,7 +397,7 @@ function load(){
       if(/Could not find the function|does not exist|schema cache/i.test(m))throw new Error('Setup not finished. Run dash/setup.sql in Supabase first.');
       throw new Error('Could not load data ('+m.slice(0,80)+').')}
     data=x.j;store('fp_dash',pass);
-    return (HD===days?Promise.resolve(null):rpc(HD).catch(function(){return null})).then(function(y){hist=(y&&y.ok&&y.j&&y.j.daily)||data.daily;show()});
+    return rpc2(days).then(function(z){v2=z;return (HD===days?Promise.resolve(null):rpc(HD).catch(function(){return null}))}).then(function(y){hist=(y&&y.ok&&y.j&&y.j.daily)||data.daily;show()});
   });
 }
 function show(){$('gate').hidden=true;$('app').hidden=false;$('demoBanner').hidden=!DEMO;render()}
@@ -387,6 +410,37 @@ $('refresh').addEventListener('click',function(){load().catch(fail)});
 $('lock').addEventListener('click',function(){store('fp_dash',null);pass='';data=null;$('app').hidden=true;$('gate').hidden=false;$('pw').value=''});
 $('abPage').addEventListener('change',abRender);
 
+
+/* ---------- campaigns, audience and hours (needs dash/migration-b.sql) ---------- */
+function phaseB(){
+  var miss='<tbody><tr><td class="empty">This needs the Phase B database upgrade (dash/migration-b.sql) before it can show data.</td></tr></tbody>';
+  if(!v2){$('camp').innerHTML=miss;$('aud').innerHTML='';$('hours').innerHTML='<div class="empty">This needs the Phase B database upgrade (dash/migration-b.sql).</div>';return}
+  var c=(v2.campaigns||[]).slice().sort(function(a,b){return b.v-a.v});
+  $('camp').innerHTML=c.length?'<thead><tr><th>Campaign</th><th>Content</th><th>Source / medium</th><th>Visitors</th><th>Checkout clicks</th><th>Purchases</th><th>Revenue</th></tr></thead><tbody>'+
+    c.map(function(r){return '<tr><td>'+esc(r.campaign||'(none)')+'</td><td>'+esc(r.content||'–')+'</td><td>'+esc(grp(r.source)+(r.medium?' / '+r.medium:''))+'</td><td>'+num(r.v)+'</td><td>'+num(r.c)+' <span class="note">· '+pf(r.c,r.v)+'</span></td><td>'+num(r.p)+'</td><td>'+naira(r.rev)+'</td></tr>'}).join('')+'</tbody>'
+    :'<tbody><tr><td class="empty">No tagged visits yet. Add ?utm_source=instagram&amp;utm_medium=story&amp;utm_campaign=nov-launch&amp;utm_content=day1 to a link and visits will appear here.</td></tr></tbody>';
+  var a=v2.audience||{new:0,returning:0}, t=(a.new||0)+(a.returning||0);
+  $('aud').innerHTML=[['New visitors',num(a.new||0),pf(a.new||0,t)+' of visitors'],['Returning visitors',num(a.returning||0),pf(a.returning||0,t)+' of visitors']]
+    .map(function(x){return '<div class="tile"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="s">'+x[2]+'</div></div>'}).join('');
+  var H=[];for(var i=0;i<24;i++)H.push(0);(v2.hours||[]).forEach(function(r){H[r.h]=r.v});
+  var mx=Math.max.apply(null,H)||1;
+  $('hours').innerHTML=H.some(function(x){return x>0})?'<div class="legend"><span><i style="background:var(--bar)"></i>Visitors by hour of day</span></div><svg viewBox="0 0 960 150" width="100%" role="img" aria-label="Visitors by hour of the day">'+
+    H.map(function(v,i){var h=Math.round(110*v/mx),x=i*40+6;return '<rect x="'+x+'" y="'+(120-h)+'" width="28" height="'+h+'" style="fill:var(--bar)"><title>'+(i<10?'0':'')+i+':00 – '+v+' visitors</title></rect><text x="'+(x+14)+'" y="140" text-anchor="middle">'+i+'</text>'}).join('')+'</svg>':'<div class="empty">No visits recorded in this period yet.</div>';
+}
+
+/* ---------- tagged link builder ---------- */
+function lbBuild(){
+  function slug(v){return String(v||'').toLowerCase().trim().replace(/[^a-z0-9-_]+/g,'-').replace(/^-+|-+$/g,'')}
+  var q=['utm_source='+slug($('lbSrc').value),'utm_medium='+slug($('lbMed').value)];
+  if(slug($('lbCamp').value))q.push('utm_campaign='+slug($('lbCamp').value));
+  if(slug($('lbCont').value))q.push('utm_content='+slug($('lbCont').value));
+  $('lbOut').textContent='https://fineboyproducer.com.ng'+$('lbPage').value+'?'+q.join('&');
+}
+['lbPage','lbSrc','lbMed','lbCamp','lbCont'].forEach(function(i){$(i).addEventListener('input',lbBuild);$(i).addEventListener('change',lbBuild)});
+$('lbCopy').addEventListener('click',function(){var t=$('lbOut').textContent,b=this;
+  function done(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy link'},1500)}
+  try{navigator.clipboard.writeText(t).then(done,function(){})}catch(e){}});
+lbBuild();
 /* ---------- busiest days of the week ---------- */
 function weekdays(){
   if(!hist||!$('wk'))return;
