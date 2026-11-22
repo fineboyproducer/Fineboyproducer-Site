@@ -130,11 +130,43 @@ select{background:var(--panel);color:var(--bone);border:1px solid var(--line);bo
   <div class="note" id="stamp" style="margin-top:12px"></div>
 
   <div class="hero" id="hero" aria-live="polite"></div>
+  <section><h2>Insights <small>plain observations worked out from your numbers, not guesses</small></h2><div class="card"><ul id="insights" style="list-style:none;padding:0;margin:0;display:grid;gap:10px"></ul></div></section>
+  <section><h2>Live now <small>last 5 minutes (refreshes every 30 seconds)</small></h2><div class="card"><div class="tiles" id="liveTiles"></div><div class="scroll" style="margin-top:14px"><table id="liveFeed"></table></div></div></section>
   <section><h2>Overview</h2><div class="tiles" id="tiles"></div></section>
   <section><h2>Daily traffic <small>unique visitors per page, added up per day</small></h2>
     <div class="card"><div class="legend"><span><i style="background:var(--bar)"></i>Visitors</span><span><i style="background:var(--bone)"></i>Checkout clickers</span><span><i style="background:var(--good)"></i>Purchases</span></div><div id="trend"></div></div></section>
+  <section><h2>Check one day <small>pick any day from the last 90 days</small></h2>
+    <div class="card">
+      <div class="ctl" style="margin-bottom:14px;flex-wrap:wrap">
+        <button class="btn" id="dayPrev" aria-label="Previous day">&larr; Previous</button>
+        <input type="date" id="dayPick" aria-label="Pick a day">
+        <button class="btn" id="dayNext" aria-label="Next day">Next &rarr;</button>
+        <button class="btn" id="dayToday">Today</button>
+      </div>
+      <div class="tiles" id="dayTiles"></div>
+      <div class="scroll" style="margin-top:14px"><table id="dayPages"></table></div>
+    </div></section>
+  <section><h2>Campaigns <small>visits from links with campaign tags (utm_campaign, utm_content), last range selected</small></h2>
+    <div class="card scroll"><table id="camp"></table></div></section>
+  <section><h2>Tagged link builder <small>make a link you can post, then watch it in the Campaigns table</small></h2>
+    <div class="card">
+      <div class="ctl" style="flex-wrap:wrap;gap:10px">
+        <select id="lbPage" aria-label="Page"><option value="/bundle/">/bundle</option><option value="/live/">/live</option><option value="/blueprint/">/blueprint</option><option value="/">Home</option></select>
+        <select id="lbSrc" aria-label="Source"><option>instagram</option><option>whatsapp</option><option>facebook</option><option>tiktok</option><option>youtube</option><option>x</option><option>telegram</option><option>email</option></select>
+        <select id="lbMed" aria-label="Medium"><option>story</option><option>post</option><option>reel</option><option>bio</option><option>status</option><option>dm</option><option>comment</option></select>
+        <input id="lbCamp" placeholder="campaign, e.g. nov-launch" aria-label="Campaign" style="background:var(--panel);color:var(--bone);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:500 13px var(--body)">
+        <input id="lbCont" placeholder="content, e.g. day1" aria-label="Content" style="background:var(--panel);color:var(--bone);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:500 13px var(--body)">
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap"><code id="lbOut" style="word-break:break-all;flex:1;min-width:200px"></code><button class="btn" id="lbCopy">Copy link</button></div>
+    </div></section>
+  <section><h2>Audience and active hours <small>new vs returning visitors, and the hours your visitors arrive (Lagos time)</small></h2>
+    <div class="card"><div class="tiles" id="aud"></div><div id="hours" style="margin-top:16px"></div></div></section>
+  <section><h2>Busiest days of the week <small>average visitors per day, last 90 days</small></h2>
+    <div class="card scroll"><table id="wk"></table></div></section>
   <section><h2>Last 12 weeks <small>darker means more visitors, a dot means a sale happened</small></h2><div class="card"><div class="heat" id="heat" role="img" aria-label="Daily visitors for the last 12 weeks"></div><div class="hl"><span><i></i>No visits</span><span><i style="background:var(--bar);opacity:.35"></i>Some</span><span><i style="background:var(--bar)"></i>Your best days</span><span><i style="background:var(--good);border-radius:50%;transform:scale(.55)"></i>Sale</span></div></div></section>
-  <section><h2>Bundle funnel <small>unique visitors at each step</small></h2><div class="card"><div class="funnel" id="funnel"></div></div></section>
+  <section><h2>Funnels <small>unique visitors at each step</small></h2><div class="card"><div class="ctl" style="margin-bottom:12px"><label for="fnPick" class="note">Offer</label><select id="fnPick"><option value="bundle">Artist Growth Bundle</option><option value="blueprint">100K Streams Blueprint</option><option value="live">Live masterclass</option></select></div><div class="funnel" id="funnel"></div></div></section>
+  <section><h2>Site health <small>JavaScript errors seen by visitors in this range</small></h2><div class="card scroll"><table id="health"></table></div></section>
+  <section><h2>Export <small>download the numbers as a spreadsheet file (CSV)</small></h2><div class="card"><div class="ctl" style="flex-wrap:wrap;gap:10px"><button class="btn" id="exDaily">Daily totals</button><button class="btn" id="exSrc">Sources</button><button class="btn" id="exPages">Pages</button><button class="btn" id="exCamp">Campaigns</button></div><div class="note" style="margin-top:10px">Daily totals cover about the last 90 days. The others follow the date range at the top.</div></div></section>
   <section><h2>Pages <small>conversion = share of that page's visitors who did it</small></h2>
     <div class="card scroll"><table id="pages"></table></div></section>
   <section><h2>A/B tests <small>compare variants on one page</small></h2>
@@ -154,7 +186,7 @@ select{background:var(--panel);color:var(--bone);border:1px solid var(--line);bo
 var SB='https://nynedxlhwephelzckjoe.supabase.co/rest/v1/rpc/fp_dashboard';
 var KEY='sb_publishable_nvbgjEhrZjS7wg_YAre5qw_JdwTL6A_';
 var DEMO=/[?&]demo\b/.test(location.search);
-var days=30, data=null, pass='';
+var days=30, data=null, pass='', v2=null;
 var $=function(id){return document.getElementById(id)};
 function store(k,v){try{if(v===undefined)return sessionStorage.getItem(k);v===null?sessionStorage.removeItem(k):sessionStorage.setItem(k,v)}catch(e){}return null}
 var nf=new Intl.NumberFormat('en-NG');
@@ -186,6 +218,11 @@ function demo(d){
   return {totals:T,daily:dl};
 }
 
+function demoV2(d){var h=[];for(var i=0;i<24;i++)h.push({h:i,v:Math.round((i>=18&&i<=22?40:i>=7&&i<=17?22:6)*d/30)});
+  return {audience:{new:Math.round(520*d/30),returning:Math.round(160*d/30)},hours:h,campaigns:[
+    {source:'instagram',medium:'story',campaign:'nov-launch',content:'day1-money-pain',term:'',v:Math.round(210*d/30),c:Math.round(34*d/30),p:Math.round(6*d/30),rev:Math.round(6*d/30)*27750},
+    {source:'instagram',medium:'story',campaign:'nov-launch',content:'day3-my-story',term:'',v:Math.round(150*d/30),c:Math.round(30*d/30),p:Math.round(5*d/30),rev:Math.round(5*d/30)*27750},
+    {source:'whatsapp',medium:'status',campaign:'nov-launch',content:'day2-dream',term:'',v:Math.round(90*d/30),c:Math.round(11*d/30),p:Math.round(2*d/30),rev:Math.round(2*d/30)*27750}]}}
 /* ---------- helpers on totals ---------- */
 function sum(f,field){return data.totals.reduce(function(s,r){return f(r)?s+Number(r[field]):s},0)}
 function uv(page,ev,variant){return sum(function(r){return r.page===page&&r.event===ev&&(variant==null||r.variant===variant)},'u')}
@@ -205,7 +242,7 @@ function render(){
     ['Revenue',naira(rev),pu?naira(rev/pu)+' per sale':'–'],
     ['Leads',num(leads),'live registrations']
   ].map(function(t){return '<div class="tile"><div class="k">'+t[0]+'</div><div class="v">'+t[1]+'</div><div class="s">'+t[2]+'</div>'+(t[3]?delta(t[3]):'')+'</div>'}).join('');
-  hero(); heat();
+  hero(); heat(); dayRender(); weekdays(); phaseB(); insights(); health(); liveStart();
   trend(); funnel(); pagesTable(); abInit(); breakdowns();
   $('stamp').textContent='Updated '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+' · last '+(days===1?'24 hours':days+' days');
 }
@@ -234,14 +271,19 @@ function trend(){
   $('trend').innerHTML=s;
 }
 
+var FUNNELS={
+  bundle:[['Saw the offer page','/bundle','pageview'],['Started the video','/bundle','video_start'],['Watched half','/bundle','video_50'],['Watched 95%','/bundle','video_95'],['Clicked buy','/bundle','checkout_click'],['Opened checkout','/access','pageview'],['Purchased','/agb','purchase']],
+  blueprint:[['Saw the Blueprint page','/blueprint','pageview'],['Scrolled halfway','/blueprint','scroll_50'],['Clicked buy','/blueprint','checkout_click'],['Purchased','/blueprint/thank-you','purchase']],
+  live:[['Saw the live page','/live','pageview'],['Scrolled halfway','/live','scroll_50'],['Registered','/live','lead']]
+};
 function funnel(){
-  var steps=[['Saw the offer page','/bundle','pageview'],['Started the video','/bundle','video_start'],['Watched half','/bundle','video_50'],['Watched 95%','/bundle','video_95'],['Clicked buy','/bundle','checkout_click'],['Opened checkout','/access','pageview'],['Purchased','/agb','purchase']];
-  var vals=steps.map(function(s){return s[2]==='purchase'?sum(function(r){return r.page===s[1]&&r.event==='purchase'},'n'):uv(s[1],s[2])});
+  var steps=FUNNELS[$('fnPick').value]||FUNNELS.bundle;
+  var vals=steps.map(function(s){return (s[2]==='purchase'||s[2]==='lead')?sum(function(r){return r.page===s[1]&&r.event===s[2]},'n'):uv(s[1],s[2])});
   var top=Math.max.apply(null,vals)||1;
   $('funnel').innerHTML=steps.map(function(s,i){
-    var share=i?pf(vals[i],vals[0]):'';
-    return '<div class="frow"><div>'+s[0]+'</div><div class="bar"><i style="width:'+(100*vals[i]/top)+'%"></i></div><div class="n">'+num(vals[i])+(share?' <span>· '+share+'</span>':'')+'</div></div>'}).join('')+
-    '<div class="note">The percentage beside each step is the share of everyone who saw the offer page. Video steps need the video watched on /bundle.</div>';
+    var share=i?pf(vals[i],vals[0]):'', drop=i&&vals[i-1]>0?Math.round(100*(vals[i-1]-vals[i])/vals[i-1]):null;
+    return '<div class="frow"><div>'+s[0]+'</div><div class="bar"><i style="width:'+(100*vals[i]/top)+'%"></i></div><div class="n">'+num(vals[i])+(share?' <span>· '+share+(drop>0?' · lost '+drop+'%':'')+'</span>':'')+'</div></div>'}).join('')+
+    '<div class="note">First percentage = share of everyone at step one. "Lost" = share who dropped off since the step before. Video steps need the video watched on /bundle.</div>';
 }
 
 function pagesTable(){
@@ -278,8 +320,11 @@ function abRender(){
   $('abNote').textContent='Confidence is the chance the gap is real and not luck. Wait for 95% or more and at least 100 visitors per variant before choosing a winner. Purchases count every sale tagged with that variant, on any page.';
 }
 
+/* Group the raw referrer hosts into one name per platform (old rows included). */
+var SRC=[[/(^|\.)(l\.|lm\.|m\.)?instagram\.com$|^ig$|^instagram/,'Instagram'],[/facebook\.com$|^fb$|^facebook|fb\.me$/,'Facebook'],[/whatsapp|^wa\.me$|^wa$/,'WhatsApp'],[/tiktok/,'TikTok'],[/youtube\.com$|youtu\.be$|^youtube/,'YouTube'],[/^t\.co$|twitter\.com$|(^|\.)x\.com$|^twitter$|^x$/,'X'],[/linkedin|lnkd\.in/,'LinkedIn'],[/^(www\.)?google\.[a-z.]+$/,'Google search'],[/bing\.com$|duckduckgo|yahoo\./,'Other search'],[/telegram|^t\.me$/,'Telegram'],[/^direct$|^\(none\)$/,'Direct']];
+function grp(x){x=String(x||'direct').toLowerCase();for(var i=0;i<SRC.length;i++)if(SRC[i][0].test(x))return SRC[i][1];return x}
 function breakdowns(){
-  function by(field,ev2){var m={};data.totals.forEach(function(r){var k=r[field]||'(none)';var o=m[k]||(m[k]={v:0,c:0,p:0});
+  function by(field,ev2){var m={};data.totals.forEach(function(r){var k=r[field]||'(none)';if(field==='source')k=grp(k);var o=m[k]||(m[k]={v:0,c:0,p:0});
     if(r.event==='pageview')o.v+=r.u; else if(r.event==='checkout_click')o.c+=r.u; else if(r.event==='purchase')o.p+=r.n});return m}
   function tbl(id,m,label){var keys=Object.keys(m).sort(function(a,b){return m[b].v-m[a].v});
     $(id).innerHTML='<thead><tr><th>'+label+'</th><th>Visitors</th><th>Checkout clicks</th><th>Click rate</th><th>Purchases</th></tr></thead><tbody>'+(keys.length?keys.map(function(k){var o=m[k];return '<tr><td>'+esc(k)+'</td><td>'+num(o.v)+'</td><td>'+num(o.c)+'</td><td>'+pf(o.c,o.v)+'</td><td>'+num(o.p)+'</td></tr>'}).join(''):'<tr><td colspan="5" class="empty">No data yet.</td></tr>')+'</tbody>'}
@@ -347,10 +392,13 @@ function heat(){
 /* ---------- loading ---------- */
 function rpc(d){return fetch(SB,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify({pass:pass,days:d})})
   .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})}
+var SB2=SB.replace('fp_dashboard','fp_dashboard_v2');
+function rpc2(d){return fetch(SB2,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify({pass:pass,days:d})})
+  .then(function(r){return r.ok?r.json():null}).catch(function(){return null})}
 function load(){
   $('err').textContent='';
   var HD=Math.max(days*2,91);
-  if(DEMO){data=demo(days);hist=demo(HD).daily;show();return Promise.resolve()}
+  if(DEMO){data=demo(days);hist=demo(HD).daily;v2=demoV2(days);show();return Promise.resolve()}
   return rpc(days)
   .then(function(x){
     if(!x.ok){var m=(x.j&&(x.j.message||x.j.hint))||'';
@@ -358,7 +406,7 @@ function load(){
       if(/Could not find the function|does not exist|schema cache/i.test(m))throw new Error('Setup not finished. Run dash/setup.sql in Supabase first.');
       throw new Error('Could not load data ('+m.slice(0,80)+').')}
     data=x.j;store('fp_dash',pass);
-    return (HD===days?Promise.resolve(null):rpc(HD).catch(function(){return null})).then(function(y){hist=(y&&y.ok&&y.j&&y.j.daily)||data.daily;show()});
+    return rpc2(days).then(function(z){v2=z;return (HD===days?Promise.resolve(null):rpc(HD).catch(function(){return null}))}).then(function(y){hist=(y&&y.ok&&y.j&&y.j.daily)||data.daily;show()});
   });
 }
 function show(){$('gate').hidden=true;$('app').hidden=false;$('demoBanner').hidden=!DEMO;render()}
@@ -370,6 +418,144 @@ $('range').addEventListener('click',function(e){var b=e.target.closest('button')
 $('refresh').addEventListener('click',function(){load().catch(fail)});
 $('lock').addEventListener('click',function(){store('fp_dash',null);pass='';data=null;$('app').hidden=true;$('gate').hidden=false;$('pw').value=''});
 $('abPage').addEventListener('change',abRender);
+
+
+/* ---------- campaigns, audience and hours (needs dash/migration-b.sql) ---------- */
+function phaseB(){
+  var miss='<tbody><tr><td class="empty">This needs the Phase B database upgrade (dash/migration-b.sql) before it can show data.</td></tr></tbody>';
+  if(!v2){$('camp').innerHTML=miss;$('aud').innerHTML='';$('hours').innerHTML='<div class="empty">This needs the Phase B database upgrade (dash/migration-b.sql).</div>';return}
+  var c=(v2.campaigns||[]).slice().sort(function(a,b){return b.v-a.v});
+  $('camp').innerHTML=c.length?'<thead><tr><th>Campaign</th><th>Content</th><th>Source / medium</th><th>Visitors</th><th>Checkout clicks</th><th>Purchases</th><th>Revenue</th></tr></thead><tbody>'+
+    c.map(function(r){return '<tr><td>'+esc(r.campaign||'(none)')+'</td><td>'+esc(r.content||'–')+'</td><td>'+esc(grp(r.source)+(r.medium?' / '+r.medium:''))+'</td><td>'+num(r.v)+'</td><td>'+num(r.c)+' <span class="note">· '+pf(r.c,r.v)+'</span></td><td>'+num(r.p)+'</td><td>'+naira(r.rev)+'</td></tr>'}).join('')+'</tbody>'
+    :'<tbody><tr><td class="empty">No tagged visits yet. Add ?utm_source=instagram&amp;utm_medium=story&amp;utm_campaign=nov-launch&amp;utm_content=day1 to a link and visits will appear here.</td></tr></tbody>';
+  var a=v2.audience||{new:0,returning:0}, t=(a.new||0)+(a.returning||0);
+  $('aud').innerHTML=[['New visitors',num(a.new||0),pf(a.new||0,t)+' of visitors'],['Returning visitors',num(a.returning||0),pf(a.returning||0,t)+' of visitors']]
+    .map(function(x){return '<div class="tile"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="s">'+x[2]+'</div></div>'}).join('');
+  var H=[];for(var i=0;i<24;i++)H.push(0);(v2.hours||[]).forEach(function(r){H[r.h]=r.v});
+  var mx=Math.max.apply(null,H)||1;
+  $('hours').innerHTML=H.some(function(x){return x>0})?'<div class="legend"><span><i style="background:var(--bar)"></i>Visitors by hour of day</span></div><svg viewBox="0 0 960 150" width="100%" role="img" aria-label="Visitors by hour of the day">'+
+    H.map(function(v,i){var h=Math.round(110*v/mx),x=i*40+6;return '<rect x="'+x+'" y="'+(120-h)+'" width="28" height="'+h+'" style="fill:var(--bar)"><title>'+(i<10?'0':'')+i+':00 – '+v+' visitors</title></rect><text x="'+(x+14)+'" y="140" text-anchor="middle">'+i+'</text>'}).join('')+'</svg>':'<div class="empty">No visits recorded in this period yet.</div>';
+}
+
+/* ---------- tagged link builder ---------- */
+function lbBuild(){
+  function slug(v){return String(v||'').toLowerCase().trim().replace(/[^a-z0-9-_]+/g,'-').replace(/^-+|-+$/g,'')}
+  var q=['utm_source='+slug($('lbSrc').value),'utm_medium='+slug($('lbMed').value)];
+  if(slug($('lbCamp').value))q.push('utm_campaign='+slug($('lbCamp').value));
+  if(slug($('lbCont').value))q.push('utm_content='+slug($('lbCont').value));
+  $('lbOut').textContent='https://fineboyproducer.com.ng'+$('lbPage').value+'?'+q.join('&');
+}
+['lbPage','lbSrc','lbMed','lbCamp','lbCont'].forEach(function(i){$(i).addEventListener('input',lbBuild);$(i).addEventListener('change',lbBuild)});
+$('lbCopy').addEventListener('click',function(){var t=$('lbOut').textContent,b=this;
+  function done(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy link'},1500)}
+  try{navigator.clipboard.writeText(t).then(done,function(){})}catch(e){}});
+lbBuild();
+
+/* ---------- insights (rules over your own numbers; each needs enough data to say anything) ---------- */
+function insights(){
+  var out=[], MIN=20;
+  function range(from,to){var o={v:0,c:0,p:0};hist.forEach(function(r){if(r.d>=from&&r.d<=to){if(r.event==='pageview')o.v+=r.u;else if(r.event==='checkout_click')o.c+=r.u;else if(r.event==='purchase')o.p+=r.n}});return o}
+  function chg(a,b){return b>0?Math.round(100*(a-b)/b):null}
+  var cur=range(ymd(6),ymd(0)), prev=range(ymd(13),ymd(7));
+  if(prev.v>=MIN||cur.v>=MIN){var c=chg(cur.v,prev.v);
+    if(c!==null&&Math.abs(c)>=15)out.push((c>0?'▲':'▼')+' Visitors are '+(c>0?'up ':'down ')+Math.abs(c)+'% over the last 7 days ('+num(cur.v)+' vs '+num(prev.v)+' the 7 days before).')}
+  if(cur.v>=MIN&&prev.v>=MIN){var r1=100*cur.c/cur.v,r0=100*prev.c/prev.v;
+    if(Math.abs(r1-r0)>=2)out.push((r1>r0?'▲':'▼')+' The checkout click rate is '+r1.toFixed(1)+'% this week, '+(r1>r0?'up':'down')+' from '+r0.toFixed(1)+'%.')}
+  if(cur.p+prev.p>0&&cur.p!==prev.p)out.push((cur.p>prev.p?'▲':'▼')+' Sales: '+cur.p+' in the last 7 days, '+prev.p+' in the 7 days before.');
+  var tv=range(ymd(0),ymd(0)).v, base=range(ymd(14),ymd(1)).v/14;
+  if(base>=5){if(tv>=base*2)out.push('▲ Today already has '+num(tv)+' visitors, more than double your recent daily average of '+Math.round(base)+'.');
+    else if(tv<=base*.3&&new Date().getHours()>=18)out.push('▼ Today has only '+num(tv)+' visitors so far, well under your recent daily average of '+Math.round(base)+'.')}
+  var m={};data.totals.forEach(function(r){var k=grp(r.source),o=m[k]||(m[k]={v:0,c:0});if(r.event==='pageview')o.v+=r.u;else if(r.event==='checkout_click')o.c+=r.u});
+  var ks=Object.keys(m).filter(function(k){return m[k].v>=MIN}).sort(function(a,b){return m[b].v-m[a].v});
+  if(ks.length){out.push('Your biggest source in this range is '+ks[0]+' with '+num(m[ks[0]].v)+' visitors.');
+    var best=ks.slice().sort(function(a,b){return m[b].c/m[b].v-m[a].c/m[a].v})[0];
+    if(best!==ks[0]&&m[best].c>0)out.push('Visitors from '+best+' click buy most often: '+pf(m[best].c,m[best].v)+' of them, against '+pf(m[ks[0]].c,m[ks[0]].v)+' from '+ks[0]+'.')}
+  if(v2&&v2.campaigns&&v2.campaigns.length){var top=v2.campaigns.slice().sort(function(a,b){return (b.p-a.p)||(b.c-a.c)})[0];
+    if(top&&(top.p>0||top.c>=5))out.push('Best tagged link so far: '+(top.campaign||'(no campaign)')+(top.content?' / '+top.content:'')+' with '+num(top.c)+' checkout clicks and '+num(top.p)+' sales.')}
+  var js=sum(function(r){return ev(r,'js_error')},'n');
+  if(js>0)out.push('⚠ Visitors hit '+num(js)+' JavaScript error'+(js===1?'':'s')+' in this range. See Site health below.');
+  $('insights').innerHTML=out.length?out.map(function(t){return '<li>'+esc(t)+'</li>'}).join(''):'<li class="empty">Not enough data yet to say anything reliable. Insights appear once there are at least '+MIN+' visitors in a period.</li>';
+}
+
+/* ---------- site health ---------- */
+function health(){
+  var m={};data.totals.forEach(function(r){if(r.event==='js_error'){var k=r.page+' · '+(r.label||'error');m[k]=(m[k]||0)+r.n}});
+  var ks=Object.keys(m).sort(function(a,b){return m[b]-m[a]});
+  $('health').innerHTML=ks.length?'<thead><tr><th>Page · error</th><th>Times</th></tr></thead><tbody>'+ks.map(function(k){return '<tr><td>'+esc(k)+'</td><td>'+num(m[k])+'</td></tr>'}).join('')+'</tbody>':'<tbody><tr><td class="empty">No JavaScript errors recorded in this range.</td></tr></tbody>';
+}
+
+/* ---------- live now (needs dash/migration-c.sql) ---------- */
+var liveTimer=null;
+function liveLoad(){
+  if(DEMO){liveDraw({active:3,pages:[{page:'/bundle',v:2},{page:'/live',v:1}],recent:[{at:new Date().toISOString(),page:'/bundle',event:'pageview',label:'',source:'instagram',device:'mobile'},{at:new Date(Date.now()-90000).toISOString(),page:'/bundle',event:'checkout_click',label:'offer',source:'instagram',device:'mobile'}]});return}
+  fetch(SB.replace('fp_dashboard','fp_live'),{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify({pass:pass})})
+    .then(function(r){return r.ok?r.json():null}).then(liveDraw).catch(function(){liveDraw(null)});
+}
+function liveDraw(L){
+  if(!L){$('liveTiles').innerHTML='';$('liveFeed').innerHTML='<tbody><tr><td class="empty">This needs the live-view database upgrade (dash/migration-c.sql).</td></tr></tbody>';return}
+  $('liveTiles').innerHTML='<div class="tile"><div class="k">Active visitors</div><div class="v">'+num(L.active||0)+'</div><div class="s">in the last 5 minutes</div></div>'+
+    (L.pages||[]).slice(0,3).map(function(p){return '<div class="tile"><div class="k">'+esc(p.page)+'</div><div class="v">'+num(p.v)+'</div><div class="s">viewing now</div></div>'}).join('');
+  var label={pageview:'Viewed',checkout_click:'Clicked buy',purchase:'Bought',lead:'Registered',scroll_90:'Read to the end',js_error:'Error'};
+  $('liveFeed').innerHTML=(L.recent||[]).length?'<thead><tr><th>When</th><th>What</th><th>Page</th><th>Source</th><th>Device</th></tr></thead><tbody>'+(L.recent||[]).map(function(r){
+    var mins=Math.max(0,Math.round((Date.now()-new Date(r.at))/60000));
+    return '<tr><td>'+(mins<1?'just now':mins+' min ago')+'</td><td>'+esc(label[r.event]||r.event)+'</td><td>'+esc(r.page)+'</td><td>'+esc(grp(r.source))+'</td><td>'+esc(r.device||'–')+'</td></tr>'}).join('')+'</tbody>'
+    :'<tbody><tr><td class="empty">No activity in the last hour.</td></tr></tbody>';
+}
+function liveStart(){clearInterval(liveTimer);liveLoad();liveTimer=setInterval(function(){if(!document.hidden&&!$('app').hidden)liveLoad()},30000)}
+
+/* ---------- CSV export ---------- */
+function csv(name,head,rows){
+  var q=function(v){v=String(v==null?'':v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+  var t=[head].concat(rows).map(function(r){return r.map(q).join(',')}).join('\n');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+t],{type:'text/csv'}));a.download=name+'-'+ymd(0)+'.csv';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+}
+function exportDaily(){var m={};hist.forEach(function(r){var o=m[r.d]||(m[r.d]={v:0,pv:0,c:0,p:0,l:0});if(r.event==='pageview'){o.v+=r.u;o.pv+=r.n}else if(r.event==='checkout_click')o.c+=r.u;else if(r.event==='purchase')o.p+=r.n;else if(r.event==='lead')o.l+=r.n});
+  csv('daily',['Date','Visitors','Page views','Checkout clicks','Purchases','Leads'],Object.keys(m).sort().map(function(d){var o=m[d];return [d,o.v,o.pv,o.c,o.p,o.l]}))}
+function exportSrc(){var m={};data.totals.forEach(function(r){var k=grp(r.source),o=m[k]||(m[k]={v:0,c:0,p:0,rev:0});if(r.event==='pageview')o.v+=r.u;else if(r.event==='checkout_click')o.c+=r.u;else if(r.event==='purchase'){o.p+=r.n;o.rev+=Number(r.v)}});
+  csv('sources',['Source','Visitors','Checkout clicks','Purchases','Revenue (NGN)'],Object.keys(m).sort(function(a,b){return m[b].v-m[a].v}).map(function(k){var o=m[k];return [k,o.v,o.c,o.p,o.rev]}))}
+function exportPages(){var m={};data.totals.forEach(function(r){var o=m[r.page]||(m[r.page]={v:0,pv:0,c:0,p:0});if(r.event==='pageview'){o.v+=r.u;o.pv+=r.n}else if(r.event==='checkout_click')o.c+=r.u;else if(r.event==='purchase')o.p+=r.n});
+  csv('pages',['Page','Visitors','Page views','Checkout clicks','Purchases'],Object.keys(m).sort(function(a,b){return m[b].v-m[a].v}).map(function(k){var o=m[k];return [k,o.v,o.pv,o.c,o.p]}))}
+function exportCamp(){csv('campaigns',['Source','Medium','Campaign','Content','Term','Visitors','Checkout clicks','Purchases','Revenue (NGN)'],((v2&&v2.campaigns)||[]).map(function(r){return [grp(r.source),r.medium,r.campaign,r.content,r.term,r.v,r.c,r.p,r.rev]}))}
+$('exDaily').addEventListener('click',exportDaily);$('exSrc').addEventListener('click',exportSrc);$('exPages').addEventListener('click',exportPages);$('exCamp').addEventListener('click',exportCamp);
+$('fnPick').addEventListener('change',function(){if(data)funnel()});
+/* ---------- busiest days of the week ---------- */
+function weekdays(){
+  if(!hist||!$('wk'))return;
+  var names=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], tot=[0,0,0,0,0,0,0], cnt=[0,0,0,0,0,0,0], ck=[0,0,0,0,0,0,0], sal=[0,0,0,0,0,0,0], keep={};
+  for(var i=0;i<90;i++){var d=ymd(i);keep[d]=1;cnt[new Date(d+'T12:00:00Z').getUTCDay()]++}
+  hist.forEach(function(r){if(!keep[r.d])return;var w=new Date(r.d+'T12:00:00Z').getUTCDay();
+    if(r.event==='pageview')tot[w]+=r.u;else if(r.event==='checkout_click')ck[w]+=r.u;else if(r.event==='purchase')sal[w]+=r.n});
+  var rows=[1,2,3,4,5,6,0].map(function(w){return {n:names[w],a:cnt[w]?tot[w]/cnt[w]:0,t:tot[w],c:ck[w],p:sal[w]}});
+  var best=Math.max.apply(null,rows.map(function(r){return r.a}));
+  $('wk').innerHTML='<thead><tr><th>Day</th><th>Avg visitors per day</th><th>Total visitors</th><th>Checkout clicks</th><th>Purchases</th></tr></thead><tbody>'+
+    rows.map(function(r){return '<tr><td>'+r.n+(best>0&&r.a===best?' <span class="note">· busiest</span>':'')+'</td><td>'+(Math.round(r.a*10)/10)+'</td><td>'+num(r.t)+'</td><td>'+num(r.c)+'</td><td>'+num(r.p)+'</td></tr>'}).join('')+'</tbody>';
+}
+/* ---------- single day ---------- */
+var pickedDay=null;
+function dayRender(){
+  var pk=$('dayPick'); if(!pk||!hist)return;
+  var today=ymd(0), min=ymd(89);
+  pk.min=min; pk.max=today;
+  if(!pickedDay||pickedDay>today||pickedDay<min)pickedDay=today;
+  pk.value=pickedDay;
+  $('dayPrev').disabled=pickedDay<=min; $('dayNext').disabled=pickedDay>=today;
+  var rows=hist.filter(function(r){return r.d===pickedDay}), pg={};
+  rows.forEach(function(r){var o=pg[r.page]||(pg[r.page]={pv:0,v:0,c:0,p:0,l:0});
+    if(r.event==='pageview'){o.pv+=r.n;o.v+=r.u}else if(r.event==='checkout_click')o.c+=r.u;else if(r.event==='purchase')o.p+=r.n;else if(r.event==='lead')o.l+=r.n});
+  var T={pv:0,v:0,c:0,p:0,l:0};Object.keys(pg).forEach(function(k){for(var x in T)T[x]+=pg[k][x]});
+  $('dayTiles').innerHTML=[['Visitors',num(T.v),num(T.pv)+' page views'],['Checkout clicks',num(T.c),pf(T.c,T.v)+' of visitors'],['Purchases',num(T.p),pf(T.p,T.v)+' of visitors'],['Leads',num(T.l),'live registrations']]
+    .map(function(t){return '<div class="tile"><div class="k">'+t[0]+'</div><div class="v">'+t[1]+'</div><div class="s">'+t[2]+'</div></div>'}).join('');
+  var keys=Object.keys(pg).sort(function(a,b){return pg[b].v-pg[a].v});
+  $('dayPages').innerHTML=keys.length?'<thead><tr><th>Page</th><th>Visitors</th><th>Page views</th><th>Checkout clicks</th><th>Purchases</th></tr></thead><tbody>'+
+    keys.map(function(k){var o=pg[k];return '<tr><td>'+esc(k)+'</td><td>'+num(o.v)+'</td><td>'+num(o.pv)+'</td><td>'+num(o.c)+'</td><td>'+num(o.p)+'</td></tr>'}).join('')+'</tbody>'
+    :'<tbody><tr><td>No visits recorded on this day.</td></tr></tbody>';
+}
+function dayShift(n){var d=new Date(pickedDay+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);pickedDay=d.toISOString().slice(0,10);dayRender()}
+$('dayPick').addEventListener('change',function(){if(this.value){pickedDay=this.value;dayRender()}});
+$('dayPrev').addEventListener('click',function(){dayShift(-1)});
+$('dayNext').addEventListener('click',function(){dayShift(1)});
+$('dayToday').addEventListener('click',function(){pickedDay=ymd(0);dayRender()});
+
 var saved=store('fp_dash');
 if(DEMO){load()}else if(saved){pass=saved;load().catch(fail)}
 })();

@@ -17,6 +17,8 @@
   function rid() { return Math.random().toString(36).slice(2, 10) + Date.now().toString(36); }
 
   var off = get(ls, 'fp_owner') === '1';
+  /* Skip automated browsers and crawlers so they never count as visitors. */
+  try { if (navigator.webdriver || /bot|crawl|spider|slurp|headless|lighthouse|preview|facebookexternalhit/i.test(navigator.userAgent)) off = true; } catch (e) {}
   var q = new URLSearchParams(window.location.search);
 
   var vid = get(ls, 'fp_vid'); if (!vid) { vid = rid(); set(ls, 'fp_vid', vid); }
@@ -37,7 +39,22 @@
 
   var ref = '';
   try { var rh = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : ''; ref = rh === window.location.hostname.replace(/^www\./, '') ? '' : rh; } catch (e) {}
-  var source = (q.get('utm_source') || q.get('src') || ref || 'direct').toLowerCase().slice(0, 60);
+  /* Attribution: where this visit came from. Read from the URL (utm_* or src) or the referrer on the first page,
+     then remembered for the rest of the tab session so checkout and purchase events keep the same source. */
+  function clean(v) { return v ? String(v).toLowerCase().trim().slice(0, 60) : null; }
+  var attr = null;
+  try { attr = JSON.parse(get(ss, 'fp_attr') || 'null'); } catch (e) {}
+  var urlSource = clean(q.get('utm_source') || q.get('src'));
+  var extRef = clean(ref) && !/paystack/.test(ref) ? clean(ref) : null;   /* the Paystack return is not a traffic source */
+  if (urlSource || !attr || (attr.source === 'direct' && extRef)) {
+    attr = {
+      source: urlSource || extRef || 'direct',
+      medium: clean(q.get('utm_medium')), campaign: clean(q.get('utm_campaign')),
+      content: clean(q.get('utm_content')), term: clean(q.get('utm_term'))
+    };
+    set(ss, 'fp_attr', JSON.stringify(attr));
+  }
+  var source = attr.source || 'direct';
   var device = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'mobile' : 'desktop';
 
   function send(event, o) {
@@ -48,13 +65,18 @@
       variant: variantString() || null, label: o.label ? String(o.label).slice(0, 60) : null,
       value: typeof o.value === 'number' ? o.value : null, source: source, device: device
     };
-    try {
-      fetch(URL_, {
-        method: 'POST', keepalive: true,
-        headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-        body: JSON.stringify(row)
-      }).catch(function () {});
-    } catch (e) {}
+    var full = {};
+    for (var k0 in row) if (row.hasOwnProperty(k0)) full[k0] = row[k0];
+    full.medium = attr.medium; full.campaign = attr.campaign; full.content = attr.content; full.term = attr.term;
+    var H = { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' };
+    function post(body, retry) {
+      try {
+        fetch(URL_, { method: 'POST', keepalive: true, headers: H, body: JSON.stringify(body) })
+          .then(function (r) { if (!r.ok && retry) post(row, false); })   /* database not upgraded yet: send without the campaign columns */
+          .catch(function () {});
+      } catch (e) {}
+    }
+    post(full, true);
   }
 
   var api = function (event, o) { send(String(event).slice(0, 40), o); };
@@ -70,6 +92,16 @@
   function start() {
     var closed = document.documentElement.classList.contains('is-closed');
     send('pageview', { label: closed ? 'closed' : '' });
+
+    /* JavaScript errors visitors hit (at most 3 per page view, message cut to 60 characters, no personal data) */
+    var errs = 0;
+    function jsErr(msg) {
+      msg = String(msg || '').replace(/\s+/g, ' ').trim();
+      if (errs >= 3 || !msg || /^script error\.?$/i.test(msg) || /ResizeObserver/i.test(msg)) return;
+      errs++; send('js_error', { label: msg.slice(0, 60) });
+    }
+    window.addEventListener('error', function (e) { jsErr(e && e.message); });
+    window.addEventListener('unhandledrejection', function (e) { jsErr(e && e.reason && (e.reason.message || e.reason)); });
 
     /* scroll depth: 50% and 90% of the page, once each */
     var s50 = false, s90 = false, tick = false;
