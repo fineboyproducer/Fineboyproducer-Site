@@ -93,6 +93,16 @@
     var closed = document.documentElement.classList.contains('is-closed');
     send('pageview', { label: closed ? 'closed' : '' });
 
+    /* JavaScript errors visitors hit (at most 3 per page view, message cut to 60 characters, no personal data) */
+    var errs = 0;
+    function jsErr(msg) {
+      msg = String(msg || '').replace(/\s+/g, ' ').trim();
+      if (errs >= 3 || !msg || /^script error\.?$/i.test(msg) || /ResizeObserver/i.test(msg)) return;
+      errs++; send('js_error', { label: msg.slice(0, 60) });
+    }
+    window.addEventListener('error', function (e) { jsErr(e && e.message); });
+    window.addEventListener('unhandledrejection', function (e) { jsErr(e && e.reason && (e.reason.message || e.reason)); });
+
     /* scroll depth: 50% and 90% of the page, once each */
     var s50 = false, s90 = false, tick = false;
     function check() {
