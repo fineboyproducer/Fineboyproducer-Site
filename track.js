@@ -93,6 +93,16 @@
     var closed = document.documentElement.classList.contains('is-closed');
     send('pageview', { label: closed ? 'closed' : '' });
 
+    /* time on page: seconds the page was actually visible, sent each time the visitor leaves the tab or page (capped at 30 minutes per send) */
+    var shownAt = document.hidden ? 0 : Date.now();
+    function sendTime() {
+      if (!shownAt) return;
+      var sec = Math.round((Date.now() - shownAt) / 1000); shownAt = 0;
+      if (sec >= 1) send('time', { value: Math.min(sec, 1800) });
+    }
+    document.addEventListener('visibilitychange', function () { if (document.hidden) sendTime(); else shownAt = Date.now(); });
+    window.addEventListener('pagehide', sendTime);
+
     /* JavaScript errors visitors hit (at most 3 per page view, message cut to 60 characters, no personal data) */
     var errs = 0;
     function jsErr(msg) {

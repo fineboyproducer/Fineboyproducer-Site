@@ -167,6 +167,10 @@ select{background:var(--panel);color:var(--bone);border:1px solid var(--line);bo
   <section><h2>Funnels <small>unique visitors at each step</small></h2><div class="card"><div class="ctl" style="margin-bottom:12px"><label for="fnPick" class="note">Offer</label><select id="fnPick"><option value="bundle">Artist Growth Bundle</option><option value="blueprint">100K Streams Blueprint</option><option value="live">Live masterclass</option></select></div><div class="funnel" id="funnel"></div></div></section>
   <section><h2>Site health <small>JavaScript errors seen by visitors in this range</small></h2><div class="card scroll"><table id="health"></table></div></section>
   <section><h2>Export <small>download the numbers as a spreadsheet file (CSV)</small></h2><div class="card"><div class="ctl" style="flex-wrap:wrap;gap:10px"><button class="btn" id="exDaily">Daily totals</button><button class="btn" id="exSrc">Sources</button><button class="btn" id="exPages">Pages</button><button class="btn" id="exCamp">Campaigns</button></div><div class="note" style="margin-top:10px">Daily totals cover about the last 90 days. The others follow the date range at the top.</div></div></section>
+  <section><h2>One page <small>open a single page's numbers</small></h2>
+    <div class="card"><div class="ctl" style="margin-bottom:12px"><label for="pgPick" class="note">Page</label><select id="pgPick"></select></div>
+      <div class="tiles" id="pgTiles"></div><div id="pgTrend" style="margin-top:14px"></div>
+      <div class="scroll" style="margin-top:14px"><table id="pgSrc"></table></div></div></section>
   <section><h2>Pages <small>conversion = share of that page's visitors who did it</small></h2>
     <div class="card scroll"><table id="pages"></table></div></section>
   <section><h2>A/B tests <small>compare variants on one page</small></h2>
@@ -203,7 +207,7 @@ function demo(d){
   pages.forEach(function(p){vs.forEach(function(v,vi){ if(p[0]!=='/bundle'&&v)return;
     var share=p[0]==='/bundle'?(v===''?0:.5):1, u=Math.round(p[1]*share*d/30*(v==='hero:B'?1.04:1)); if(!u)return;
     var add=function(ev,n,u2,val,lab){T.push({page:p[0],event:ev,variant:v,label:lab||'',source:'x',device:'',n:n,u:u2,v:val||0})};
-    add('pageview',Math.round(u*1.2),u);add('scroll_50',0,Math.round(u*p[2]));add('scroll_90',0,Math.round(u*p[2]*.6));
+    add('pageview',Math.round(u*1.2),u);add('time',Math.round(u*1.2),u,Math.round(u*1.2*(p[0]==='/live'?95:48)));add('scroll_50',0,Math.round(u*p[2]));add('scroll_90',0,Math.round(u*p[2]*.6));
     var cc=Math.round(u*p[3]*(v==='hero:B'?1.3:1));add('checkout_click',cc,cc,0,'offer');
     if(p[0]==='/bundle'){add('video_start',0,Math.round(u*.62));add('video_50',0,Math.round(u*.31));add('video_95',0,Math.round(u*.14));}
   });});
@@ -242,7 +246,7 @@ function render(){
     ['Revenue',naira(rev),pu?naira(rev/pu)+' per sale':'–'],
     ['Leads',num(leads),'live registrations']
   ].map(function(t){return '<div class="tile"><div class="k">'+t[0]+'</div><div class="v">'+t[1]+'</div><div class="s">'+t[2]+'</div>'+(t[3]?delta(t[3]):'')+'</div>'}).join('');
-  hero(); heat(); dayRender(); weekdays(); phaseB(); insights(); health(); liveStart();
+  hero(); heat(); dayRender(); weekdays(); phaseB(); insights(); health(); onePage(); liveStart();
   trend(); funnel(); pagesTable(); abInit(); breakdowns();
   $('stamp').textContent='Updated '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+' · last '+(days===1?'24 hours':days+' days');
 }
@@ -286,14 +290,15 @@ function funnel(){
     '<div class="note">First percentage = share of everyone at step one. "Lost" = share who dropped off since the step before. Video steps need the video watched on /bundle.</div>';
 }
 
+function avgTime(sec,views){if(!views||!sec)return '–';var a=Math.round(sec/views);return a>=60?Math.floor(a/60)+'m '+(a%60)+'s':a+'s'}
 function pagesTable(){
   var ps={};
   data.totals.forEach(function(r){var o=ps[r.page]||(ps[r.page]={});o[r.event]=o[r.event]||{n:0,u:0,v:0};o[r.event].n+=r.n;o[r.event].u+=r.u;o[r.event].v+=r.v});
   var rows=Object.keys(ps).sort(function(a,b){return (ps[b].pageview?ps[b].pageview.u:0)-(ps[a].pageview?ps[a].pageview.u:0)});
   var g=function(p,e,f){return ps[p][e]?ps[p][e][f]:0};
-  $('pages').innerHTML='<thead><tr><th>Page</th><th>Visitors</th><th>Views</th><th>Read to 50%</th><th>Checkout clicks</th><th>Leads</th><th>Purchases</th><th>Revenue</th></tr></thead><tbody>'+
+  $('pages').innerHTML='<thead><tr><th>Page</th><th>Visitors</th><th>Views</th><th>Avg time on page</th><th>Read to 50%</th><th>Checkout clicks</th><th>Leads</th><th>Purchases</th><th>Revenue</th></tr></thead><tbody>'+
    (rows.length?rows.map(function(p){var v=g(p,'pageview','u');
-    return '<tr><td>'+esc(p)+'</td><td>'+num(v)+'</td><td>'+num(g(p,'pageview','n'))+'</td><td>'+num(g(p,'scroll_50','u'))+'<span class="pct">'+pf(g(p,'scroll_50','u'),v)+'</span></td><td>'+num(g(p,'checkout_click','u'))+'<span class="pct">'+pf(g(p,'checkout_click','u'),v)+'</span></td><td>'+num(g(p,'lead','n'))+'<span class="pct">'+pf(g(p,'lead','n'),v)+'</span></td><td>'+num(g(p,'purchase','n'))+'<span class="pct">'+pf(g(p,'purchase','n'),v)+'</span></td><td>'+naira(g(p,'purchase','v'))+'</td></tr>'}).join(''):'<tr><td colspan="8" class="empty">No data yet.</td></tr>')+'</tbody>';
+    return '<tr><td>'+esc(p)+'</td><td>'+num(v)+'</td><td>'+num(g(p,'pageview','n'))+'</td><td>'+avgTime(g(p,'time','v'),g(p,'pageview','n'))+'</td><td>'+num(g(p,'scroll_50','u'))+'<span class="pct">'+pf(g(p,'scroll_50','u'),v)+'</span></td><td>'+num(g(p,'checkout_click','u'))+'<span class="pct">'+pf(g(p,'checkout_click','u'),v)+'</span></td><td>'+num(g(p,'lead','n'))+'<span class="pct">'+pf(g(p,'lead','n'),v)+'</span></td><td>'+num(g(p,'purchase','n'))+'<span class="pct">'+pf(g(p,'purchase','n'),v)+'</span></td><td>'+naira(g(p,'purchase','v'))+'</td></tr>'}).join(''):'<tr><td colspan="8" class="empty">No data yet.</td></tr>')+'</tbody>';
 }
 
 /* two-proportion z-test, returns confidence that the rates differ (0..1) */
@@ -518,6 +523,27 @@ function exportPages(){var m={};data.totals.forEach(function(r){var o=m[r.page]|
 function exportCamp(){csv('campaigns',['Source','Medium','Campaign','Content','Term','Visitors','Checkout clicks','Purchases','Revenue (NGN)'],((v2&&v2.campaigns)||[]).map(function(r){return [grp(r.source),r.medium,r.campaign,r.content,r.term,r.v,r.c,r.p,r.rev]}))}
 $('exDaily').addEventListener('click',exportDaily);$('exSrc').addEventListener('click',exportSrc);$('exPages').addEventListener('click',exportPages);$('exCamp').addEventListener('click',exportCamp);
 $('fnPick').addEventListener('change',function(){if(data)funnel()});
+
+/* ---------- one page ---------- */
+function onePage(){
+  var sel=$('pgPick'), pages={};
+  data.totals.forEach(function(r){if(r.event==='pageview')pages[r.page]=(pages[r.page]||0)+r.u});
+  var list=Object.keys(pages).sort(function(a,b){return pages[b]-pages[a]}), cur=sel.value;
+  sel.innerHTML=list.map(function(p){return '<option>'+esc(p)+'</option>'}).join('')||'<option>(no pages yet)</option>';
+  if(list.indexOf(cur)>=0)sel.value=cur;
+  var p=sel.value, T=data.totals.filter(function(r){return r.page===p});
+  function S(e,f){return T.reduce(function(a,r){return r.event===e?a+Number(r[f]):a},0)}
+  var vis=S('pageview','u'), views=S('pageview','n');
+  $('pgTiles').innerHTML=[['Visitors',num(vis),num(views)+' page views'],['Avg time on page',avgTime(S('time','v'),views),'time the page was visible'],['Read to 50%',pf(S('scroll_50','u'),vis),num(S('scroll_50','u'))+' visitors'],['Read to the end',pf(S('scroll_90','u'),vis),num(S('scroll_90','u'))+' visitors'],['Checkout clicks',num(S('checkout_click','u')),pf(S('checkout_click','u'),vis)+' of visitors'],['Purchases',num(S('purchase','n')),naira(S('purchase','v'))]]
+    .map(function(t){return '<div class="tile"><div class="k">'+t[0]+'</div><div class="v">'+t[1]+'</div><div class="s">'+t[2]+'</div></div>'}).join('');
+  var m={};hist.forEach(function(r){if(r.page===p&&r.event==='pageview'&&r.d>=ymd(Math.min(days,60)-1))m[r.d]=(m[r.d]||0)+r.u});
+  var ks=Object.keys(m).sort(), mx=Math.max.apply(null,ks.map(function(k){return m[k]}))||1;
+  $('pgTrend').innerHTML=ks.length?'<div class="legend"><span><i style="background:var(--bar)"></i>Visitors per day</span></div><svg viewBox="0 0 1000 130" width="100%" role="img" aria-label="Daily visitors to this page">'+ks.map(function(k,i){var w=1000/ks.length,h=Math.round(95*m[k]/mx);return '<rect x="'+(i*w+w*.15)+'" y="'+(105-h)+'" width="'+(w*.7)+'" height="'+h+'" style="fill:var(--bar)"><title>'+k+': '+m[k]+' visitors</title></rect>'+(i%Math.ceil(ks.length/8)===0?'<text x="'+(i*w+w/2)+'" y="124" text-anchor="middle">'+k.slice(5)+'</text>':'')}).join('')+'</svg>':'<div class="empty">No visits to this page in this range.</div>';
+  var sm={};T.forEach(function(r){var k=grp(r.source),o=sm[k]||(sm[k]={v:0,c:0,p:0});if(r.event==='pageview')o.v+=r.u;else if(r.event==='checkout_click')o.c+=r.u;else if(r.event==='purchase')o.p+=r.n});
+  var sk=Object.keys(sm).sort(function(a,b){return sm[b].v-sm[a].v});
+  $('pgSrc').innerHTML=sk.length?'<thead><tr><th>Source</th><th>Visitors</th><th>Checkout clicks</th><th>Purchases</th></tr></thead><tbody>'+sk.map(function(k){var o=sm[k];return '<tr><td>'+esc(k)+'</td><td>'+num(o.v)+'</td><td>'+num(o.c)+' <span class="note">· '+pf(o.c,o.v)+'</span></td><td>'+num(o.p)+'</td></tr>'}).join('')+'</tbody>':'';
+}
+$('pgPick').addEventListener('change',onePage);
 /* ---------- busiest days of the week ---------- */
 function weekdays(){
   if(!hist||!$('wk'))return;
