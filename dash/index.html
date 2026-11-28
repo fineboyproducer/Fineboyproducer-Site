@@ -406,7 +406,7 @@ function rpc2(d){return fetch(SB2,{method:'POST',headers:{apikey:KEY,Authorizati
 function load(){
   $('err').textContent='';
   var HD=Math.max(days*2,91);
-  if(DEMO){data=demo(days);hist=demo(HD).daily;v2=demoV2(days);pay={sales:Math.round(11*days/30),revenue:Math.round(11*days/30)*27750,refunded:Math.round(days/30)*27750,all_time:42,recent:[{ref:'A1B2C3',amount_ngn:27750,refunded_ngn:0,channel:'card',paid_at:new Date().toISOString()},{ref:'D4E5F6',amount_ngn:27750,refunded_ngn:27750,channel:'bank_transfer',paid_at:new Date(Date.now()-86400000).toISOString()}];show();return Promise.resolve()}
+  if(DEMO){data=demo(days);hist=demo(HD).daily;v2=demoV2(days);pay={sales:Math.round(11*days/30),revenue:Math.round(11*days/30)*27750,refunded:Math.round(days/30)*27750,all_time:42,recent:[{ref:'A1B2C3',amount_ngn:27750,refunded_ngn:0,channel:'card',paid_at:new Date().toISOString()},{ref:'D4E5F6',amount_ngn:27750,refunded_ngn:27750,channel:'bank_transfer',paid_at:new Date(Date.now()-86400000).toISOString()}]};show();return Promise.resolve()}
   return rpc(days)
   .then(function(x){
     if(!x.ok){var m=(x.j&&(x.j.message||x.j.hint))||'';
