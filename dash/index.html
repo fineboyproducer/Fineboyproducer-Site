@@ -167,6 +167,10 @@ select{background:var(--panel);color:var(--bone);border:1px solid var(--line);bo
   <section><h2>Last 12 weeks <small>darker means more visitors, a dot means a sale happened</small></h2><div class="card"><div class="heat" id="heat" role="img" aria-label="Daily visitors for the last 12 weeks"></div><div class="hl"><span><i></i>No visits</span><span><i style="background:var(--bar);opacity:.35"></i>Some</span><span><i style="background:var(--bar)"></i>Your best days</span><span><i style="background:var(--good);border-radius:50%;transform:scale(.55)"></i>Sale</span></div></div></section>
   <section><h2>Funnels <small>unique visitors at each step</small></h2><div class="card"><div class="ctl" style="margin-bottom:12px"><label for="fnPick" class="note">Offer</label><select id="fnPick"><option value="bundle">Artist Growth Bundle</option><option value="blueprint">100K Streams Blueprint</option><option value="live">Live masterclass</option></select></div><div class="funnel" id="funnel"></div></div></section>
   <section><h2>Site health <small>JavaScript errors seen by visitors in this range</small></h2><div class="card scroll"><table id="health"></table></div></section>
+  <section><h2>Weekly summary <small>last 7 days, ready to copy and send or paste</small></h2><div class="card">
+    <div class="ctl" style="margin-bottom:12px;flex-wrap:wrap"><button class="btn" id="wkBuild">Build summary</button><button class="btn" id="wkCopy">Copy text</button></div>
+    <textarea id="wkText" rows="14" readonly aria-label="Weekly summary text" style="width:100%;background:var(--panel);color:var(--bone);border:1px solid var(--line);border-radius:6px;padding:12px;font:500 13px/1.6 var(--body)"></textarea>
+  </div></section>
   <section><h2>Export <small>download the numbers as a spreadsheet file (CSV)</small></h2><div class="card"><div class="ctl" style="flex-wrap:wrap;gap:10px"><button class="btn" id="exDaily">Daily totals</button><button class="btn" id="exSrc">Sources</button><button class="btn" id="exPages">Pages</button><button class="btn" id="exCamp">Campaigns</button></div><div class="note" style="margin-top:10px">Daily totals cover about the last 90 days. The others follow the date range at the top.</div></div></section>
   <section><h2>One page <small>open a single page's numbers</small></h2>
     <div class="card"><div class="ctl" style="margin-bottom:12px"><label for="pgPick" class="note">Page</label><select id="pgPick"></select></div>
@@ -559,6 +563,39 @@ function payments(){
   $('payRecent').innerHTML=(pay.recent||[]).length?'<thead><tr><th>Paid</th><th>Reference</th><th>Amount</th><th>Refunded</th><th>Method</th></tr></thead><tbody>'+(pay.recent||[]).map(function(r){
     return '<tr><td>'+esc(new Date(r.paid_at).toLocaleString('en-GB',{timeZone:'Africa/Lagos',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}))+'</td><td>…'+esc(r.ref)+'</td><td>'+naira(r.amount_ngn)+'</td><td>'+(r.refunded_ngn>0?naira(r.refunded_ngn):'–')+'</td><td>'+esc((r.channel||'–').replace('_',' '))+'</td></tr>'}).join('')+'</tbody>':'';
 }
+
+/* ---------- weekly summary (fresh 7-day and previous 7-day numbers, plain text) ---------- */
+function wkTotals(d,field){return d.totals.reduce(function(o,r){if(r.event==='pageview')o.v+=r.u;else if(r.event==='checkout_click')o.c+=r.u;else if(r.event==='purchase'){o.p+=r.n;o.rev+=Number(r.v)}else if(r.event==='lead')o.l+=r.n;return o},{v:0,c:0,p:0,l:0,rev:0})}
+function wkArrow(a,b){if(!b)return '';var c=Math.round(100*(a-b)/b);return c===0?' (same as the week before)':' ('+(c>0?'up ':'down ')+Math.abs(c)+'% on the week before)'}
+function wkBuild(){
+  var btn=$('wkBuild');btn.disabled=true;btn.textContent='Building…';$('wkText').value='';
+  var done=function(t){$('wkText').value=t;btn.disabled=false;btn.textContent='Build summary'};
+  var get=DEMO?Promise.resolve({cur:demo(7),prev:demo(14),v2:demoV2(7),pay:pay}):
+    Promise.all([rpc(7),rpc(14),rpc2(7),rpcP(7)]).then(function(r){return{cur:r[0].ok?r[0].j:null,prev:r[1].ok?r[1].j:null,v2:r[2],pay:r[3]}});
+  get.then(function(x){
+    if(!x.cur||!x.prev){done('Could not load the numbers. Check your connection and try again.');return}
+    var lt=wkTotals(x.cur), c={v:0,c:0,p:0,l:lt.l}, p={v:0,c:0,p:0};
+    (x.prev.daily||[]).forEach(function(r){var o=r.d>=ymd(6)?c:(r.d>=ymd(13)&&r.d<=ymd(7)?p:null);if(!o)return;
+      if(r.event==='pageview')o.v+=r.u;else if(r.event==='checkout_click')o.c+=r.u;else if(r.event==='purchase')o.p+=r.n});   /* each day's visitors added up, for both weeks, so the comparison is like for like */
+    var L=['WEEKLY SUMMARY, last 7 days to '+ymd(0),'','Visitors (each day added up): '+num(c.v)+wkArrow(c.v,p.v),'Checkout clicks: '+num(c.c)+' ('+pf(c.c,c.v)+' of visitors)'+wkArrow(c.c,p.c),'Sales recorded by the thank-you page: '+num(c.p)+wkArrow(c.p,p.p)];
+    if(x.pay&&x.pay.all_time>0)L.push('Sales confirmed by Paystack: '+num(x.pay.sales)+', revenue '+naira(x.pay.revenue)+(x.pay.refunded>0?', refunded '+naira(x.pay.refunded):''));
+    if(c.l)L.push('Live registrations: '+num(c.l));
+    var m={};x.cur.totals.forEach(function(r){var k=grp(r.source),o=m[k]||(m[k]={v:0,c:0});if(r.event==='pageview')o.v+=r.u;else if(r.event==='checkout_click')o.c+=r.u});
+    var ks=Object.keys(m).filter(function(k){return m[k].v>0}).sort(function(u,w){return m[w].v-m[u].v}).slice(0,3);
+    if(ks.length){L.push('','Top sources:');ks.forEach(function(k){L.push('- '+k+': '+num(m[k].v)+' visitors, '+num(m[k].c)+' checkout clicks')})}
+    var cp=((x.v2&&x.v2.campaigns)||[]).slice().sort(function(u,w){return (w.p-u.p)||(w.c-u.c)||(w.v-u.v)}).slice(0,3);
+    if(cp.length){L.push('','Best tagged links:');cp.forEach(function(r){L.push('- '+(r.campaign||'(no campaign)')+(r.content?' / '+r.content:'')+': '+num(r.v)+' visitors, '+num(r.c)+' checkout clicks, '+num(r.p)+(r.p===1?' sale':' sales'))})}
+    var pg={};x.cur.totals.forEach(function(r){if(r.event==='pageview')pg[r.page]=(pg[r.page]||0)+r.u});
+    var pk=Object.keys(pg).sort(function(u,w){return pg[w]-pg[u]})[0];
+    if(pk)L.push('','Most visited page: '+pk+' ('+num(pg[pk])+' visitors)');
+    L.push('','Numbers come from your own tracker. Verified sales appear only for payments made after the Paystack webhook was connected.');
+    done(L.join('\n'));
+  }).catch(function(){done('Could not load the numbers. Check your connection and try again.')});
+}
+$('wkBuild').addEventListener('click',wkBuild);
+$('wkCopy').addEventListener('click',function(){var b=this,t=$('wkText').value;if(!t)return;
+  function ok(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy text'},1500)}
+  try{navigator.clipboard.writeText(t).then(ok,function(){$('wkText').select()})}catch(e){$('wkText').select()}});
 /* ---------- busiest days of the week ---------- */
 function weekdays(){
   if(!hist||!$('wk'))return;
