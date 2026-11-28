@@ -131,6 +131,7 @@ select{background:var(--panel);color:var(--bone);border:1px solid var(--line);bo
 
   <div class="hero" id="hero" aria-live="polite"></div>
   <section><h2>Insights <small>plain observations worked out from your numbers, not guesses</small></h2><div class="card"><ul id="insights" style="list-style:none;padding:0;margin:0;display:grid;gap:10px"></ul></div></section>
+  <section><h2>Verified payments <small>confirmed by Paystack itself, not by the thank-you page</small></h2><div class="card"><div class="tiles" id="payTiles"></div><div class="note" id="payNote" style="margin:12px 0"></div><div class="scroll"><table id="payRecent"></table></div></div></section>
   <section><h2>Live now <small>last 5 minutes (refreshes every 30 seconds)</small></h2><div class="card"><div class="tiles" id="liveTiles"></div><div class="scroll" style="margin-top:14px"><table id="liveFeed"></table></div></div></section>
   <section><h2>Overview</h2><div class="tiles" id="tiles"></div></section>
   <section><h2>Daily traffic <small>unique visitors per page, added up per day</small></h2>
@@ -190,7 +191,7 @@ select{background:var(--panel);color:var(--bone);border:1px solid var(--line);bo
 var SB='https://nynedxlhwephelzckjoe.supabase.co/rest/v1/rpc/fp_dashboard';
 var KEY='sb_publishable_nvbgjEhrZjS7wg_YAre5qw_JdwTL6A_';
 var DEMO=/[?&]demo\b/.test(location.search);
-var days=30, data=null, pass='', v2=null;
+var days=30, data=null, pass='', v2=null, pay=null;
 var $=function(id){return document.getElementById(id)};
 function store(k,v){try{if(v===undefined)return sessionStorage.getItem(k);v===null?sessionStorage.removeItem(k):sessionStorage.setItem(k,v)}catch(e){}return null}
 var nf=new Intl.NumberFormat('en-NG');
@@ -246,7 +247,7 @@ function render(){
     ['Revenue',naira(rev),pu?naira(rev/pu)+' per sale':'–'],
     ['Leads',num(leads),'live registrations']
   ].map(function(t){return '<div class="tile"><div class="k">'+t[0]+'</div><div class="v">'+t[1]+'</div><div class="s">'+t[2]+'</div>'+(t[3]?delta(t[3]):'')+'</div>'}).join('');
-  hero(); heat(); dayRender(); weekdays(); phaseB(); insights(); health(); onePage(); liveStart();
+  hero(); heat(); dayRender(); weekdays(); phaseB(); payments(); insights(); health(); onePage(); liveStart();
   trend(); funnel(); pagesTable(); abInit(); breakdowns();
   $('stamp').textContent='Updated '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+' · last '+(days===1?'24 hours':days+' days');
 }
@@ -398,12 +399,14 @@ function heat(){
 function rpc(d){return fetch(SB,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify({pass:pass,days:d})})
   .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})}
 var SB2=SB.replace('fp_dashboard','fp_dashboard_v2');
+function rpcP(d){return fetch(SB.replace('fp_dashboard','fp_payments_summary'),{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify({pass:pass,days:d})})
+  .then(function(r){return r.ok?r.json():null}).catch(function(){return null})}
 function rpc2(d){return fetch(SB2,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify({pass:pass,days:d})})
   .then(function(r){return r.ok?r.json():null}).catch(function(){return null})}
 function load(){
   $('err').textContent='';
   var HD=Math.max(days*2,91);
-  if(DEMO){data=demo(days);hist=demo(HD).daily;v2=demoV2(days);show();return Promise.resolve()}
+  if(DEMO){data=demo(days);hist=demo(HD).daily;v2=demoV2(days);pay={sales:Math.round(11*days/30),revenue:Math.round(11*days/30)*27750,refunded:Math.round(days/30)*27750,all_time:42,recent:[{ref:'A1B2C3',amount_ngn:27750,refunded_ngn:0,channel:'card',paid_at:new Date().toISOString()},{ref:'D4E5F6',amount_ngn:27750,refunded_ngn:27750,channel:'bank_transfer',paid_at:new Date(Date.now()-86400000).toISOString()}];show();return Promise.resolve()}
   return rpc(days)
   .then(function(x){
     if(!x.ok){var m=(x.j&&(x.j.message||x.j.hint))||'';
@@ -411,7 +414,7 @@ function load(){
       if(/Could not find the function|does not exist|schema cache/i.test(m))throw new Error('Setup not finished. Run dash/setup.sql in Supabase first.');
       throw new Error('Could not load data ('+m.slice(0,80)+').')}
     data=x.j;store('fp_dash',pass);
-    return rpc2(days).then(function(z){v2=z;return (HD===days?Promise.resolve(null):rpc(HD).catch(function(){return null}))}).then(function(y){hist=(y&&y.ok&&y.j&&y.j.daily)||data.daily;show()});
+    return rpcP(days).then(function(q){pay=q;return rpc2(days)}).then(function(z){v2=z;return (HD===days?Promise.resolve(null):rpc(HD).catch(function(){return null}))}).then(function(y){hist=(y&&y.ok&&y.j&&y.j.daily)||data.daily;show()});
   });
 }
 function show(){$('gate').hidden=true;$('app').hidden=false;$('demoBanner').hidden=!DEMO;render()}
@@ -544,6 +547,18 @@ function onePage(){
   $('pgSrc').innerHTML=sk.length?'<thead><tr><th>Source</th><th>Visitors</th><th>Checkout clicks</th><th>Purchases</th></tr></thead><tbody>'+sk.map(function(k){var o=sm[k];return '<tr><td>'+esc(k)+'</td><td>'+num(o.v)+'</td><td>'+num(o.c)+' <span class="note">· '+pf(o.c,o.v)+'</span></td><td>'+num(o.p)+'</td></tr>'}).join('')+'</tbody>':'';
 }
 $('pgPick').addEventListener('change',onePage);
+
+/* ---------- verified payments (needs dash/migration-d.sql + the Paystack webhook) ---------- */
+function payments(){
+  if(!pay){$('payTiles').innerHTML='';$('payNote').textContent='This needs the payments upgrade (dash/migration-d.sql) and the Paystack webhook. See supabase/functions/paystack-webhook.';$('payRecent').innerHTML='';return}
+  var claimed=sum(function(r){return r.event==='purchase'},'n');
+  $('payTiles').innerHTML=[['Verified sales',num(pay.sales),'payments Paystack confirmed'],['Verified revenue',naira(pay.revenue),'before refunds'],['Refunded',naira(pay.refunded),'refunds Paystack processed'],['Net revenue',naira(pay.revenue-pay.refunded),'verified minus refunds']]
+    .map(function(t){return '<div class="tile"><div class="k">'+t[0]+'</div><div class="v">'+t[1]+'</div><div class="s">'+t[2]+'</div></div>'}).join('');
+  $('payNote').textContent=pay.all_time===0?'No payments recorded yet. Once the webhook is connected, each new payment appears here. Payments from before that are not included.':
+    'Thank-you page counted '+num(claimed)+' purchase'+(claimed===1?'':'s')+' in this range; Paystack confirmed '+num(pay.sales)+'. A gap means someone reached the thank-you page without a confirmed payment, or paid before the webhook was connected. Failed payments are not reported by Paystack webhooks, so they cannot be shown here.';
+  $('payRecent').innerHTML=(pay.recent||[]).length?'<thead><tr><th>Paid</th><th>Reference</th><th>Amount</th><th>Refunded</th><th>Method</th></tr></thead><tbody>'+(pay.recent||[]).map(function(r){
+    return '<tr><td>'+esc(new Date(r.paid_at).toLocaleString('en-GB',{timeZone:'Africa/Lagos',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}))+'</td><td>…'+esc(r.ref)+'</td><td>'+naira(r.amount_ngn)+'</td><td>'+(r.refunded_ngn>0?naira(r.refunded_ngn):'–')+'</td><td>'+esc((r.channel||'–').replace('_',' '))+'</td></tr>'}).join('')+'</tbody>':'';
+}
 /* ---------- busiest days of the week ---------- */
 function weekdays(){
   if(!hist||!$('wk'))return;
